@@ -58,6 +58,36 @@
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
+          outlined
+          v-model="newData.primary_contact"
+          dense
+          type="number"
+          label="Primary Contact"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter primary contact',
+          ]"
+          :error-message="$getValidationErrors('primary_contact')"
+          :error="$hasValidationErrors('primary_contact')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="newData.secondary_contact"
+          dense
+          type="number"
+          label="Secondary Contact"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter secondary contact',
+          ]"
+          :error-message="$getValidationErrors('secondary_contact')"
+          :error="$hasValidationErrors('secondary_contact')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <q-input
           type="password"
           outlined
           v-model="newData.password"
@@ -79,6 +109,232 @@
           :rules="[(val) => (val && val.length) || 'Please confirm password']"
           :error-message="$getValidationErrors('confirm_password')"
           :error="$hasValidationErrors('confirm_password')"
+        >
+        </q-input>
+      </div>
+    </div>
+    <div
+      class="row q-col-gutter-md"
+      v-for="(user_detail, key) in newData.user_details"
+      :key="key"
+    >
+      <div class="col-12">
+        <q-input
+          type="textarea"
+          outlined
+          v-model="user_detail.address"
+          dense
+          label="Address"
+          :rules="[(val) => (val && val.length) || 'Please enter your address']"
+          :error-message="$getValidationErrors('address')"
+          :error="$hasValidationErrors('address')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-select
+          :options="genderList"
+          map-options
+          emit-value
+          option-label="label"
+          option-value="value"
+          type="gender"
+          outlined
+          clearable
+          v-model="user_detail.gender"
+          dense
+          label="Gender"
+          :rules="[(val) => (val && val.length) || 'Please select a gender']"
+          :error-message="$getValidationErrors('gender')"
+          :error="$hasValidationErrors('gender')"
+        />
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.disease"
+          dense
+          label="Disease"
+          :rules="[(val) => (val && val.length) || 'Please enter the disease']"
+          :error-message="$getValidationErrors('disease')"
+          :error="$hasValidationErrors('disease')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          type="number"
+          v-model="user_detail.assigned_to_room"
+          dense
+          label="Assigned to room"
+          :rules="[
+            (val) => (val && val.length) || 'Please assign a room number',
+          ]"
+          :error-message="$getValidationErrors('assigned_to_room')"
+          :error="$hasValidationErrors('assigned_to_room')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <UploaderFile
+          v-model="user_detail.identity_proof"
+          label="Upload Identity Proof"
+          :multiple="true"
+          acceptFileType=".pdf,.txt,.doc,.docx"
+          attachmentType="document"
+        />
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-select
+          :options="bloodList"
+          map-options
+          emit-value
+          option-label="label"
+          option-value="value"
+          type="blood"
+          outlined
+          clearable
+          v-model="user_detail.blood_group"
+          dense
+          label="Blood Group"
+          :rules="[(val) => (val && val.length) || 'Please select blood group']"
+          :error-message="$getValidationErrors('blood_group')"
+          :error="$hasValidationErrors('blood_group')"
+        />
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          dense
+          readonly
+          label="Date of Admission"
+          v-model="user_detail.date_of_addmission"
+          mask="date"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter date of addmission',
+          ]"
+          :error-message="$getValidationErrors('date_of_addmission')"
+          :error="$hasValidationErrors('date_of_addmission')"
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy
+                cover
+                transition-show="scale"
+                transition-hide="scale"
+              >
+                <q-date v-model="user_detail.date_of_addmission">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.age"
+          dense
+          type="number"
+          label="Age"
+          :rules="[(val) => (val && val.length) || 'Please enter age']"
+          :error-message="$getValidationErrors('age')"
+          :error="$hasValidationErrors('age')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.blood_pressure_level"
+          dense
+          label="Blood pressure level"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter blood pressure level',
+          ]"
+          :error-message="$getValidationErrors('blood_pressure_level')"
+          :error="$hasValidationErrors('blood_pressure_level')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.heart_beat"
+          dense
+          label="Heart Rate"
+          :rules="[(val) => (val && val.length) || 'Please enter heart rate']"
+          :error-message="$getValidationErrors('heart_beat')"
+          :error="$hasValidationErrors('heart_beat')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.sugar_level"
+          dense
+          label="Blood Sugar Level"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter blood sugar level',
+          ]"
+          :error-message="$getValidationErrors('sugar_level')"
+          :error="$hasValidationErrors('sugar_level')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.height"
+          dense
+          label="Height"
+          :rules="[(val) => (val && val.length) || 'Please enter height']"
+          :error-message="$getValidationErrors('height')"
+          :error="$hasValidationErrors('height')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.weight"
+          dense
+          label="Weight"
+          :rules="[(val) => (val && val.length) || 'Please enter weight']"
+          :error-message="$getValidationErrors('weight')"
+          :error="$hasValidationErrors('weight')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.salary"
+          dense
+          type="number"
+          label="Salary"
+          :rules="[(val) => (val && val.length) || 'Please enter salary']"
+          :error-message="$getValidationErrors('salary')"
+          :error="$hasValidationErrors('salary')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="user_detail.experience"
+          dense
+          label="Experience"
+          :rules="[
+            (val) => (val && val.length) || 'Please enter the experience',
+          ]"
+          :error-message="$getValidationErrors('experience')"
+          :error="$hasValidationErrors('experience')"
         >
         </q-input>
       </div>
@@ -186,6 +442,21 @@ export default {
           label: "Company Employee",
           value: "cemployee",
         },
+      ],
+      genderList: [
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
+        { label: "Others", value: "others" },
+      ],
+      bloodList: [
+        { label: "A+", value: "a_p" },
+        { label: "A-", value: "a_n" },
+        { label: "B+", value: "b_p" },
+        { label: "B-", value: "b_n" },
+        { label: "O+", value: "o_p" },
+        { label: "O-", value: "o_n" },
+        { label: "AB+", value: "ab_p" },
+        { label: "AB-", value: "ab_n" },
       ],
       newData,
       pageTitle,

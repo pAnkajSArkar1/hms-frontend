@@ -81,7 +81,7 @@ export default defineComponent({
     const essentialLinks = computed(() => [
       {
         title: "Home",
-        link: "/home",
+        link: "/",
         show: true,
       },
       {

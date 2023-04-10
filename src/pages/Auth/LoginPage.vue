@@ -116,7 +116,7 @@ export default defineComponent({
             type: "positive",
           });
 
-          router.push("/appointment");
+          router.push("/home");
         })
         .catch((error) => {
           loader.value = false;

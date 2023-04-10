@@ -91,7 +91,12 @@ export default {
   name: "CreateDashboard",
 
   props: {
-    modelValue: Array,
+    modelValue: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
     label: {
       type: String,
       default: "Upload Image",
@@ -112,13 +117,28 @@ export default {
       type: String,
       default: "image/*, .pdf",
     },
+    moduleName: {
+      type: String,
+      default: "",
+    },
+    current_folder_id: {
+      type: Number,
+      default: null,
+    },
   },
 
   setup(props, { emit }) {
     const mediaStore = useMediaStore();
     const { uploadItem } = mediaStore;
     let mFiles = reactive([]);
-    const { attachmentType, modelValue, multiple, privateData } = reactive(props);
+    const {
+      modelValue,
+      attachmentType,
+      multiple,
+      privateData,
+      moduleName,
+      current_folder_id,
+    } = reactive(props);
 
     onMounted(() => {
       mFiles = modelValue;
@@ -140,7 +160,7 @@ export default {
 
       return new Promise((resolve, reject) => {
         resolve({
-          url: `${process.env.MEDIA_API}?attachment_type=${attachmentType}&private=${privateData}`,
+          url: `${process.env.MEDIA_API}?attachment_type=${attachmentType}&private=${privateData}&module_name=${moduleName}&current_folder_id=${current_folder_id}`,
           method: "POST",
           headers: [{ name: "Authorization", value: `Bearer ${token}` }],
         });
@@ -168,9 +188,12 @@ export default {
     }
 
     function deleteFile(index) {
-      mFiles.splice(index, 1);
-      return true;
-      // emit("update:modelValue", mFiles);
+      if (mFiles?.length > 0) {
+        mFiles.splice(index, 1);
+        emit("update:modelValue", mFiles);
+
+        return true;
+      }
     }
 
     return {

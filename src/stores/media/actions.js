@@ -4,13 +4,11 @@ const endPoint = "media";
 
 export function getItems(props) {
   // console.log("getItems", true);
-
   // if (props.pagination.descending == true) {
   //   var direction = "DESC";
   // } else {
   //   var direction = "ASC";
   // }
-
   // var params = {
   //   sort: props.pagination.sortBy,
   //   direction: direction,
@@ -18,7 +16,6 @@ export function getItems(props) {
   //   rowsPerPage: props.pagination.rowsPerPage,
   //   search: props.search ? props.search : this.filter.search,
   // };
-
   // return new Promise((resolve, reject) => {
   //   axios
   //     .get(endPoint, {
@@ -62,7 +59,6 @@ export function uploadItem(formData) {
       });
   });
 }
-
 
 // export function uploadItem(formData) {
 
