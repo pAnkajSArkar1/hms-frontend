@@ -112,11 +112,19 @@
         >
         </q-input>
       </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <UploaderFile
+          v-model="newData.identity_proof"
+          label="Upload Identity Proof"
+          acceptFileType=".pdf,.txt,.doc,.docx"
+          attachmentType="document"
+        />
+      </div>
     </div>
     <div
       class="row q-col-gutter-md"
-      v-for="(user_detail, key) in newData.user_details"
-      :key="key"
+      v-for="user_detail in newData.user_details"
+      :key="user_detail"
     >
       <div class="col-12">
         <q-input
@@ -175,15 +183,6 @@
           :error="$hasValidationErrors('assigned_to_room')"
         >
         </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <UploaderFile
-          v-model="user_detail.identity_proof"
-          label="Upload Identity Proof"
-          :multiple="true"
-          acceptFileType=".pdf,.txt,.doc,.docx"
-          attachmentType="document"
-        />
       </div>
       <div class="col-12 col-md-6 col-lg-6">
         <q-select

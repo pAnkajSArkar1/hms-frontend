@@ -49,13 +49,13 @@ export default function () {
       company_id: null,
       primary_contact: null,
       signed_by: "",
+      identity_proof: [],
       user_details: [
         {
           address: "",
           gender: "",
           disease: "",
           assigned_to_room: null,
-          identity_proof: [],
           blood_group: "",
           date_of_addmission: "",
           age: null,

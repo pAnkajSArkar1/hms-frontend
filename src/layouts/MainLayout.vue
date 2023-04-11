@@ -24,7 +24,7 @@
         />
 
         <q-space />
-
+        <q-btn label="Logout" no-caps to="/login" flat />
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -67,6 +67,8 @@
 
 <script>
 import { defineComponent, ref, computed } from "vue";
+import { acl } from "boot/acl";
+
 import EssentialLink from "components/EssentialLink.vue";
 
 export default defineComponent({
@@ -87,7 +89,7 @@ export default defineComponent({
       {
         title: "Users",
         link: "users",
-        show: true,
+        show: acl.hasAccess("user.create"),
       },
 
       // {

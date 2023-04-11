@@ -31,6 +31,11 @@ const routes = [
       {
         path: "",
         component: () => import("pages/Admin/UserManagement/IndexPage.vue"),
+        meta: {
+          name: "company-users.index",
+          requiresAuth: true,
+          acl: "user.index",
+        },
       },
     ],
   },
