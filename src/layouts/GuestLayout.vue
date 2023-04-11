@@ -110,6 +110,11 @@ export default defineComponent({
         link: "/login",
         show: true,
       },
+      {
+        title: "Signup",
+        link: "/signup",
+        show: true,
+      },
       // {
       //   title: "Home",
       //   link: "/overview",

@@ -52,6 +52,18 @@ const routes = [
       },
     ],
   },
+  // For signup route
+  {
+    path: "/signup",
+    component: () => import("layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Auth/SignUpPage.vue"),
+        meta: { name: "Login", requiresAuth: false },
+      },
+    ],
+  },
 
   // For forgot password route
   {

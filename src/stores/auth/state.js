@@ -12,6 +12,13 @@ export default function () {
       email: "",
       password: "",
     },
+    signup: {
+      name: "",
+      email: "",
+      primary_contact: null,
+      password: "",
+      confirm_password: "",
+    },
     passwordReset: {
       email: "",
       otp: null,

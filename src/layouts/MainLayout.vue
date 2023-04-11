@@ -24,7 +24,9 @@
         />
 
         <q-space />
-        <q-btn label="Logout" no-caps to="/login" flat />
+        <q-item clickable @click="logout()">
+          <q-item-section>Logout</q-item-section>
+        </q-item>
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -66,10 +68,12 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
-import { acl } from "boot/acl";
-
+import { defineComponent, ref, onMounted, computed, onBeforeMount } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { acl } from "boot/acl";
+import { useAuthStore } from "stores/auth/index";
+import { useQuasar } from "quasar";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
   name: "MainLayout",
@@ -79,7 +83,9 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
-
+    const $q = useQuasar();
+    const router = useRouter();
+    const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
       {
         title: "Dashboard",
@@ -207,9 +213,32 @@ export default defineComponent({
       // },
     ]);
 
+    const logout = () => {
+      $q.dialog({
+        title: "Confirm",
+        message: "Are you sure to logout?",
+        ok: {
+          label: "Yes",
+          unelevated: true,
+          color: "primary",
+        },
+        cancel: {
+          unelevated: true,
+          color: "",
+          textColor: "black",
+        },
+        persistent: true,
+      }).onOk(() => {
+        authUserStore.logout().then((r) => {
+          window.location.href = "/";
+        });
+      });
+    };
+
     return {
       essentialLinks,
       leftDrawerOpen,
+      logout,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
