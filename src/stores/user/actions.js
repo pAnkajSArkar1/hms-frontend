@@ -2,7 +2,7 @@ import { api, axios } from "boot/axios";
 
 const endPoint = "users";
 
-const endPointUpdate = "user-profile-update";
+const endPointUpdate = "user_profile_update";
 
 export function getItems(props) {
   console.log("getItems", true);

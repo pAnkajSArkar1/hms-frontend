@@ -1,6 +1,6 @@
 import { api, axios } from "boot/axios";
 
-const endPoint = "floor";
+const endPoint = "bed-group";
 
 export function getItems(props) {
   console.log("getItems", true);
@@ -25,6 +25,20 @@ export function getItems(props) {
         params: params,
       })
       .then((response) => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function getItem(id) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(endPoint + "/" + id)
+      .then((response) => {
+        this.formData = response.data;
         resolve(response);
       })
       .catch((err) => {

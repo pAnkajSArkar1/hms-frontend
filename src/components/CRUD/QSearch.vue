@@ -72,6 +72,12 @@ export default {
       type: String,
       default: "string",
     },
+    customFilter: {
+      type: Object,
+      default(rawProps) {
+        return { search: "" };
+      },
+    },
   },
   setup(props, { emit }) {
     const { useStore, autoLoad } = reactive(props);
@@ -91,12 +97,20 @@ export default {
       totalRecords: 0,
     });
 
-    const search = ref(null);
+    const search = ref("");
+    const filter = ref({});
 
     const getOptionValues = async () => {
+      filter.value = props.customFilter;
+
+      console.log("On filter", {
+        pagination: pagination.value,
+        filter: filter,
+      });
+
       getItems({
         pagination: pagination.value,
-        filter: search,
+        // filter: customFilter,
       })
         .then((response) => {
           if (response.data && response.data.data) {
@@ -121,32 +135,6 @@ export default {
         getOptionValues();
       }
     });
-
-    // onRequest(() => {
-    //   store
-    //     .dispatch(`${props.dataStore}/${props.action}`, {
-    //       pagination: pagination,
-    //       search: val,
-    //     })
-    //     .then((response) => {
-    //       if (response.data && response.data.data) {
-    //         options.value = response.data.data;
-    //       } else {
-    //         options.value = response.data;
-    //       }
-
-    //       loading.value = false;
-    //     })
-    //     .catch((err) => {
-    //       loading.value = false;
-    //       console.log("err", err);
-    //     });
-
-    //   loading.value = false;
-    // });
-
-    // getOptionValues();
-    // this.onRequest();
 
     watch(
       () => {
@@ -192,11 +180,19 @@ export default {
       },
 
       filterFn(val, update) {
-        // if (!val.length > 0) return;
         loading.value = true;
+
+        filter.value = props.customFilter;
+        filter.value.search = val;
+
+        console.log("On filter", {
+          pagination: pagination.value,
+          filter: filter,
+        });
+
         getItems({
           pagination: pagination.value,
-          filter: val,
+          filter: filter.value,
         })
           .then((response) => {
             update(() => {

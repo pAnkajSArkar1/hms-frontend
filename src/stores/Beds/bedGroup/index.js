@@ -3,7 +3,7 @@ import state from "./state";
 import * as getters from "./getters";
 import * as actions from "./actions";
 
-export const useFloorStore = defineStore("manageFloor", {
+export const useBedGroupStore = defineStore("BedGroupManagement", {
   state,
   getters: {
     ...getters,

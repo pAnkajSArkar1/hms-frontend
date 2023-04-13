@@ -1,6 +1,6 @@
 import { api, axios } from "boot/axios";
 
-const endPoint = "floor";
+const endPoint = "bed-list";
 
 export function getItems(props) {
   console.log("getItems", true);

@@ -88,6 +88,33 @@ const routes = [
     ],
   },
 
+  {
+    path: "/bed-management",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Beds/BedStatus/IndexPage.vue"),
+      },
+      {
+        path: "floor",
+        component: () => import("src/pages/Beds/Floor/IndexPage.vue"),
+      },
+      {
+        path: "bed-group",
+        component: () => import("src/pages/Beds/BedGroup/IndexPage.vue"),
+      },
+      {
+        path: "bed-type",
+        component: () => import("src/pages/Beds/BedType/IndexPage.vue"),
+      },
+      {
+        path: "bed-list",
+        component: () => import("src/pages/Beds/BedList/IndexPage.vue"),
+      },
+    ],
+  },
+
   // USER
   // {
   //   path: "/profile",
@@ -146,17 +173,17 @@ const routes = [
   // },
 
   // // Asset
-  // {
-  //   path: "/asset",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () => import("src/pages/Asset/IndexPage.vue"),
-  //       meta: { name: "Login", requiresAuth: true, acl: "assets.index" },
-  //     },
-  //   ],
-  // },
+  {
+    path: "/asset",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Asset/IndexPage.vue"),
+        meta: { name: "Login", requiresAuth: true, acl: "assets.index" },
+      },
+    ],
+  },
 
   // // {
   // //     path: "/company",

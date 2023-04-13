@@ -100,6 +100,28 @@ export default {
       formData.value.email = params.email;
       formData.value.username = params.username;
       formData.value.role = params.user_role.role.code;
+      formData.value.primary_contact = params.primary_contact;
+      formData.value.secondary_contact = params.secondary_contact;
+      formData.value.identity_proof = params.identity_proof;
+      // formData.value.user_details = params.user_details;
+      // formData.value.user_details.address = params?.user_details?.address;
+      // formData.value.user_details.gender = params.user_details.gender;
+      // formData.value.user_details.disease = params.user_details.disease;
+      // formData.value.user_details.assigned_to_room =
+      //   params.user_details.assigned_to_room;
+      // formData.value.user_details.blood_group = params.user_details.blood_group;
+      // formData.value.user_details.date_of_addmission =
+      //   params.user_details.date_of_addmission;
+      // formData.value.user_details.age = params.user_details.age;
+      // formData.value.user_details.blood_pressure_level =
+      //   params.user_details.blood_pressure_level;
+      // formData.value.user_details.heart_beat = params.user_details.heart_beat;
+      // formData.value.user_details.sugar_level = params.user_details.sugar_level;
+      // formData.value.user_details.height = params.user_details.height;
+      // formData.value.user_details.weight = params.user_details.weight;
+      // formData.value.user_details.salary = params.user_details.salary;
+      // formData.value.user_details.experience = params.user_details.experience;
+      console.log("hi", formData.value.user_details);
       dialogs.value.editItem = true;
     };
 

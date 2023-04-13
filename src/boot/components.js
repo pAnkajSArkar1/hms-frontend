@@ -7,6 +7,7 @@ import DoughnutChart from "components/CHART/DoughnutChart.vue";
 import PieChart from "components/CHART/PieChart.vue";
 import PolarAreaChart from "components/CHART/PolarAreaChart.vue";
 import UploaderFile from "components/CRUD/UploaderFile.vue";
+import BedMenu from "components/BedMenu.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -18,4 +19,5 @@ export default ({ app }) => {
   app.component("PieChart", PieChart);
   app.component("PolarAreaChart", PolarAreaChart);
   app.component("UploaderFile", UploaderFile);
+  app.component("BedMenu", BedMenu);
 };
