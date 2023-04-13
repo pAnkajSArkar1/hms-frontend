@@ -1,5 +1,5 @@
 <template>
-  <QCreateForm :useStore="useStore" :getItems="getItems" title="Add Risk">
+  <QCreateForm :useStore="useStore" :getItems="getItems" title="Add Bed List">
     <QSearch
       label="Select Floor"
       v-model="newData.floor_id"
@@ -47,7 +47,7 @@
       dense
       outlined
       v-model="newData.name"
-      label="Risk"
+      label="Name"
       :rules="[(val) => (val && val.length) || 'Please enter bed list name']"
       :error-message="$getValidationErrors('name')"
       :error="$hasValidationErrors('name')"
