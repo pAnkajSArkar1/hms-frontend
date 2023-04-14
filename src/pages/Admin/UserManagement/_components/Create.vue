@@ -112,7 +112,7 @@
         >
         </q-input>
       </div>
-      <div class="col-12 col-md-6 col-lg-6">
+      <div class="col-12">
         <UploaderFile
           v-model="newData.identity_proof"
           label="Upload Identity Proof"
@@ -120,17 +120,11 @@
           attachmentType="document"
         />
       </div>
-    </div>
-    <div
-      class="row q-col-gutter-md"
-      v-for="user_detail in newData.user_details"
-      :key="user_detail"
-    >
       <div class="col-12">
         <q-input
           type="textarea"
           outlined
-          v-model="user_detail.address"
+          v-model="newData.address"
           dense
           label="Address"
           :rules="[(val) => (val && val.length) || 'Please enter your address']"
@@ -149,40 +143,13 @@
           type="gender"
           outlined
           clearable
-          v-model="user_detail.gender"
+          v-model="newData.gender"
           dense
           label="Gender"
           :rules="[(val) => (val && val.length) || 'Please select a gender']"
           :error-message="$getValidationErrors('gender')"
           :error="$hasValidationErrors('gender')"
         />
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="user_detail.disease"
-          dense
-          label="Disease"
-          :rules="[(val) => (val && val.length) || 'Please enter the disease']"
-          :error-message="$getValidationErrors('disease')"
-          :error="$hasValidationErrors('disease')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          type="number"
-          v-model="user_detail.assigned_to_room"
-          dense
-          label="Assigned to room"
-          :rules="[
-            (val) => (val && val.length) || 'Please assign a room number',
-          ]"
-          :error-message="$getValidationErrors('assigned_to_room')"
-          :error="$hasValidationErrors('assigned_to_room')"
-        >
-        </q-input>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
         <q-select
@@ -194,7 +161,7 @@
           type="blood"
           outlined
           clearable
-          v-model="user_detail.blood_group"
+          v-model="newData.blood_group"
           dense
           label="Blood Group"
           :rules="[(val) => (val && val.length) || 'Please select blood group']"
@@ -205,10 +172,35 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
+          v-model="newData.age"
+          dense
+          type="number"
+          label="Age"
+          :rules="[(val) => (val && val.length) || 'Please enter age']"
+          :error-message="$getValidationErrors('age')"
+          :error="$hasValidationErrors('age')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="newData.disease"
+          dense
+          label="Disease"
+          :rules="[(val) => (val && val.length) || 'Please enter the disease']"
+          :error-message="$getValidationErrors('disease')"
+          :error="$hasValidationErrors('disease')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
           dense
           readonly
           label="Date of Admission"
-          v-model="user_detail.date_of_addmission"
+          v-model="newData.date_of_addmission"
           mask="date"
           :rules="[
             (val) => (val && val.length) || 'Please enter date of addmission',
@@ -223,7 +215,7 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="user_detail.date_of_addmission">
+                <q-date v-model="newData.date_of_addmission">
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -233,23 +225,27 @@
           </template>
         </q-input>
       </div>
+
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.age"
-          dense
           type="number"
-          label="Age"
-          :rules="[(val) => (val && val.length) || 'Please enter age']"
-          :error-message="$getValidationErrors('age')"
-          :error="$hasValidationErrors('age')"
+          v-model="newData.assigned_to_room"
+          dense
+          label="Assigned to room"
+          :rules="[
+            (val) => (val && val.length) || 'Please assign a room number',
+          ]"
+          :error-message="$getValidationErrors('assigned_to_room')"
+          :error="$hasValidationErrors('assigned_to_room')"
         >
         </q-input>
       </div>
+
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.blood_pressure_level"
+          v-model="newData.blood_pressure_level"
           dense
           label="Blood pressure level"
           :rules="[
@@ -263,7 +259,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.heart_beat"
+          v-model="newData.heart_beat"
           dense
           label="Heart Rate"
           :rules="[(val) => (val && val.length) || 'Please enter heart rate']"
@@ -275,7 +271,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.sugar_level"
+          v-model="newData.sugar_level"
           dense
           label="Blood Sugar Level"
           :rules="[
@@ -289,7 +285,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.height"
+          v-model="newData.height"
           dense
           label="Height"
           :rules="[(val) => (val && val.length) || 'Please enter height']"
@@ -301,7 +297,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.weight"
+          v-model="newData.weight"
           dense
           label="Weight"
           :rules="[(val) => (val && val.length) || 'Please enter weight']"
@@ -313,7 +309,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.salary"
+          v-model="newData.salary"
           dense
           type="number"
           label="Salary"
@@ -326,7 +322,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="user_detail.experience"
+          v-model="newData.experience"
           dense
           label="Experience"
           :rules="[
@@ -338,6 +334,7 @@
         </q-input>
       </div>
     </div>
+    <div></div>
   </QCreateForm>
 </template>
 

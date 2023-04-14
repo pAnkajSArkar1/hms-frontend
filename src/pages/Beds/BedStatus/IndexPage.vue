@@ -245,9 +245,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.card-width {
-  width: 400px;
-}
-</style>

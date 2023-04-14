@@ -61,10 +61,9 @@
       option-value="value"
       type="status"
       outlined
-      clearable
       v-model="formData.status"
       dense
-      label="Gender"
+      label="Status"
       :rules="[(val) => (val && val.length) || 'Please select status']"
       :error-message="$getValidationErrors('status')"
       :error="$hasValidationErrors('status')"
