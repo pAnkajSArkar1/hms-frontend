@@ -19,7 +19,6 @@
       placeholder="Number of rooms"
       lazy-rules
       hint
-      :rules="[(val) => (val && val.length) || 'Please enter number of rooms']"
       :error-message="$getValidationErrors('no_of_rooms')"
       :error="$hasValidationErrors('no_of_rooms')"
     />

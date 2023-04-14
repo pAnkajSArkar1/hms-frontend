@@ -95,7 +95,7 @@ export default defineComponent({
       {
         title: "Users",
         link: "users",
-        show: acl.hasAccess("user.create"),
+        show: true,
       },
       {
         title: "Bed Management",

@@ -34,7 +34,6 @@ const routes = [
         meta: {
           name: "company-users.index",
           requiresAuth: true,
-          acl: "user.index",
         },
       },
     ],
