@@ -3,21 +3,27 @@ import { api, axios } from "boot/axios";
 const endPoint = "bed-group";
 
 export function getItems(props) {
-  console.log("getItems", true);
-
-  if (props.pagination.descending == true) {
-    var direction = "DESC";
+  if (props.all) {
+    var params = {
+      all: props.all,
+      floor_id: props?.floor_id,
+    };
   } else {
-    var direction = "ASC";
-  }
+    if (props.pagination.descending == true) {
+      var direction = "DESC";
+    } else {
+      var direction = "ASC";
+    }
 
-  var params = {
-    sort: props.pagination.sortBy,
-    direction: direction,
-    page: props.pagination.page,
-    rowsPerPage: props.pagination.rowsPerPage,
-    search: props.search ? props.search : this.filter.search,
-  };
+    var params = {
+      sort: props.pagination.sortBy,
+      direction: direction,
+      page: props.pagination.page,
+      rowsPerPage: props.pagination.rowsPerPage,
+      search: props.search ? props.search : this.filter.search,
+      floor_id: this.filter?.floor_id,
+    };
+  }
 
   return new Promise((resolve, reject) => {
     axios
@@ -33,12 +39,11 @@ export function getItems(props) {
   });
 }
 
-export function getItem(id) {
+export function getItem(params) {
   return new Promise((resolve, reject) => {
     axios
-      .get(endPoint + "/" + id)
+      .get(endPoint + "/" + params.id)
       .then((response) => {
-        this.formData = response.data;
         resolve(response);
       })
       .catch((err) => {
@@ -47,12 +52,20 @@ export function getItem(id) {
   });
 }
 
+export function resetForm(form) {
+  form.floor_id = null;
+  form.bed_group_id = null;
+  form.bed_type_id = null;
+  form.name = "";
+}
+
 export function createItem() {
   return new Promise((resolve, reject) => {
     axios
       .post(endPoint, this.newData)
       .then((response) => {
         this.lastUpdated = new Date();
+        this.resetForm(this.newData);
         this.dialogs.createItem = false;
         resolve(response);
       })

@@ -6,11 +6,11 @@
       :useStore="floorStore"
       optionValue="id"
       optionLabel="name"
+      @update:modelValue="onFloorSelect"
       :error-message="$getValidationErrors('floor_id')"
       :error="$hasValidationErrors('floor_id')"
     />
-
-    <!-- <q-select
+    <q-select
       dense
       v-model="newData.bed_group_id"
       outlined
@@ -20,15 +20,6 @@
       optionLabel="name"
       emit-value
       map-options
-      :error-message="$getValidationErrors('bed_group_id')"
-      :error="$hasValidationErrors('bed_group_id')"
-    /> -->
-    <QSearch
-      label="Select Bed Group"
-      v-model="newData.bed_group_id"
-      :useStore="bedGroupStore"
-      optionValue="id"
-      optionLabel="name"
       :error-message="$getValidationErrors('bed_group_id')"
       :error="$hasValidationErrors('bed_group_id')"
     />
@@ -89,41 +80,38 @@ export default {
     const bedGroupStore = useBedGroupStore();
     const bedTypeStore = useBedTypeStore();
 
-    // const bedGroupOptions = ref([]);
+    const { getItems: getBedGroup } = bedGroupStore;
 
-    // const { getItems: getBedGroup } = bedGroupStore;
+    const bedGroupOptions = ref([]);
 
-    // const onFloorSelect = () => {
-    //   console.log("newData.value.floor_id", newData.value.floor_id);
+    const onFloorSelect = () => {
+      // console.log("floor_id", newData.value.floor_id);
 
-    //   if (newData.value.floor_id !== null) {
-    //     getBedGroup({ all: true, floor_id: newData.value.floor_id }).then(
-    //       (response) => {
-    //         bedGroupOptions.value = response.data;
-    //       }
-    //     );
-    //   }
-    // };
-    // watch(
-    //   () => {
-    //     return newData.value.floor_id;
-    //   },
-    //   (first, second) => {
-    //     newData.value.bed_group_id = null;
-    //   }
-    // );
+      if (newData.value.floor_id !== null) {
+        getBedGroup({ all: true, floor_id: newData.value.floor_id }).then(
+          (response) => {
+            bedGroupOptions.value = response.data;
+            // console.log("option", bedGroupOptions.value);
+          }
+        );
+      }
+    };
+    watch(
+      () => {
+        return newData.value.floor_id;
+      },
+      (first, second) => {
+        newData.value.bed_group_id = null;
+      }
+    );
 
     return {
       floorStore,
       bedTypeStore,
       newData,
       bedGroupStore,
-      // statusList: [
-      //   { label: "Free", value: "Free" },
-      //   { label: "Occupied", value: "Occupied" },
-      // ],
-      // bedGroupOptions,
-      // onFloorSelect,
+      bedGroupOptions,
+      onFloorSelect,
       getItems,
     };
   },

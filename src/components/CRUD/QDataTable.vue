@@ -10,7 +10,6 @@
     row-key="id"
     @row-click="onRowClick"
     @request="onRequest"
-    dense
   >
     <template v-slot:header="props">
       <q-tr :props="props">
@@ -33,10 +32,10 @@
       <div
         class="col-xs-12 col-sm-6 col-md-6 row justify-end items-center q-col-gutter-sm"
       >
-        <div class="col-6 col-md-4 col-lg-4">
+        <div class="col-6 col-md-6 col-lg-6">
           <slot name="customTop"></slot>
         </div>
-        <div class="col-6 col-md-8 col-lg-8">
+        <div class="col-6 col-md-6 col-lg-6">
           <q-input
             outlined
             dense
@@ -106,15 +105,17 @@
       </q-td>
     </template>
   </q-table>
-  <q-page-sticky position="bottom-right" :offset="[18, 18]">
-    <q-btn
-      fab
-      icon="add"
-      color="primary"
-      @click="setCreateModal(true)"
-      v-show="canAdd"
-    />
-  </q-page-sticky>
+  <div class="q-pb-xl">
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn
+        fab
+        icon="add"
+        color="primary"
+        @click="setCreateModal(true)"
+        v-show="canAdd"
+      />
+    </q-page-sticky>
+  </div>
 </template>
 
 <script>
@@ -124,6 +125,7 @@ import {
   reactive,
   onMounted,
   getCurrentInstance,
+  onDeactivated,
 } from "vue";
 import { computed } from "vue";
 import { useQuasar } from "quasar";
@@ -228,21 +230,35 @@ export default defineComponent({
         pagination: pagination.value,
         filter: filter,
       });
-
-      useStore.$subscribe((mutation, state) => {
-        if (
-          mutation.events.key === "lastUpdated" ||
-          mutation.events.key === "createItem" ||
-          mutation.events.key === "editItem" ||
-          mutation.events.key === "deleteItem"
-        ) {
-          onRequest({
-            pagination: pagination.value,
-            filter: filter,
-          });
-        }
-      });
     });
+
+    onDeactivated(() => {
+      unsubscribe();
+    });
+
+    const unsubscribe = useStore.$onAction(
+      ({
+        name, // name of the action
+        store, // store instance, same as `someStore`
+        args, // array of parameters passed to the action
+        after, // hook after the action returns or resolves
+        onError, // hook if the action throws or rejects
+      }) => {
+        after((result) => {
+          if (
+            name == "createItem" ||
+            name == "editItem" ||
+            name == "updateSafetyFolder" ||
+            name == "deleteItem"
+          ) {
+            onRequest({
+              pagination: pagination.value,
+              filter: filter,
+            });
+          }
+        });
+      }
+    );
 
     const onRequest = (params) => {
       loading.value = true;
@@ -286,7 +302,7 @@ export default defineComponent({
       if (props.editRoute !== "") {
         router.push({ name: props.editRoute });
       }
-      formData.value = params;
+      formData.value = Object.assign({}, params);
       dialogs.value.editItem = true;
     };
 
