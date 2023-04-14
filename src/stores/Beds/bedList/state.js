@@ -28,7 +28,7 @@ export default function () {
       {
         name: "bedList",
         align: "left",
-        label: "Bed List",
+        label: "Bed",
         field: "name",
         sortable: true,
       },
@@ -57,6 +57,7 @@ export default function () {
       bed_group_id: null,
       bed_type_id: null,
       name: "",
+      status: "",
     }),
     createdby: {
       name: "",

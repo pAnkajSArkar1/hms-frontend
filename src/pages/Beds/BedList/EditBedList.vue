@@ -52,6 +52,23 @@
       :error-message="$getValidationErrors('name')"
       :error="$hasValidationErrors('name')"
     />
+
+    <q-select
+      :options="statusList"
+      map-options
+      emit-value
+      option-label="label"
+      option-value="value"
+      type="status"
+      outlined
+      clearable
+      v-model="formData.status"
+      dense
+      label="Gender"
+      :rules="[(val) => (val && val.length) || 'Please select status']"
+      :error-message="$getValidationErrors('status')"
+      :error="$hasValidationErrors('status')"
+    />
   </QEditForm>
 </template>
 
@@ -102,6 +119,10 @@ export default {
       bedTypeStore,
       formData,
       bedGroupStore,
+      statusList: [
+        { label: "Free", value: "Free" },
+        { label: "Occupied", value: "Occupied" },
+      ],
       // bedGroupOptions,
       // onFloorSelect,
       getItems,

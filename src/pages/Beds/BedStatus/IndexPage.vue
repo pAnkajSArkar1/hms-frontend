@@ -1,33 +1,4 @@
 <template>
-  <!-- <div class="row q-col-gutter-md"> -->
-  <!-- TASK COUNT -->
-  <!-- <div class="col-12 col-md-4 col-lg-4 q-gutter-md">
-      <q-card>
-        <q-card-section class="text-weight-bold q-pb-none">
-          Completed Tasks
-        </q-card-section>
-        <q-card-section class="text-weight-bold">
-          {{ complete_tasks }}
-        </q-card-section>
-      </q-card>
-      <q-card>
-        <q-card-section class="text-weight-bold q-pb-none">
-          Incompleted Tasks
-        </q-card-section>
-        <q-card-section class="text-weight-bold">
-          {{ incomplete_tasks }}
-        </q-card-section>
-      </q-card>
-      <q-card>
-        <q-card-section class="text-weight-bold q-pb-none">
-          Overdue Tasks
-        </q-card-section>
-        <q-card-section class="text-weight-bold">
-          {{ overdue }}
-        </q-card-section>
-      </q-card>
-    </div> -->
-
   <!-- CHARTS -->
   <!-- <div class="col-12 col-md-8 col-lg-8">
       <q-card>
@@ -54,6 +25,36 @@
   <!-- QDATATABLE -->
   <q-page>
     <BedMenu />
+    <div class="row q-pa-md">
+      <div
+        :class="
+          $q.platform.is.desktop
+            ? 'row q-col-gutter-md col-8'
+            : 'row q-col-gutter-md col-12'
+        "
+      >
+        <div class="col-12 col-md-6 col-lg-6">
+          <q-card>
+            <q-card-section class="text-weight-bold q-pb-none">
+              Free Beds
+            </q-card-section>
+            <q-card-section class="text-weight-bold">
+              {{ free_beds }}
+            </q-card-section>
+          </q-card>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+          <q-card>
+            <q-card-section class="text-weight-bold q-pb-none">
+              Occupied Beds
+            </q-card-section>
+            <q-card-section class="text-weight-bold">
+              {{ occupied_beds }}
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
+    </div>
     <div class="q-pa-md">
       <QDataTable
         :customBodySlot="true"
@@ -83,7 +84,7 @@
                 </q-chip>
               </span>
             </q-td>
-            <!-- <q-td key="actions" align="right">
+            <q-td key="actions" align="right">
               <q-btn
                 flat
                 round
@@ -95,7 +96,7 @@
               >
                 <q-tooltip> Edit </q-tooltip>
               </q-btn>
-              <q-btn
+              <!-- <q-btn
                 flat
                 round
                 dense
@@ -104,12 +105,20 @@
                 @click="onClickDelete(bodyRow.row)"
               >
                 <q-tooltip> Delete </q-tooltip>
-              </q-btn>
-            </q-td> -->
+              </q-btn> -->
+            </q-td>
           </q-tr>
         </template>
       </QDataTable>
     </div>
+    <!-- EDIT -->
+    <q-dialog v-model="showEditBedList">
+      <q-card class="card-width">
+        <div :class="$q.platform.is.desktop ? '' : ''">
+          <edit-bed-list :useStore="useStore" v-bind:modal="true" />
+        </div>
+      </q-card>
+    </q-dialog>
   </q-page>
   <!-- </div> -->
 </template>
@@ -124,16 +133,23 @@ import {
   onMounted,
   reactive,
 } from "vue";
-import { useBedListStore } from "stores/Beds/status";
+import { useBedListStore } from "stores/Beds/bedList";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
+const EditBedList = defineAsyncComponent(() =>
+  import("../BedList/EditBedList.vue")
+);
+
 export default {
   name: "BedStatus",
-  components: {},
+  components: {
+    EditBedList,
+  },
 
   setup(props) {
     const useStore = useBedListStore();
+    const showEditBedList = computed(() => useStore.showEditBedList);
     const $q = useQuasar();
     // const { deleteItem } = useStore;
     const { formData, dialogs } = storeToRefs(useStore);
@@ -141,9 +157,14 @@ export default {
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
     // const loading = ref([]);
     // const taskDetails = ref("");
-    // const incomplete_tasks = ref(0);
-    // const complete_tasks = ref(0);
+    const occupied_beds = ref(0);
+    const free_beds = ref(0);
     // const overdue = ref(0);
+
+    const onClickEdit = (params) => {
+      formData.value = params;
+      dialogs.value.editItem = true;
+    };
 
     // const onClickView = (params) => {
     //   router.push({ name: props.viewRoute, params: { id: params.id } });
@@ -171,56 +192,62 @@ export default {
     //   ],
     // });
 
-    // onBeforeMount(() => {
-    //   fetchAllData();
-    // });
-    // const fetchAllData = () => {
-    //   useStore.getItems({ all: true }).then((response) => {
-    //     incomplete_tasks.value = 0;
-    //     complete_tasks.value = 0;
-    //     overdue.value = 0;
+    onBeforeMount(() => {
+      fetchAllData();
+    });
+    const fetchAllData = () => {
+      useStore.getItems({ all: true }).then((response) => {
+        occupied_beds.value = 0;
+        free_beds.value = 0;
 
-    //     response.data.map((single_data) => {
-    //       if (single_data.status === "Incomplete") {
-    //         incomplete_tasks.value++;
-    //       }
+        response.data.map((single_data) => {
+          if (single_data.status === "Occupied") {
+            occupied_beds.value++;
+          }
 
-    //       if (single_data.status === "Complete") {
-    //         complete_tasks.value++;
-    //       }
+          if (single_data.status === "Free") {
+            free_beds.value++;
+          }
 
-    //       if (single_data.status === "Overdue") {
-    //         overdue.value++;
-    //       }
-    //     });
+          // if (single_data.status === "Overdue") {
+          //   overdue.value++;
+          // }
+        });
 
-    //     barChartData.datasets[0].data = [];
-    //     barChartData.datasets[0].data.push(complete_tasks.value);
-    //     barChartData.datasets[0].data.push(incomplete_tasks.value);
-    //     barChartData.datasets[0].data.push(overdue.value);
+        // barChartData.datasets[0].data = [];
+        // barChartData.datasets[0].data.push(free_beds.value);
+        // barChartData.datasets[0].data.push(occupied_beds.value);
+        // barChartData.datasets[0].data.push(overdue.value);
 
-    //     doughnutChartData.datasets[0].data = [];
-    //     doughnutChartData.datasets[0].data.push(complete_tasks.value);
-    //     doughnutChartData.datasets[0].data.push(incomplete_tasks.value);
-    //     doughnutChartData.datasets[0].data.push(overdue.value);
-    //   });
-    // };
+        // doughnutChartData.datasets[0].data = [];
+        // doughnutChartData.datasets[0].data.push(free_beds.value);
+        // doughnutChartData.datasets[0].data.push(occupied_beds.value);
+        // doughnutChartData.datasets[0].data.push(overdue.value);
+      });
+    };
 
     return {
       useStore,
-      // onClickEdit,
+      onClickEdit,
       formData,
+      showEditBedList,
       // onClickDelete,
       // loading,
       // taskDetails,
       // onClickView,
       // barChartData,
       // doughnutChartData,
-      // fetchAllData,
-      // incomplete_tasks,
-      // complete_tasks,
+      fetchAllData,
+      occupied_beds,
+      free_beds,
       // overdue,
     };
   },
 };
 </script>
+
+<style scoped>
+.card-width {
+  width: 400px;
+}
+</style>
