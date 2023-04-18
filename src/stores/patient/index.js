@@ -3,7 +3,7 @@ import state from "./state";
 import * as getters from "./getters";
 import * as actions from "./actions";
 
-export const usePatientStore = defineStore("patient", {
+export const useShowPatientStore = defineStore("patient", {
   state,
   getters: {
     ...getters,

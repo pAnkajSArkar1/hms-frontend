@@ -37,6 +37,7 @@ export default function () {
     filter: {
       search: "",
       company_id: "",
+      name: "",
     },
     items: reactive([]),
     item: reactive({}),

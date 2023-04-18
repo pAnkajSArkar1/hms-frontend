@@ -113,7 +113,7 @@
         </q-input>
       </div>
       <div class="col-12">
-        <UploaderFile
+        <SingleUploaderFile
           v-model="newData.identity_proof"
           label="Upload Identity Proof"
           acceptFileType=".pdf,.txt,.doc,.docx"

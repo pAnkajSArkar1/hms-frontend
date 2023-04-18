@@ -7,7 +7,11 @@ import DoughnutChart from "components/CHART/DoughnutChart.vue";
 import PieChart from "components/CHART/PieChart.vue";
 import PolarAreaChart from "components/CHART/PolarAreaChart.vue";
 import UploaderFile from "components/CRUD/UploaderFile.vue";
+import SingleUploaderFile from "components/CRUD/SingleUploaderFile.vue";
 import BedMenu from "components/BedMenu.vue";
+import BloodAdmin from "components/BloodAdmin.vue";
+import BloodDonor from "components/BloodDonor.vue";
+import BloodPatient from "components/BloodPatient.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -19,5 +23,9 @@ export default ({ app }) => {
   app.component("PieChart", PieChart);
   app.component("PolarAreaChart", PolarAreaChart);
   app.component("UploaderFile", UploaderFile);
+  app.component("SingleUploaderFile", SingleUploaderFile);
   app.component("BedMenu", BedMenu);
+  app.component("BloodAdmin", BloodAdmin);
+  app.component("BloodDonor", BloodDonor);
+  app.component("BloodPatient", BloodPatient);
 };

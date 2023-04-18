@@ -35,10 +35,6 @@ export function setActiveCompany() {
   });
 }
 
-export function setSignature(props) {
-  this.authUser.signature = props.id;
-}
-
 export function updateProfile() {
   return new Promise((resolve, reject) => {
     axios

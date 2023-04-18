@@ -94,12 +94,17 @@ export default defineComponent({
       },
       {
         title: "Users",
-        link: "users",
+        link: "/users",
         show: true,
       },
       {
         title: "Bed Management",
-        link: "bed-management",
+        link: "/bed-management",
+        show: true,
+      },
+      {
+        title: "Blood Bank",
+        link: "/blood-admin",
         show: true,
       },
 

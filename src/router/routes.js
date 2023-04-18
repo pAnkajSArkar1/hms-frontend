@@ -114,19 +114,121 @@ const routes = [
     ],
   },
 
+  {
+    path: "/blood-admin",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Admin/Dashboard/IndexPage.vue"),
+      },
+      {
+        path: "donors",
+        component: () =>
+          import("src/pages/BloodBank/Admin/Donor/IndexPage.vue"),
+      },
+      {
+        path: "receivers",
+        component: () =>
+          import("src/pages/BloodBank/Admin/Patient/IndexPage.vue"),
+      },
+      {
+        path: "donations",
+        component: () =>
+          import("src/pages/BloodBank/Admin/Donation/IndexPage.vue"),
+      },
+      {
+        path: "requests",
+        component: () =>
+          import("src/pages/BloodBank/Admin/Request/IndexPage.vue"),
+      },
+    ],
+  },
+
+  // donor
+  {
+    path: "/donor-dashboard",
+    component: () => import("layouts/DonorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Donor/Dashboard/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/donate",
+    component: () => import("layouts/DonorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Donor/Donate/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/donation-history",
+    component: () => import("layouts/DonorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Donor/DonateHistory/IndexPage.vue"),
+      },
+    ],
+  },
+
+  // patient
+  {
+    path: "/receiver-dashboard",
+    component: () => import("layouts/PatientLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Patient/Dashboard/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/request",
+    component: () => import("layouts/PatientLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Patient/Request/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/request-history",
+    component: () => import("layouts/PatientLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BloodBank/Patient/RequestHistory/IndexPage.vue"),
+      },
+    ],
+  },
+
   // USER
-  // {
-  //   path: "/profile",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       name: "profile",
-  //       component: () => import("src/pages/ProfilePage.vue"),
-  //       meta: { name: "Profile", requiresAuth: true },
-  //     },
-  //   ],
-  // },
+  {
+    path: "/profile",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "profile",
+        component: () => import("src/pages/ProfilePage.vue"),
+        meta: { name: "Profile", requiresAuth: true },
+      },
+    ],
+  },
   // {
   //   path: "/company-profile",
   //   component: () => import("layouts/MainLayout.vue"),

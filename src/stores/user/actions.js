@@ -2,8 +2,6 @@ import { api, axios } from "boot/axios";
 
 const endPoint = "users";
 
-const endPointUpdate = "user_profile_update";
-
 export function getItems(props) {
   console.log("getItems", true);
 
@@ -36,12 +34,38 @@ export function getItems(props) {
   });
 }
 
+export function getItem(props) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(endPoint + "/" + props.id)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function resetForm(form) {
+  form.name = "";
+  form.email = "";
+  form.primary_contact = null;
+  form.secondary_contact = null;
+  form.password = "";
+  form.confirm_password = "";
+  form.signed_by = "";
+  form.username = "";
+  form.role = "";
+}
+
 export function createItem() {
   return new Promise((resolve, reject) => {
     axios
       .post(endPoint, this.newData)
       .then((response) => {
         this.lastUpdated = new Date();
+        this.resetForm(this.newData);
         this.dialogs.createItem = false;
         resolve(response);
       })
@@ -54,7 +78,7 @@ export function createItem() {
 export function editItem() {
   return new Promise((resolve, reject) => {
     axios
-      .put(endPointUpdate + "/" + this.formData.id, this.formData)
+      .put(endPoint + "/" + this.formData.id, this.formData)
       .then((response) => {
         this.lastUpdated = new Date();
         this.dialogs.editItem = false;

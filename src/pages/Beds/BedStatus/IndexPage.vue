@@ -35,21 +35,37 @@
       >
         <div class="col-12 col-md-6 col-lg-6">
           <q-card>
-            <q-card-section class="text-weight-bold q-pb-none">
+            <q-card-section class="q-pb-none text-weight-bold blood-type">
               Free Beds
             </q-card-section>
-            <q-card-section class="text-weight-bold">
+            <q-card-section
+              class="blood-available text-weight-bold text-blue-9"
+              v-if="free_beds > 0"
+            >
               {{ free_beds }}
+            </q-card-section>
+            <q-card-section
+              class="blood-available text-weight-bold text-red-6"
+              v-else
+              >No Beds Available
             </q-card-section>
           </q-card>
         </div>
         <div class="col-12 col-md-6 col-lg-6">
           <q-card>
-            <q-card-section class="text-weight-bold q-pb-none">
+            <q-card-section class="q-pb-none text-weight-bold blood-type">
               Occupied Beds
             </q-card-section>
-            <q-card-section class="text-weight-bold">
+            <q-card-section
+              class="blood-available text-weight-bold text-blue-9"
+              v-if="occupied_beds > 0"
+            >
               {{ occupied_beds }}
+            </q-card-section>
+            <q-card-section
+              class="blood-available text-weight-bold text-red-6"
+              v-else
+              >NoBeds
             </q-card-section>
           </q-card>
         </div>
@@ -130,6 +146,7 @@ import {
   getCurrentInstance,
   onBeforeMount,
   ref,
+  watch,
   onMounted,
   reactive,
 } from "vue";
@@ -137,9 +154,7 @@ import { useBedListStore } from "stores/Beds/bedList";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
-const EditBedList = defineAsyncComponent(() =>
-  import("../BedList/EditBedList.vue")
-);
+const EditBedList = defineAsyncComponent(() => import("./EditBedList.vue"));
 
 export default {
   name: "BedStatus",
@@ -245,3 +260,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card-width {
+  width: 300px;
+}
+.blood-type {
+  font-size: 25px;
+  color: #146c2e;
+}
+.blood-available {
+  font-size: 18px;
+}
+.units {
+  font-size: 15px;
+}
+</style>

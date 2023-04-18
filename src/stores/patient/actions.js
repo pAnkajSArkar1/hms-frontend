@@ -1,6 +1,6 @@
 import { api, axios } from "boot/axios";
 
-const endPoint = "medicine";
+const endPoint = "blood-recievers";
 
 export function getItems(props) {
   console.log("getItems", true);

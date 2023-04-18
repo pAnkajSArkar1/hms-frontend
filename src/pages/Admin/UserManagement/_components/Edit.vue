@@ -88,13 +88,14 @@
       </div>
 
       <div class="col-12">
-        <UploaderFile
+        <SingleUploaderFile
           v-model="formData.identity_proof"
           label="Upload Identity Proof"
           acceptFileType=".pdf,.txt,.doc,.docx"
           attachmentType="document"
         />
       </div>
+
       <div class="col-12">
         <q-input
           type="textarea"
@@ -318,6 +319,7 @@ import { reactive, onMounted, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "stores/auth/index";
+// import { useUserStore } from "stores/user/index";
 
 export default {
   name: "EditUserPage",
@@ -327,6 +329,7 @@ export default {
   },
   setup(props) {
     const authUserStore = useAuthStore();
+    // const useUsersStore = useUserStore();
     const { useStore, company } = reactive(props);
     const { formData, filter } = storeToRefs(useStore);
     const route = useRoute();
@@ -430,6 +433,7 @@ export default {
         { label: "AB-", value: "AB-" },
       ],
       formData,
+      // useUsersStore,
       pageTitle,
     };
   },

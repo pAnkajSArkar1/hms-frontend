@@ -105,7 +105,6 @@ import { getCurrentInstance, ref } from "vue";
 import { useAuthStore } from "stores/auth/index";
 import { useCompanyStore } from "stores/company";
 import { useUserStore } from "stores/user";
-import { useMediaStore } from "stores/media";
 
 export default {
   component: {},
@@ -115,8 +114,6 @@ export default {
     const companyStore = useCompanyStore();
     const userStore = useUserStore();
     const { setDigitalSignature } = userStore;
-    const mediaStore = useMediaStore();
-    const { uploadItem } = mediaStore;
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
     const setValidationErrors =
@@ -126,19 +123,6 @@ export default {
     const passChangeLoader = ref(false);
 
     //sign uploader
-    const setDigitalSign = (files) => {
-      let uploadFormData = new FormData();
-      uploadFormData.append("attachment_type", "image");
-      uploadFormData.append("file", files[0]);
-      return new Promise((resolve) => {
-        uploadItem(uploadFormData)
-          .then((res) => {
-            authUserStore.setSignature({ id: res.data.media_id });
-            resolve({ url: null });
-          })
-          .finally(() => {});
-      });
-    };
 
     const onSubmit = () => {
       authUserStore
@@ -203,7 +187,6 @@ export default {
       authUserStore,
       companyStore,
       userStore,
-      setDigitalSign,
       onSubmit,
       onSubmitPass,
     };

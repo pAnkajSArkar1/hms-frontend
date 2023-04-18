@@ -7,6 +7,18 @@
       :useStore="userStore"
       title="Users"
     >
+      <!-- <template v-slot:customTop>
+        <div>
+          <QSearch
+            label="Department"
+            clearable
+            v-model="filter.branch_id"
+            :useStore="branchStore"
+            optionValue="id"
+            optionLabel="name"
+          />
+        </div>
+      </template> -->
       <template v-slot:aditionalActions="props">
         <q-btn
           flat
