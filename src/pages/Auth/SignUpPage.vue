@@ -3,10 +3,19 @@
     <q-card class="card-min-width">
       <q-form @submit.prevent="submitForm" autocomplete="off">
         <q-card-section class="row justify-center">
-          <div class="text-h5 text-center text-weight-bold text-grey-9">
+          <div class="col-12 text-h5 text-center text-weight-bold text-grey-9">
             Sign Up
           </div>
+          <div class="row q-pt-md">
+            <div>Already Signed Up?</div>
+            <div class="flex justify-end q-pl-sm">
+              <router-link to="/login" class="text-weight-bold links">
+                Login
+              </router-link>
+            </div>
+          </div>
         </q-card-section>
+
         <q-card-section class="q-pb-sm">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
             <q-input
@@ -213,8 +222,8 @@ export default defineComponent({
 </style>
 
 <style scoped>
-.forgot-pass {
+.links {
   text-decoration: none;
-  color: #36487c;
+  color: #1b7af6;
 }
 </style>

@@ -3,11 +3,8 @@
     <div class="q-py-md">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-          <h1 class="main-heading">Donate Blood Save a Life</h1>
-          <div>
-            The blood you are donating here will help us in saving a person's
-            life.
-          </div>
+          <h1 class="main-heading">Receive blood in your time of need</h1>
+          <div>The blood you are receiving will help in saving your life.</div>
         </div>
         <div
           class="col-12 col-sm-12 col-md-4 col-lg-4 flex"
@@ -26,8 +23,7 @@
             <div class="q-pb-md">
               <h2 class="form-heading">Select your blood group</h2>
               <div>
-                Please answer this correctly as help to protect you and the
-                patient who received your blood.
+                Please answer this correctly as it is regarding your own safety.
               </div>
             </div>
             <q-card flat bordered class="my-card">
@@ -53,7 +49,7 @@
 
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Amount of Blood you want to donate</h2>
+              <h2 class="form-heading">Amount of Blood you want to receive</h2>
               <div>Enter the amount of units(ml)</div>
             </div>
             <q-card flat bordered class="my-card">
@@ -74,11 +70,10 @@
 
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Are you suffering from any diseases?</h2>
+              <h2 class="form-heading">Reason for requesting blood</h2>
               <div>
-                If you are suffering from any diseases that can spread through
-                blood transfusion, and may cause harm the person who receives
-                your blood.<br />
+                If you have any specific reasons for which you are requesting
+                blood.<br />
                 Then please mention it below.
               </div>
             </div>
@@ -90,7 +85,7 @@
                   outlined
                   square
                   type="textarea"
-                  placeholder="Name or description of the disease"
+                  placeholder="Reason for requesting blood"
                 />
               </q-card-section>
             </q-card>

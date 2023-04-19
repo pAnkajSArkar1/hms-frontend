@@ -76,7 +76,7 @@
       <q-card-section class="row justify-center text-center">
         <div>Don't have an account yet ?</div>
         <div class="flex justify-end q-pl-sm">
-          <router-link to="/signup" class="text-weight-bold links">
+          <router-link to="/receiver-signup" class="text-weight-bold links">
             Sign Up
           </router-link>
         </div>
@@ -120,7 +120,7 @@ export default defineComponent({
             type: "positive",
           });
 
-          router.push("/home");
+          router.push("/receiver-dashboard");
         })
         .catch((error) => {
           loader.value = false;

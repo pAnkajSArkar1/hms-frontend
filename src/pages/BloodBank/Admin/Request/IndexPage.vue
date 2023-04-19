@@ -7,7 +7,7 @@
         :customBodySlot="true"
         :useStore="useStore"
         :canAdd="false"
-        title="Donor Requests"
+        title="Receiver Requests"
       >
         <template v-slot:customBodySlot="bodyRow">
           <q-tr v-if="bodyRow.row.status === 'No action'">

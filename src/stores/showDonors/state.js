@@ -5,10 +5,10 @@ export default function () {
   return {
     columns: [
       {
-        name: "created_at",
+        name: "id",
         align: "left",
-        label: "Created At",
-        field: (row) => dateConvert.format(row.created_at),
+        label: "Donor ID",
+        field: "id",
         sortable: true,
       },
       {
@@ -19,17 +19,38 @@ export default function () {
         sortable: true,
       },
       {
+        name: "primary_contact",
+        align: "left",
+        label: "Contact Number",
+        field: "primary_contact",
+        sortable: true,
+      },
+      {
+        name: "bloodgroup",
+        align: "left",
+        label: "Blood Group",
+        field: "blood_group",
+        sortable: true,
+      },
+      {
+        name: "gender",
+        align: "left",
+        label: "Gender",
+        field: "gender",
+        sortable: true,
+      },
+      {
+        name: "disease",
+        align: "left",
+        label: "Disease",
+        field: "disease",
+        sortable: true,
+      },
+      {
         name: "email",
         align: "left",
         label: "Email",
         field: "email",
-        sortable: true,
-      },
-      {
-        name: "role",
-        align: "left",
-        label: "Role",
-        field: (row) => row.user_role.role.role,
         sortable: true,
       },
     ],

@@ -9,7 +9,7 @@
               Blood Requested
             </div>
             <div class="text-weight-bold units q-pt-sm">
-              Total: {{ free_beds }} Units
+              Total: {{ useStore?.authUser.blood_requests }} Units
             </div>
           </q-card-section>
         </q-card>
@@ -21,7 +21,7 @@
               Total Requests
             </div>
             <div class="text-weight-bold units q-pt-sm">
-              Total: {{ free_beds }} Units
+              {{ useStore?.authUser.total_requests }}
             </div>
           </q-card-section>
         </q-card>
@@ -33,7 +33,7 @@
               Requests Pending
             </div>
             <div class="text-weight-bold units q-pt-sm">
-              Total: {{ free_beds }} Units
+              {{ useStore?.authUser.request_pending }}
             </div>
           </q-card-section>
         </q-card>
@@ -45,7 +45,7 @@
               Requests Accepted
             </div>
             <div class="text-weight-bold units q-pt-sm">
-              Total: {{ free_beds }} Units
+              {{ useStore?.authUser.request_accepted }}
             </div>
           </q-card-section>
         </q-card>
@@ -57,7 +57,7 @@
               Requests Rejected
             </div>
             <div class="text-weight-bold units q-pt-sm">
-              Total: {{ free_beds }} Units
+              {{ useStore?.authUser.request_rejected }}
             </div>
           </q-card-section>
         </q-card>
@@ -77,7 +77,7 @@ import {
   onMounted,
   reactive,
 } from "vue";
-import { useBedListStore } from "stores/Beds/bedList";
+import { useReceiverDashboardStore } from "stores/bloodbank/receiverDashboard";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
@@ -92,17 +92,17 @@ export default {
   },
 
   setup(props) {
-    const useStore = useBedListStore();
+    const useStore = useReceiverDashboardStore();
     const showEditBedList = computed(() => useStore.showEditBedList);
     const $q = useQuasar();
     // const { deleteItem } = useStore;
-    const { formData, dialogs } = storeToRefs(useStore);
+    const { fetchAuthUser } = useStore;
+
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
     // const loading = ref([]);
     // const taskDetails = ref("");
-    const occupied_beds = ref(0);
-    const free_beds = ref(0);
+    const aPositive = ref("");
     // const overdue = ref(0);
 
     const onClickEdit = (params) => {
@@ -136,44 +136,24 @@ export default {
     //   ],
     // });
 
-    onBeforeMount(() => {
-      fetchAllData();
+    // onBeforeMount(() => {
+    //   fetchDashboard();
+    // });
+    // const fetchDashboard = () => {
+    //   useStore.getItems({ all: true }).then((response) => {
+    //     if (response.data.length > 0) {
+    //       aPositive.value = response.data;
+    //     }
+    //   });
+    // };
+    onMounted(() => {
+      fetchAuthUser();
     });
-    const fetchAllData = () => {
-      useStore.getItems({ all: true }).then((response) => {
-        occupied_beds.value = 0;
-        free_beds.value = 0;
-
-        response.data.map((single_data) => {
-          if (single_data.status === "Occupied") {
-            occupied_beds.value++;
-          }
-
-          if (single_data.status === "Free") {
-            free_beds.value++;
-          }
-
-          // if (single_data.status === "Overdue") {
-          //   overdue.value++;
-          // }
-        });
-
-        // barChartData.datasets[0].data = [];
-        // barChartData.datasets[0].data.push(free_beds.value);
-        // barChartData.datasets[0].data.push(occupied_beds.value);
-        // barChartData.datasets[0].data.push(overdue.value);
-
-        // doughnutChartData.datasets[0].data = [];
-        // doughnutChartData.datasets[0].data.push(free_beds.value);
-        // doughnutChartData.datasets[0].data.push(occupied_beds.value);
-        // doughnutChartData.datasets[0].data.push(overdue.value);
-      });
-    };
 
     return {
       useStore,
       onClickEdit,
-      formData,
+      // formData,
       showEditBedList,
       // onClickDelete,
       // loading,
@@ -181,9 +161,8 @@ export default {
       // onClickView,
       // barChartData,
       // doughnutChartData,
-      fetchAllData,
-      occupied_beds,
-      free_beds,
+      // fetchDashboard,
+      aPositive,
       // overdue,
     };
   },
@@ -198,7 +177,7 @@ export default {
   font-size: 20px;
 }
 .units {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .card {

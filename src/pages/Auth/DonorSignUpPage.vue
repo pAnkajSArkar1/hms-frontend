@@ -3,18 +3,55 @@
     <q-card class="card-min-width">
       <q-form @submit.prevent="submitForm" autocomplete="off">
         <q-card-section class="row justify-center">
-          <div class="text-h5 text-center text-weight-bold text-grey-9">
-            Login
+          <div class="col-12 text-h5 text-center text-weight-bold text-grey-9">
+            Sign Up
+          </div>
+          <div class="row q-pt-md">
+            <div>Already Signed Up?</div>
+            <div class="flex justify-end q-pl-sm">
+              <router-link to="/donor-login" class="text-weight-bold links">
+                Login
+              </router-link>
+            </div>
           </div>
         </q-card-section>
+
         <q-card-section class="q-pb-sm">
+          <div class="col-12">
+            <QSearch
+              label="Select Hospital"
+              v-model="signup.company_id"
+              :useStore="companyStore"
+              optionValue="id"
+              optionLabel="name"
+              :error-message="$getValidationErrors('company_id')"
+              :error="$hasValidationErrors('company_id')"
+            />
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
+            <q-input
+              dense
+              outlined
+              label="Name"
+              v-model="signup.name"
+              :rules="[
+                (val) => (val && val.length) || $t('Invalid Credentials'),
+              ]"
+              :error-message="$getValidationErrors('name')"
+              :error="$hasValidationErrors('name')"
+            >
+              <template v-slot:prepend>
+                <q-icon name="badge" />
+              </template>
+            </q-input>
+          </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
             <q-input
               dense
               outlined
               label="Email"
               type="email"
-              v-model="login.email"
+              v-model="signup.email"
               :rules="[
                 (val) => (val && val.length) || $t('Invalid Credentials'),
               ]"
@@ -26,12 +63,30 @@
               </template>
             </q-input>
           </div>
-          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
+            <q-input
+              dense
+              outlined
+              label="Primary contact"
+              type="number"
+              v-model="signup.primary_contact"
+              :rules="[
+                (val) => (val && val.length) || $t('Invalid Credentials'),
+              ]"
+              :error-message="$getValidationErrors('primary_contact')"
+              :error="$hasValidationErrors('primary_contact')"
+            >
+              <template v-slot:prepend>
+                <q-icon name="call" />
+              </template>
+            </q-input>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
             <q-input
               dense
               outlined
               label="Password"
-              v-model="login.password"
+              v-model="signup.password"
               :type="isPwd ? 'password' : 'text'"
               :rules="[
                 (val) => (val && val.length) || $t('Invalid Credentials'),
@@ -51,16 +106,37 @@
               </template>
             </q-input>
           </div>
-          <div class="flex justify-end">
-            <router-link to="/forgot-password" class="text-weight-bold links">
-              Forgot your password?
-            </router-link>
+          <div class="col-12">
+            <q-input
+              :type="isNewPwd ? 'password' : 'text'"
+              dense
+              outlined
+              label="Confirm Password"
+              v-model="signup.confirm_password"
+              :rules="[
+                (val) =>
+                  (val && val.length) || $t('Confirm Password cannot be empty'),
+              ]"
+              :error-message="$getValidationErrors('confirm_password')"
+              :error="$hasValidationErrors('confirm_password')"
+            >
+              <template v-slot:prepend>
+                <q-icon name="password" />
+              </template>
+              <template v-slot:append>
+                <q-icon
+                  :name="isNewPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isNewPwd = !isNewPwd"
+                />
+              </template>
+            </q-input>
           </div>
         </q-card-section>
         <q-card-section class="col-12 col-sm-12 col-md-12 col-lg-12">
           <q-btn
             color="primary"
-            label="Login"
+            label="Create Account"
             class="full-width"
             unelevated
             icon="login"
@@ -71,16 +147,17 @@
         </q-card-section>
       </q-form>
 
-      <q-separator />
+      <!-- <q-separator />
 
       <q-card-section class="row justify-center text-center">
-        <div>Don't have an account yet ?</div>
-        <div class="flex justify-end q-pl-sm">
-          <router-link to="/signup" class="text-weight-bold links">
-            Sign Up
+        <div>
+          Forgot your password?
+          <router-link to="/forgot-password" class="forgot-pass">
+            Reset It Here
           </router-link>
         </div>
-      </q-card-section>
+        <div></div>
+      </q-card-section> -->
     </q-card>
   </q-page>
 </template>
@@ -90,16 +167,18 @@ import { ref, defineComponent, getCurrentInstance } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "stores/auth/index";
+import { useCompanyStore } from "stores/getCompany";
 import { storeToRefs } from "pinia";
 
 export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useAuthStore();
+    const companyStore = useCompanyStore();
     const loader = ref(false);
     const $q = useQuasar();
 
-    const { login } = storeToRefs(store);
+    const { signup } = storeToRefs(store);
 
     const app = getCurrentInstance();
     const clearValidationErrors =
@@ -111,16 +190,16 @@ export default defineComponent({
     function submitForm() {
       loader.value = true;
       store
-        .loginUser()
+        .signupDonor()
         .then((response) => {
           loader.value = false;
           clearValidationErrors();
           Qnotify({
-            message: "Login successfull",
+            message: "Account Created successfull",
             type: "positive",
           });
 
-          router.push("/home");
+          router.push("/donor-login");
         })
         .catch((error) => {
           loader.value = false;
@@ -140,10 +219,12 @@ export default defineComponent({
 
     return {
       store,
+      companyStore,
       loader,
       submitForm,
       isPwd: ref(true),
-      login,
+      isNewPwd: ref(true),
+      signup,
     };
   },
 });

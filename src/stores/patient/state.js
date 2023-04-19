@@ -5,10 +5,24 @@ export default function () {
   return {
     columns: [
       {
+        name: "id",
+        align: "left",
+        label: "Receiver ID",
+        field: "id",
+        sortable: true,
+      },
+      {
         name: "name",
         align: "left",
-        label: "Name",
+        label: "Full Name",
         field: "name",
+        sortable: true,
+      },
+      {
+        name: "primary_contact",
+        align: "left",
+        label: "Contact Number",
+        field: "primary_contact",
         sortable: true,
       },
       {
@@ -19,17 +33,24 @@ export default function () {
         sortable: true,
       },
       {
+        name: "gender",
+        align: "left",
+        label: "Gender",
+        field: "gender",
+        sortable: true,
+      },
+      {
+        name: "disease",
+        align: "left",
+        label: "Disease",
+        field: "disease",
+        sortable: true,
+      },
+      {
         name: "email",
         align: "left",
         label: "Email",
         field: "email",
-        sortable: true,
-      },
-      {
-        name: "role",
-        align: "left",
-        label: "Role",
-        field: (row) => row.user_role.role.role,
         sortable: true,
       },
       // { name: "actions", align: "right", label: "Actions" },

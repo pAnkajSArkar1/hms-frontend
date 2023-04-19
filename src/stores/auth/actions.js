@@ -215,3 +215,43 @@ export function signupUser() {
       });
   });
 }
+export function signupDonor() {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/auth/donate-blood", {
+        company_id: this.signup.company_id,
+        name: this.signup.name,
+        email: this.signup.email,
+        primary_contact: this.signup.primary_contact,
+        password: this.signup.password,
+        confirm_password: this.signup.confirm_password,
+      })
+      .then((response) => {
+        this.fetchAuthUser();
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+export function signupReceiver() {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/auth/request-blood", {
+        company_id: this.signup.company_id,
+        name: this.signup.name,
+        email: this.signup.email,
+        primary_contact: this.signup.primary_contact,
+        password: this.signup.password,
+        confirm_password: this.signup.confirm_password,
+      })
+      .then((response) => {
+        this.fetchAuthUser();
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}

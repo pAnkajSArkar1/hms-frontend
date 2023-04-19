@@ -13,6 +13,7 @@ export default function () {
       password: "",
     },
     signup: {
+      company_id: null,
       name: "",
       email: "",
       primary_contact: null,
