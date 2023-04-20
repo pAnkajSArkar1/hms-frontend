@@ -34,8 +34,8 @@ export default {
     return {
       formData,
       statusList: [
-        { label: "Approve", value: "approved" },
-        { label: "Reject", value: "rejected" },
+        { label: "Approve", value: "Approved" },
+        { label: "Reject", value: "Rejected" },
       ],
     };
   },

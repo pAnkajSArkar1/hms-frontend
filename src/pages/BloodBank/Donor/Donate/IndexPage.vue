@@ -97,7 +97,7 @@
           </div>
 
           <div class="flex justify-end q-pt-md">
-            <q-btn type="primary" color="primary">Update</q-btn>
+            <q-btn type="primary" color="primary">Donate</q-btn>
           </div>
         </div>
       </q-form>
