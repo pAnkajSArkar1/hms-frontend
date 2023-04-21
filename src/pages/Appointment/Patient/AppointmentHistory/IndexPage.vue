@@ -6,20 +6,28 @@
         :customBodySlot="true"
         :useStore="useStore"
         :canAdd="false"
-        title="Receiver Requests"
+        title="Appointment Requests"
       >
         <template v-slot:customBodySlot="bodyRow">
           <q-tr>
-            <q-td key="donationid">{{ bodyRow.row?.id }} </q-td>
-            <q-td key="donorname"
-              >{{ bodyRow.row?.blood_request_person_details?.name }}
+            <!-- <q-td key="appointmentid">{{ bodyRow.row?.id }} </q-td> -->
+            <q-td key="patientname"
+              >{{ bodyRow.row?.patient_details?.name }}
+            </q-td>
+            <q-td key="doctor">{{ bodyRow.row?.doctor_details?.name }} </q-td>
+            <q-td key="appointmentdate"
+              >{{ bodyRow.row?.appointment_date }}
             </q-td>
             <q-td key="donorno"
-              >{{ bodyRow.row?.blood_request_person_details?.primary_contact }}
+              >{{ bodyRow.row?.patient_details?.primary_contact }}
             </q-td>
-            <q-td key="bloodgroup">{{ bodyRow.row.blood_group }} </q-td>
-            <q-td key="unitsinml">{{ bodyRow.row.units_in_ml }} </q-td>
-            <q-td key="disease">{{ bodyRow.row.reason }} </q-td>
+            <q-td key="source">{{ bodyRow.row.source }} </q-td>
+            <q-td key="priority">{{ bodyRow.row.priority }} </q-td>
+            <q-td key="consultantant_type"
+              >{{ bodyRow.row.consultantant_type }}
+            </q-td>
+            <q-td key="message">{{ bodyRow.row.message }} </q-td>
+            <q-td key="slot">{{ bodyRow.row.slot }} </q-td>
             <q-td key="status">
               <span v-if="bodyRow.row.status === 'Approved'">
                 <q-chip color="green" class="text-white">
@@ -31,7 +39,7 @@
                   {{ bodyRow.row.status }}
                 </q-chip>
               </span>
-              <span v-if="bodyRow.row.status === 'No action'">
+              <span v-if="bodyRow.row.status === 'Pending'">
                 <q-chip color="grey" class="text-white">
                   {{ bodyRow.row.status }}
                 </q-chip>
@@ -40,7 +48,7 @@
             <q-td
               key="actions"
               align="right"
-              v-if="bodyRow.row.status === 'No action'"
+              v-if="bodyRow.row.status === 'Pending'"
             >
               <q-btn
                 flat
@@ -78,10 +86,10 @@
     </q-dialog>
 
     <!-- EDIT -->
-    <q-dialog v-model="showEditRequest">
+    <q-dialog v-model="showEditAppointment">
       <q-card class="card-width">
         <div :class="$q.platform.is.desktop ? '' : ''">
-          <edit-request :useStore="useStore" v-bind:modal="true" />
+          <edit-appointment :useStore="useStore" v-bind:modal="true" />
         </div>
       </q-card>
     </q-dialog>
@@ -100,24 +108,28 @@ import {
   onMounted,
   reactive,
 } from "vue";
-import { useRequestStore } from "src/stores/bloodbank/request";
+import { useAppointmentStore } from "src/stores/Appointment/makeAppointment";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
 const CreateRequest = defineAsyncComponent(() => import("./CreateRequest.vue"));
-const EditRequest = defineAsyncComponent(() => import("./EditRequest.vue"));
+const EditAppointment = defineAsyncComponent(() =>
+  import("./EditAppointment.vue")
+);
 
 export default {
   name: "RequestManagement",
   components: {
     CreateRequest,
-    EditRequest,
+    EditAppointment,
   },
 
   setup(props) {
-    const useStore = useRequestStore();
-    const showCreateRequest = computed(() => useStore.showCreateRequest);
-    const showEditRequest = computed(() => useStore.showEditRequest);
+    const useStore = useAppointmentStore();
+    const showCreateAppointment = computed(
+      () => useStore.showCreateAppointment
+    );
+    const showEditAppointment = computed(() => useStore.showEditAppointment);
 
     const $q = useQuasar();
     const { deleteItem } = useStore;
@@ -176,8 +188,8 @@ export default {
       onClickEdit,
       onClickDelete,
       formData,
-      showCreateRequest,
-      showEditRequest,
+      showCreateAppointment,
+      showEditAppointment,
       // onClickDelete,
       // loading,
       // taskDetails,
@@ -189,7 +201,7 @@ export default {
 
 <style scoped>
 .card-width {
-  width: 300px;
+  width: 400px;
 }
 .blood-type {
   font-size: 25px;

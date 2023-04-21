@@ -33,5 +33,14 @@ export default function () {
       password: "",
       confirm_password: "",
     },
+    makeAppointment: {
+      appointment_date: "",
+      doctor_id: null,
+      priority: "",
+      consultantant_type: "",
+      message: "",
+      slot_from: "",
+      slot_to: "",
+    },
   };
 }

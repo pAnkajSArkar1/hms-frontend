@@ -129,6 +129,44 @@ export function fetchAuthUser() {
       });
   });
 }
+export function resetForm(form) {
+  form.appointment_date = "";
+  form.doctor_id = null;
+  form.source = "";
+  form.priority = "";
+  form.consultantant_type = "";
+  form.message = "";
+  form.slot = "";
+}
+
+export function createAppointment() {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/appointment", {
+        patient_id: this.authUser.user_role.user_id,
+        appointment_date: this.makeAppointment.appointment_date,
+        doctor_id: this.makeAppointment.doctor_id,
+        priority: this.makeAppointment.priority,
+        consultantant_type: this.makeAppointment.consultantant_type,
+        message: this.makeAppointment.message,
+        slot:
+          "from:" +
+          " " +
+          this.makeAppointment.slot_from +
+          " , " +
+          "to:" +
+          " " +
+          this.makeAppointment.slot_to,
+      })
+      .then((response) => {
+        this.resetForm(this.makeAppointment);
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
 
 export function logout() {
   return new Promise((resolve, reject) => {

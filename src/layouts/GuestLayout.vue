@@ -51,7 +51,7 @@
     <q-separator />
     <footer v-if="$q.platform.is.desktop">
       <div class="container flex justify-between items-center q-py-lg">
-        <div>Copyright © 2023, Practo. All rights reserved.</div>
+        <div>Copyright © 2023, DoctoLib. All rights reserved.</div>
         <div class="flex justify-end items-center q-col-gutter-sm">
           <router-link to="#">
             <q-img src="~assets/images/play_store.png" class="store-img" />

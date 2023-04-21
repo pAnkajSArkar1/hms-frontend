@@ -78,9 +78,7 @@ import {
   reactive,
 } from "vue";
 import { useDonorDashboardStore } from "stores/bloodbank/donorDashboard";
-import { useAuthStore } from "stores/auth/index";
 import { storeToRefs } from "pinia";
-
 import { useQuasar } from "quasar";
 
 // const EditBedList = defineAsyncComponent(() =>
@@ -94,12 +92,11 @@ export default {
   },
 
   setup(props) {
-    const authUserStore = useAuthStore();
     const useStore = useDonorDashboardStore();
     const showEditBedList = computed(() => useStore.showEditBedList);
     const $q = useQuasar();
     // const { deleteItem } = useStore;
-    const { fetchAuthUser } = authUserStore;
+    const { fetchAuthUser } = useStore;
 
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
@@ -163,7 +160,6 @@ export default {
       // doughnutChartData,
       // fetchDashboard,
       aPositive,
-      authUserStore,
       // overdue,
     };
   },
@@ -172,16 +168,12 @@ export default {
 
 <style scoped>
 .blood-type {
-  font-size: 30px;
-}
-.blood-available {
-  font-size: 20px;
+  font-size: 26px;
 }
 .units {
-  font-size: 20px;
+  font-size: 18px;
 }
-
 .card {
-  height: 140px;
+  height: 130px;
 }
 </style>

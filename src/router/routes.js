@@ -7,10 +7,6 @@ const routes = [
         path: "",
         component: () => import("pages/Landing/LandingPage.vue"),
       },
-      {
-        path: "appointment",
-        component: () => import("pages/Appointment/CreateAppointment.vue"),
-      },
     ],
   },
 
@@ -191,7 +187,7 @@ const routes = [
     ],
   },
 
-  // donor
+  // blood donor
   {
     path: "/donor-dashboard",
     component: () => import("layouts/DonorLayout.vue"),
@@ -226,7 +222,7 @@ const routes = [
     ],
   },
 
-  // patient
+  // blood receiver
   {
     path: "/receiver-dashboard",
     component: () => import("layouts/PatientLayout.vue"),
@@ -257,6 +253,57 @@ const routes = [
         path: "",
         component: () =>
           import("src/pages/BloodBank/Patient/RequestHistory/IndexPage.vue"),
+      },
+    ],
+  },
+
+  // patient
+  // {
+  //   path: "/patient-dashboard",
+  //   component: () => import("layouts/UserLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () =>
+  //         import("src/pages/Appointment/Dashboard/IndexPage.vue"),
+  //     },
+  //   ],
+  // },
+  {
+    path: "/make-appointment",
+    component: () => import("layouts/UserLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/Appointment/Patient/Appointment/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/appointment-history",
+    component: () => import("layouts/UserLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import(
+            "src/pages/Appointment/Patient/AppointmentHistory/IndexPage.vue"
+          ),
+      },
+    ],
+  },
+  // admin appointment request
+  {
+    path: "/appointment-requests",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import(
+            "src/pages/Appointment/Admin/AppointmentRequests/IndexPage.vue"
+          ),
       },
     ],
   },

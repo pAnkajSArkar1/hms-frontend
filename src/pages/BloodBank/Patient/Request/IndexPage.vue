@@ -11,7 +11,7 @@
           :class="$q.platform.is.mobile ? 'justify-center' : 'justify-end'"
         >
           <q-img
-            src="~assets/images/hotel/hotel.svg"
+            src="~assets/images/bloodReceive.jpg"
             spinner-color="white"
             :class="$q.platform.is.mobile ? '' : 'page-image'"
           />
@@ -102,7 +102,7 @@
 
 <script>
 import { getCurrentInstance, ref } from "vue";
-import { useBloodRequestStore } from "stores/BloodBank/requestBlood/index";
+import { useBloodRequestStore } from "stores/bloodbank/requestBlood/index";
 
 export default {
   name: "DescriptionPage",

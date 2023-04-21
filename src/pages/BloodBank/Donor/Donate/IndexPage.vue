@@ -14,7 +14,7 @@
           :class="$q.platform.is.mobile ? 'justify-center' : 'justify-end'"
         >
           <q-img
-            src="~assets/images/hotel/hotel.svg"
+            src="~assets/images/donateBlood.jpg"
             spinner-color="white"
             :class="$q.platform.is.mobile ? '' : 'page-image'"
           />

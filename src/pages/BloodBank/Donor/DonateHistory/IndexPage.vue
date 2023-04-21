@@ -35,7 +35,11 @@
                 </q-chip>
               </span>
             </q-td>
-            <q-td key="actions" align="right">
+            <q-td
+              key="actions"
+              align="right"
+              v-if="bodyRow.row.status === 'No action'"
+            >
               <q-btn
                 flat
                 round

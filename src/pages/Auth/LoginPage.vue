@@ -127,6 +127,8 @@ export default defineComponent({
             router.push("/donor-dashboard");
           } else if (store.authUser.user_role.role.code === "blood_reciever") {
             router.push("/receiver-dashboard");
+          } else if (store.authUser.user_role.role.code === "regd_patient") {
+            router.push("/make-appointment");
           }
         })
         .catch((error) => {

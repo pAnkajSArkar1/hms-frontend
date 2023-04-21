@@ -171,16 +171,12 @@ export default {
 
 <style scoped>
 .blood-type {
-  font-size: 30px;
-}
-.blood-available {
-  font-size: 20px;
+  font-size: 26px;
 }
 .units {
-  font-size: 20px;
+  font-size: 18px;
 }
-
 .card {
-  height: 140px;
+  height: 130px;
 }
 </style>
