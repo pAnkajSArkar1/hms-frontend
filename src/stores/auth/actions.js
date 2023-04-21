@@ -9,6 +9,7 @@ export function loginUser(props) {
         SessionStorage.set("token", JSON.stringify(response.data.token));
         this.authUserDetails = response.data.authUser;
         this.authUser = response.data.authUser;
+        this.fetchAuthUser();
         resolve(response);
       })
       .catch((err) => {

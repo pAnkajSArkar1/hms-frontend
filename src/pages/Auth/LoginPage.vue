@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { ref, defineComponent, getCurrentInstance } from "vue";
+import { ref, defineComponent, getCurrentInstance, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "stores/auth/index";
@@ -98,7 +98,7 @@ export default defineComponent({
     const store = useAuthStore();
     const loader = ref(false);
     const $q = useQuasar();
-
+    const { fetchAuthUser } = store;
     const { login } = storeToRefs(store);
 
     const app = getCurrentInstance();
@@ -108,19 +108,26 @@ export default defineComponent({
     const setValidationErrors =
       app.appContext.config.globalProperties.$setValidationErrors;
 
+    onMounted(() => {});
     function submitForm() {
       loader.value = true;
       store
         .loginUser()
         .then((response) => {
           loader.value = false;
+          fetchAuthUser();
           clearValidationErrors();
           Qnotify({
             message: "Login successfull",
             type: "positive",
           });
-
-          router.push("/home");
+          if (store.authUser.user_role.role.code === "sadmin") {
+            router.push("/home");
+          } else if (store.authUser.user_role.role.code === "blood_donor") {
+            router.push("/donor-dashboard");
+          } else if (store.authUser.user_role.role.code === "blood_reciever") {
+            router.push("/receiver-dashboard");
+          }
         })
         .catch((error) => {
           loader.value = false;

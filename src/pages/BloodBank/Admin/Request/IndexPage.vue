@@ -125,6 +125,7 @@ export default {
 
     const onClickEdit = (params) => {
       formData.value = params;
+
       dialogs.value.editItem = true;
     };
     // const onClickShow = () => {

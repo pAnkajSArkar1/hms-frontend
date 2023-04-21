@@ -86,6 +86,7 @@ export default defineComponent({
     const $q = useQuasar();
     const router = useRouter();
     const authUserStore = useAuthStore();
+
     const essentialLinks = computed(() => [
       {
         title: "Dashboard",
@@ -97,6 +98,10 @@ export default defineComponent({
         link: "/users",
         show: true,
       },
+      // disable:
+      //   authUserStore.authUser.user_role.role.code === "sadmin"
+      //     ? true
+      //     : false,
       {
         title: "Bed Management",
         link: "/bed-management",

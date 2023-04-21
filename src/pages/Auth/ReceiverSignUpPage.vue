@@ -9,7 +9,7 @@
           <div class="row q-pt-md">
             <div>Already Signed Up?</div>
             <div class="flex justify-end q-pl-sm">
-              <router-link to="/receiver-login" class="text-weight-bold links">
+              <router-link to="/login" class="text-weight-bold links">
                 Login
               </router-link>
             </div>
@@ -199,7 +199,7 @@ export default defineComponent({
             type: "positive",
           });
 
-          router.push("/receiver-login");
+          router.push("/login");
         })
         .catch((error) => {
           loader.value = false;

@@ -7,6 +7,7 @@ export default function () {
       email: "",
       active_company_id: null,
       acl: [],
+      user_role: [],
     }),
     login: {
       email: "",

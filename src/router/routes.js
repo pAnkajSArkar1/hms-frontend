@@ -51,28 +51,28 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/donor-login",
-    component: () => import("layouts/AuthLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("pages/Auth/DonorLoginPage.vue"),
-        meta: { name: "Login", requiresAuth: false },
-      },
-    ],
-  },
-  {
-    path: "/receiver-login",
-    component: () => import("layouts/AuthLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("pages/Auth/ReceiverLoginPage.vue"),
-        meta: { name: "Login", requiresAuth: false },
-      },
-    ],
-  },
+  // {
+  //   path: "/donor-login",
+  //   component: () => import("layouts/AuthLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("pages/Auth/DonorLoginPage.vue"),
+  //       meta: { name: "Login", requiresAuth: false },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/receiver-login",
+  //   component: () => import("layouts/AuthLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("pages/Auth/ReceiverLoginPage.vue"),
+  //       meta: { name: "Login", requiresAuth: false },
+  //     },
+  //   ],
+  // },
   // For signup route
   {
     path: "/signup",

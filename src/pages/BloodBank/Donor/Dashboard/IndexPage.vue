@@ -78,7 +78,9 @@ import {
   reactive,
 } from "vue";
 import { useDonorDashboardStore } from "stores/bloodbank/donorDashboard";
+import { useAuthStore } from "stores/auth/index";
 import { storeToRefs } from "pinia";
+
 import { useQuasar } from "quasar";
 
 // const EditBedList = defineAsyncComponent(() =>
@@ -92,18 +94,16 @@ export default {
   },
 
   setup(props) {
+    const authUserStore = useAuthStore();
     const useStore = useDonorDashboardStore();
     const showEditBedList = computed(() => useStore.showEditBedList);
     const $q = useQuasar();
     // const { deleteItem } = useStore;
-    const { fetchAuthUser } = useStore;
+    const { fetchAuthUser } = authUserStore;
 
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
-    // const loading = ref([]);
-    // const taskDetails = ref("");
     const aPositive = ref("");
-    // const overdue = ref(0);
 
     const onClickEdit = (params) => {
       formData.value = params;
@@ -163,6 +163,7 @@ export default {
       // doughnutChartData,
       // fetchDashboard,
       aPositive,
+      authUserStore,
       // overdue,
     };
   },
