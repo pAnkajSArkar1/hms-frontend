@@ -6,26 +6,37 @@
         :customBodySlot="true"
         :useStore="useStore"
         :canAdd="false"
-        title="Appointment Requests"
+        title="Manage Visitors"
       >
         <template v-slot:customBodySlot="bodyRow">
           <q-tr>
             <!-- <q-td key="appointmentid">{{ bodyRow.row?.id }} </q-td> -->
             <q-td key="visitorname">{{ bodyRow.row?.name }} </q-td>
-            <q-td key="doctor">{{ bodyRow.row?.doctor_details?.name }} </q-td>
-            <q-td key="appointmentdate"
-              >{{ bodyRow.row?.appointment_date }}
+            <q-td key="email">{{ bodyRow.row?.email }} </q-td>
+            <q-td key="phone">{{ bodyRow.row?.phone }} </q-td>
+            <q-td key="address">
+              <div class="row justify-center">
+                <div style="width: 100px" class="custom-ellipsis">
+                  {{ bodyRow.row?.address }}
+                  <q-tooltip>
+                    {{ bodyRow.row?.address }}
+                  </q-tooltip>
+                </div>
+              </div>
             </q-td>
-            <q-td key="donorno"
-              >{{ bodyRow.row?.patient_details?.primary_contact }}
+            <q-td key="purpose_of_visiting"
+              >{{ bodyRow.row.purpose_of_visiting }}
             </q-td>
-            <q-td key="source">{{ bodyRow.row.source }} </q-td>
-            <q-td key="priority">{{ bodyRow.row.priority }} </q-td>
-            <q-td key="consultantant_type"
-              >{{ bodyRow.row.consultantant_type }}
+            <q-td key="date_of_visiting"
+              >{{ bodyRow.row.date_of_visiting }}
             </q-td>
-            <q-td key="message">{{ bodyRow.row.message }} </q-td>
-            <q-td key="slot">{{ bodyRow.row.slot }} </q-td>
+            <q-td key="from_time"
+              >{{ bodyRow.row.from_time + " - " + bodyRow.row.to_time }}
+            </q-td>
+            <q-td key="aadhar_no">{{ bodyRow.row.aadhar_no }} </q-td>
+            <q-td key="vaccination_status"
+              >{{ bodyRow.row.vaccination_status }}
+            </q-td>
             <q-td key="status">
               <span v-if="bodyRow.row.status === 'Approved'">
                 <q-chip color="green" class="text-white">
@@ -76,7 +87,7 @@
     <q-dialog v-model="showEditAppointment">
       <q-card class="card-width">
         <div :class="$q.platform.is.desktop ? '' : ''">
-          <edit-appointment :useStore="useStore" v-bind:modal="true" />
+          <edit-visitor :useStore="useStore" v-bind:modal="true" />
         </div>
       </q-card>
     </q-dialog>
@@ -108,15 +119,13 @@ import { useVisitorStore } from "src/stores/Visitor";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
-const EditAppointment = defineAsyncComponent(() =>
-  import("./EditAppointment.vue")
-);
+const EditVisitor = defineAsyncComponent(() => import("./EditVisitor.vue"));
 const EmailReport = defineAsyncComponent(() => import("./EmailReport.vue"));
 
 export default {
   name: "RequestManagement",
   components: {
-    EditAppointment,
+    EditVisitor,
     EmailReport,
   },
 
@@ -175,5 +184,10 @@ export default {
 }
 .units {
   font-size: 15px;
+}
+.custom-ellipsis {
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
 }
 </style>

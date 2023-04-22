@@ -104,6 +104,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/visitor-signup",
+    component: () => import("layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Auth/VisitorSignUpPage.vue"),
+        meta: { name: "Login", requiresAuth: false },
+      },
+    ],
+  },
 
   // For forgot password route
   {
@@ -296,7 +307,7 @@ const routes = [
 
   // admin appointment request
   {
-    path: "/appointment-requests",
+    path: "/manage-appointment",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
@@ -317,7 +328,7 @@ const routes = [
       {
         path: "",
         component: () =>
-          import("src/pages/Visitor/Patient/Appointment/IndexPage.vue"),
+          import("src/pages/Visitor/Patient/Visit/IndexPage.vue"),
       },
     ],
   },
@@ -328,19 +339,19 @@ const routes = [
       {
         path: "",
         component: () =>
-          import("src/pages/Visitor/Patient/AppointmentHistory/IndexPage.vue"),
+          import("src/pages/Visitor/Patient/VisitHistory/IndexPage.vue"),
       },
     ],
   },
   // admin visitor request
   {
-    path: "/visitor-requests",
+    path: "/manage-visitor",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
         path: "",
         component: () =>
-          import("src/pages/Visitor/Admin/AppointmentRequests/IndexPage.vue"),
+          import("src/pages/Visitor/Admin/VisitorManagement/IndexPage.vue"),
       },
     ],
   },

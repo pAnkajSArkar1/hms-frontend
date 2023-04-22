@@ -69,8 +69,8 @@ export default function () {
       {
         name: "slot",
         align: "left",
-        label: "Slot",
-        field: "slot",
+        label: "Time Slot",
+        field: "from_time" + "to_time",
         sortable: true,
       },
       {
@@ -95,8 +95,8 @@ export default function () {
       priority: "",
       consultantant_type: "",
       message: "",
-      slot_from: "",
-      slot_to: "",
+      from_time: "",
+      to_time: "",
       status: "",
     }),
 

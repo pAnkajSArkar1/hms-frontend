@@ -1,5 +1,5 @@
 <template>
-  <QEditForm :useStore="useStore" title="Edit Appointment">
+  <QEditForm :useStore="useStore" title="Edit Visitor Request">
     <div class="col-12">
       <q-select
         :options="statusList"

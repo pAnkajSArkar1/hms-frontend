@@ -234,7 +234,7 @@
                     square
                     label="From"
                     readonly
-                    v-model="authStore.makeAppointment.slot_from"
+                    v-model="authStore.makeAppointment.from_time"
                     mask="time"
                     :rules="['time']"
                   >
@@ -245,7 +245,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.slot_from">
+                          <q-time v-model="authStore.makeAppointment.from_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup
@@ -267,7 +267,7 @@
                     square
                     label="To"
                     readonly
-                    v-model="authStore.makeAppointment.slot_to"
+                    v-model="authStore.makeAppointment.to_time"
                     mask="time"
                     :rules="['time']"
                   >
@@ -278,7 +278,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.slot_to">
+                          <q-time v-model="authStore.makeAppointment.to_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup

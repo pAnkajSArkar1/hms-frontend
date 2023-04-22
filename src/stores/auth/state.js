@@ -39,8 +39,20 @@ export default function () {
       priority: "",
       consultantant_type: "",
       message: "",
-      slot_from: "",
-      slot_to: "",
+      from_time: "",
+      to_time: "",
+    },
+    makeVisitor: {
+      name: "",
+      email: "",
+      phone: null,
+      address: "",
+      purpose_of_visiting: "",
+      date_of_visiting: "",
+      from_time: "",
+      to_time: "",
+      aadhar_no: null,
+      vaccination_status: "",
     },
   };
 }

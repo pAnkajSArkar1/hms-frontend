@@ -2,33 +2,62 @@
   <QEditForm :useStore="useStore" title="Edit Appointment">
     <div class="row q-col-gutter-md q-pb-md">
       <div class="col-12">
-        <QSearch
-          label="Select Doctor"
-          :useStore="docStore"
-          optionValue="id"
-          optionLabel="name"
-          v-model="formData.doctor_id"
+        <q-input
+          label="Name"
+          v-model="formData.name"
           outlined
           dense
           square
-          :error-message="$getValidationErrors('doctor_id')"
-          :error="$hasValidationErrors('doctor_id')"
+          :error-message="$getValidationErrors('name')"
+          :error="$hasValidationErrors('name')"
         />
       </div>
+      <div class="col-12">
+        <q-input
+          label="Email"
+          type="email"
+          v-model="formData.email"
+          outlined
+          dense
+          square
+          :error-message="$getValidationErrors('email')"
+          :error="$hasValidationErrors('email')"
+        />
+      </div>
+      <div class="col-12">
+        <q-input
+          label="Address"
+          v-model="formData.address"
+          outlined
+          type="textarea"
+          dense
+          square
+          :error-message="$getValidationErrors('address')"
+          :error="$hasValidationErrors('address')"
+        />
+      </div>
+      <div class="col-12">
+        <q-input
+          label="Purpose of visiting"
+          v-model="formData.purpose_of_visiting"
+          outlined
+          dense
+          square
+          :error-message="$getValidationErrors('purpose_of_visiting')"
+          :error="$hasValidationErrors('purpose_of_visiting')"
+        />
+      </div>
+
       <div class="col-12">
         <q-input
           outlined
           dense
           readonly
-          label="Date for Appointment"
-          v-model="formData.appointment_date"
+          label="Date of visiting"
+          v-model="formData.date_of_visiting"
           mask="date"
-          :rules="[
-            (val) =>
-              (val && val.length) || 'Please enter date for the appointment',
-          ]"
-          :error-message="$getValidationErrors('appointment_date')"
-          :error="$hasValidationErrors('appointment_date')"
+          :error-message="$getValidationErrors('date_of_visiting')"
+          :error="$hasValidationErrors('date_of_visiting')"
         >
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
@@ -37,7 +66,7 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="formData.appointment_date">
+                <q-date v-model="formData.date_of_visiting">
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -48,50 +77,37 @@
         </q-input>
       </div>
       <div class="col-12">
-        <q-select
-          :options="priorityList"
-          map-options
-          emit-value
-          option-label="label"
-          option-value="value"
-          type="priority"
-          outlined
-          clearable
-          v-model="formData.priority"
-          dense
-          label="Priority"
-          :rules="[(val) => (val && val.length) || 'Please select a priority']"
-          :error-message="$getValidationErrors('priority')"
-          :error="$hasValidationErrors('priority')"
-        />
-      </div>
-      <div class="col-12">
-        <q-select
-          :options="modeList"
-          map-options
-          emit-value
-          option-label="label"
-          option-value="value"
-          type="mode"
-          outlined
-          clearable
-          v-model="formData.consultantant_type"
-          dense
-          label="Mode"
-          :rules="[(val) => (val && val.length) || 'Please select a Mode']"
-          :error-message="$getValidationErrors('consultantant_type')"
-          :error="$hasValidationErrors('consultantant_type')"
-        />
-      </div>
-      <div class="col-12">
         <q-input
           dense
           outlined
+          v-on:keypress="NumbersOnly"
+          maxlength="12"
+          minlength="12"
+          v-model="formData.aadhar_no"
           square
-          v-model="formData.message"
-          label="Message"
+          placeholder="Adhaar No"
+          :error-message="$getValidationErrors('aadhar_no')"
+          :error="$hasValidationErrors('aadhar_no')"
         />
       </div>
+      <div class="col-12">
+        <q-select
+          :options="vaccinationList"
+          map-options
+          emit-value
+          option-label="label"
+          option-value="value"
+          type="vaccination"
+          outlined
+          clearable
+          v-model="formData.vaccination_status"
+          dense
+          label="Vaccination Status"
+          :error-message="$getValidationErrors('vaccination_status')"
+          :error="$hasValidationErrors('vaccination_status')"
+        />
+      </div>
+
       <div class="row q-col-gutter-md">
         <div class="col-12 col-md-6 col-lg-6">
           <q-input
@@ -102,7 +118,6 @@
             readonly
             v-model="formData.from_time"
             mask="time"
-            :rules="['time']"
           >
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
@@ -130,7 +145,6 @@
             readonly
             v-model="formData.to_time"
             mask="time"
-            :rules="['time']"
           >
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
@@ -168,18 +182,28 @@ export default {
     const { useStore } = reactive(props);
     const docStore = useShowDoctorStore();
     const { formData } = storeToRefs(useStore);
+    const NumbersOnly = (evt) => {
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    };
 
     return {
       formData,
+      NumbersOnly,
       docStore,
-      priorityList: [
-        { label: "No Urgency", value: "No Urgency" },
-        { label: "Urgent", value: "Urgent" },
-        { label: "Emergency", value: "Emergency" },
-      ],
-      modeList: [
-        { label: "Online", value: "Online" },
-        { label: "Offline", value: "Offline" },
+      vaccinationList: [
+        { label: "1st Dose", value: "1st Dose" },
+        { label: "2nd Dose", value: "2nd Dose" },
+        { label: "Both Doses", value: "Both Doses" },
       ],
     };
   },

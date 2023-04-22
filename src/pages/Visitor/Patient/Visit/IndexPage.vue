@@ -3,15 +3,15 @@
     <div class="q-py-md">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-          <h1 class="main-heading">Book an appointment</h1>
-          <div>You can book an appointment with a doctor of your choice.</div>
+          <h1 class="main-heading">Make a Visit</h1>
+          <div>You can visit the hospital by filling up this form.</div>
         </div>
         <div
           class="col-12 col-sm-12 col-md-4 col-lg-4 flex"
           :class="$q.platform.is.mobile ? 'justify-center' : 'justify-end'"
         >
           <q-img
-            src="~assets/images/appointment.jpg"
+            src="~assets/images/visit.jpg"
             spinner-color="white"
             :class="$q.platform.is.mobile ? '' : 'page-image'"
           />
@@ -21,25 +21,87 @@
         <div>
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Select the doctor of your choice</h2>
+              <h2 class="form-heading">Your Name</h2>
+              <div>Enter your name in the feild below.</div>
+            </div>
+            <q-card flat bordered class="my-card">
+              <q-card-section class="row q-col-gutter-md">
+                <div class="col-12 col-md-9 col-lg-9">
+                  <q-input
+                    label="Name"
+                    v-model="authStore.makeVisitor.name"
+                    outlined
+                    dense
+                    square
+                    :error-message="$getValidationErrors('name')"
+                    :error="$hasValidationErrors('name')"
+                  />
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+          <div class="q-pb-lg">
+            <div class="q-pb-md">
+              <h2 class="form-heading">Your Email</h2>
+              <div>Enter your working email in the feild below.</div>
+            </div>
+            <q-card flat bordered class="my-card">
+              <q-card-section class="row q-col-gutter-md">
+                <div class="col-12 col-md-9 col-lg-9">
+                  <q-input
+                    label="Email"
+                    type="email"
+                    v-model="authStore.makeVisitor.email"
+                    outlined
+                    dense
+                    square
+                    :error-message="$getValidationErrors('email')"
+                    :error="$hasValidationErrors('email')"
+                  />
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+          <div class="q-pb-lg">
+            <div class="q-pb-md">
+              <h2 class="form-heading">Your Address</h2>
+              <div>Enter your current address in the feild below.</div>
+            </div>
+            <q-card flat bordered class="my-card">
+              <q-card-section class="row q-col-gutter-md">
+                <div class="col-12 col-md-9 col-lg-9">
+                  <q-input
+                    label="Address"
+                    v-model="authStore.makeVisitor.address"
+                    outlined
+                    type="textarea"
+                    dense
+                    square
+                    :error-message="$getValidationErrors('address')"
+                    :error="$hasValidationErrors('address')"
+                  />
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+          <div class="q-pb-lg">
+            <div class="q-pb-md">
+              <h2 class="form-heading">The purpose behind visiting</h2>
               <div>
-                Select the doctor of your liking from the dropdown below.
+                Enter your purpose behind visitng us in the feild below.
               </div>
             </div>
             <q-card flat bordered class="my-card">
               <q-card-section class="row q-col-gutter-md">
                 <div class="col-12 col-md-9 col-lg-9">
-                  <QSearch
-                    label="Select Doctor"
-                    :useStore="docStore"
-                    optionValue="id"
-                    optionLabel="name"
-                    v-model="authStore.makeAppointment.doctor_id"
+                  <q-input
+                    label="Purpose of visiting"
+                    v-model="authStore.makeVisitor.purpose_of_visiting"
                     outlined
                     dense
                     square
-                    :error-message="$getValidationErrors('doctor_id')"
-                    :error="$hasValidationErrors('doctor_id')"
+                    :error-message="$getValidationErrors('purpose_of_visiting')"
+                    :error="$hasValidationErrors('purpose_of_visiting')"
                   />
                 </div>
               </q-card-section>
@@ -48,8 +110,8 @@
 
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Provide a date for appointment</h2>
-              <div>Enter the date when you want your appointment</div>
+              <h2 class="form-heading">Provide a date for visiting</h2>
+              <div>Enter the date when you want to visit us.</div>
             </div>
             <q-card flat bordered class="my-card">
               <q-card-section class="row q-col-gutter-md">
@@ -58,16 +120,11 @@
                     outlined
                     dense
                     readonly
-                    label="Date for Appointment"
-                    v-model="authStore.makeAppointment.appointment_date"
+                    label="Date of visiting"
+                    v-model="authStore.makeVisitor.date_of_visiting"
                     mask="date"
-                    :rules="[
-                      (val) =>
-                        (val && val.length) ||
-                        'Please enter date for the appointment',
-                    ]"
-                    :error-message="$getValidationErrors('appointment_date')"
-                    :error="$hasValidationErrors('appointment_date')"
+                    :error-message="$getValidationErrors('date_of_visiting')"
+                    :error="$hasValidationErrors('date_of_visiting')"
                   >
                     <template v-slot:append>
                       <q-icon name="event" class="cursor-pointer">
@@ -77,7 +134,7 @@
                           transition-hide="scale"
                         >
                           <q-date
-                            v-model="authStore.makeAppointment.appointment_date"
+                            v-model="authStore.makeVisitor.date_of_visiting"
                           >
                             <div class="row items-center justify-end">
                               <q-btn
@@ -97,10 +154,10 @@
             </q-card>
           </div>
 
-          <!-- <div class="q-pb-lg">
+          <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Provide a Source</h2>
-              <div>Mention your source below.</div>
+              <h2 class="form-heading">Your Adhaar No</h2>
+              <div>Mention your Adhaar No. below.</div>
             </div>
             <q-card flat bordered class="my-card">
               <q-card-section class="row q-col-gutter-md">
@@ -108,44 +165,45 @@
                   <q-input
                     dense
                     outlined
-                    v-model="authStore.makeAppointment.source"
+                    v-on:keypress="NumbersOnly"
+                    maxlength="12"
+                    minlength="12"
+                    v-model="authStore.makeVisitor.aadhar_no"
                     square
-                    placeholder="Source"
+                    placeholder="Adhaar No"
+                    :error-message="$getValidationErrors('aadhar_no')"
+                    :error="$hasValidationErrors('aadhar_no')"
                   />
                 </div>
               </q-card-section>
             </q-card>
-          </div> -->
+          </div>
 
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Nature of appointment priority</h2>
+              <h2 class="form-heading">Covid-19 Vaccination Status</h2>
               <div>
-                According to reasons or emergencies, Select a priority.<br />
-                Abusing it may ban you from future appointments.
+                Enter the covid-19 vaccination you have been,<br />
+                Vaccinated with.
               </div>
             </div>
             <q-card flat bordered class="my-card">
               <q-card-section class="row q-col-gutter-md">
                 <div class="col-12 col-md-9 col-lg-9">
                   <q-select
-                    :options="priorityList"
+                    :options="vaccinationList"
                     map-options
                     emit-value
                     option-label="label"
                     option-value="value"
-                    type="priority"
+                    type="vaccination"
                     outlined
                     clearable
-                    v-model="authStore.makeAppointment.priority"
+                    v-model="authStore.makeVisitor.vaccination_status"
                     dense
-                    label="Priority"
-                    :rules="[
-                      (val) =>
-                        (val && val.length) || 'Please select a priority',
-                    ]"
-                    :error-message="$getValidationErrors('priority')"
-                    :error="$hasValidationErrors('priority')"
+                    label="Vaccination Status"
+                    :error-message="$getValidationErrors('vaccination_status')"
+                    :error="$hasValidationErrors('vaccination_status')"
                   />
                 </div>
               </q-card-section>
@@ -154,75 +212,10 @@
 
           <div class="q-pb-lg">
             <div class="q-pb-md">
-              <h2 class="form-heading">Consultantant Type</h2>
+              <h2 class="form-heading">Visiting Time</h2>
               <div>
-                If you have any specific type of consultant.<br />
-                Then please mention it below.
-              </div>
-            </div>
-            <q-card flat bordered class="my-card">
-              <q-card-section class="row q-col-gutter-md">
-                <div class="col-12 col-md-9 col-lg-9">
-                  <!-- <q-input
-                    dense
-                    outlined
-                    v-model="authStore.makeAppointment.consultantant_type"
-                    square
-                    placeholder="Consultantant Type"
-                  /> -->
-                  <q-select
-                    :options="modeList"
-                    map-options
-                    emit-value
-                    option-label="label"
-                    option-value="value"
-                    type="mode"
-                    outlined
-                    clearable
-                    v-model="authStore.makeAppointment.consultantant_type"
-                    dense
-                    label="Mode"
-                    :rules="[
-                      (val) => (val && val.length) || 'Please select a Mode',
-                    ]"
-                    :error-message="$getValidationErrors('consultantant_type')"
-                    :error="$hasValidationErrors('consultantant_type')"
-                  />
-                </div>
-              </q-card-section>
-            </q-card>
-          </div>
-
-          <div class="q-pb-lg">
-            <div class="q-pb-md">
-              <h2 class="form-heading">Any Messages</h2>
-              <div>
-                If you have any message concerning the appointment<br />
-                Then please mention it below.
-              </div>
-            </div>
-            <q-card flat bordered class="my-card">
-              <q-card-section class="row q-col-gutter-md">
-                <div class="col-12 col-md-9 col-lg-9">
-                  <q-input
-                    dense
-                    outlined
-                    square
-                    v-model="authStore.makeAppointment.message"
-                    placeholder="Message"
-                  />
-                </div>
-              </q-card-section>
-            </q-card>
-          </div>
-
-          <div class="q-pb-lg">
-            <div class="q-pb-md">
-              <h2 class="form-heading">Appointment Time</h2>
-              <div>
-                If you have any specific range of time in which you need the
-                appointment to be in between.<br />
-                Then please mention it below.
+                A specific range of time in which you would like to visit.<br />
+                Please mention it below.
               </div>
             </div>
             <q-card flat bordered class="my-card">
@@ -234,9 +227,8 @@
                     square
                     label="From"
                     readonly
-                    v-model="authStore.makeAppointment.slot_from"
+                    v-model="authStore.makeVisitor.from_time"
                     mask="time"
-                    :rules="['time']"
                   >
                     <template v-slot:append>
                       <q-icon name="access_time" class="cursor-pointer">
@@ -245,7 +237,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.slot_from">
+                          <q-time v-model="authStore.makeVisitor.from_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup
@@ -267,9 +259,8 @@
                     square
                     label="To"
                     readonly
-                    v-model="authStore.makeAppointment.slot_to"
+                    v-model="authStore.makeVisitor.to_time"
                     mask="time"
-                    :rules="['time']"
                   >
                     <template v-slot:append>
                       <q-icon name="access_time" class="cursor-pointer">
@@ -278,7 +269,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.slot_to">
+                          <q-time v-model="authStore.makeVisitor.to_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup
@@ -308,25 +299,20 @@
 
 <script>
 import { getCurrentInstance, ref, onMounted } from "vue";
-import { useAppointmentStore } from "stores/Appointment/makeAppointment/index";
 import { useAuthStore } from "stores/auth/index";
-import { useShowDoctorStore } from "stores/showDoctors";
 
 export default {
   name: "DescriptionPage",
   setup() {
-    const appointmentStore = useAppointmentStore();
     const authStore = useAuthStore();
-    const docStore = useShowDoctorStore();
     const { fetchAuthUser } = authStore;
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
 
     const onSubmit = () => {
       authStore
-        .createAppointment()
+        .createVisitor()
         .then((response) => {
-          console.log("A", authStore.makeAppointment.slot);
           Qnotify({
             message: response.data.message,
             type: "positive",
@@ -367,19 +353,14 @@ export default {
 
     return {
       onSubmit,
-      priorityList: [
-        { label: "No Urgency", value: "No Urgency" },
-        { label: "Urgent", value: "Urgent" },
-        { label: "Emergency", value: "Emergency" },
+      vaccinationList: [
+        { label: "1st Dose", value: "1st Dose" },
+        { label: "2nd Dose", value: "2nd Dose" },
+        { label: "Both Doses", value: "Both Doses" },
       ],
-      modeList: [
-        { label: "Online", value: "Online" },
-        { label: "Offline", value: "Offline" },
-      ],
+
       NumbersOnly,
       authStore,
-      docStore,
-      appointmentStore,
     };
   },
 };

@@ -27,7 +27,9 @@
               >{{ bodyRow.row.consultantant_type }}
             </q-td>
             <q-td key="message">{{ bodyRow.row.message }} </q-td>
-            <q-td key="slot">{{ bodyRow.row.slot }} </q-td>
+            <q-td key="slot"
+              >{{ bodyRow.row.from_time + " - " + bodyRow.row.to_time }}
+            </q-td>
             <q-td key="status">
               <span v-if="bodyRow.row.status === 'Approved'">
                 <q-chip color="green" class="text-white">

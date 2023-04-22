@@ -15,7 +15,12 @@
         <div class="row q-col-gutter-md">
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
             <!-- <router-link to="/signup"> -->
-            <q-card flat bordered class="cursor-pointer border-radius-20">
+            <q-card
+              flat
+              bordered
+              class="cursor-pointer border-radius-20"
+              @click="toAppointment()"
+            >
               <q-img src="~assets/svg/doctor.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
                 <div class="text-weight-bold font-25">Appointments</div>
@@ -25,28 +30,33 @@
             <!-- </router-link> -->
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20">
+            <q-card flat bordered class="border-radius-20" @click="toDonor()">
               <q-img src="~assets/svg/injection.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
-                <div class="text-weight-bold font-25">Medicines</div>
+                <div class="text-weight-bold font-25">Donate Blood</div>
                 <p class="font-16">Variety of Medicines</p>
               </q-card-section>
             </q-card>
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20">
+            <q-card
+              flat
+              bordered
+              class="border-radius-20"
+              @click="toReceiver()"
+            >
               <q-img src="~assets/svg/test.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
-                <div class="text-weight-bold font-25">Lab Tests</div>
+                <div class="text-weight-bold font-25">Receive Blood</div>
                 <p class="font-16">Fast and accurate tests</p>
               </q-card-section>
             </q-card>
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20">
+            <q-card flat bordered class="border-radius-20" @click="toVisitor()">
               <q-img src="~assets/svg/surgery.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
-                <div class="text-weight-bold font-25">Surgeries</div>
+                <div class="text-weight-bold font-25">Visit Us</div>
                 <p class="font-16">Secure and trusted surgeons</p>
               </q-card-section>
             </q-card>
@@ -252,6 +262,8 @@
 <script>
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
 import "vue3-carousel/dist/carousel.css";
 
 import { useQuasar } from "quasar";
@@ -298,6 +310,19 @@ export default {
     Navigation,
   },
   setup() {
+    const router = useRouter();
+    const toAppointment = () => {
+      router.push("/signup");
+    };
+    const toDonor = () => {
+      router.push("/donor-signup");
+    };
+    const toReceiver = () => {
+      router.push("/receiver-signup");
+    };
+    const toVisitor = () => {
+      router.push("/visitor-signup");
+    };
     const info = ref(null);
     const $q = useQuasar();
     $q.platform.is.mobile;
@@ -306,6 +331,10 @@ export default {
 
     return {
       dialog: ref(false),
+      toAppointment,
+      toReceiver,
+      toVisitor,
+      toDonor,
       slide: ref(1),
       autoplay: ref(true),
       mostbooked: ref(1),

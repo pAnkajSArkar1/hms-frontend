@@ -113,13 +113,13 @@ export default defineComponent({
         show: true,
       },
       {
-        title: "Appointment Requests",
-        link: "/appointment-requests",
+        title: "Manage Appointment",
+        link: "/manage-appointment",
         show: true,
       },
       {
-        title: "Visitor Requests",
-        link: "/visitor-requests",
+        title: "Manage Visitors",
+        link: "/manage-visitor",
         show: true,
       },
 

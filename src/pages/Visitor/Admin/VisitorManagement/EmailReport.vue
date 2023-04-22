@@ -30,41 +30,6 @@
               autogrow
             />
           </div>
-          <!-- <div class="col-12">
-            <QSearch
-              label="Select User"
-              :useStore="userStore"
-              v-model="emailReport.user_id"
-              optionValue="id"
-              optionLabel="name"
-              @update:modelValue="onUserSelect"
-              :error-message="$getValidationErrors('user_id')"
-              :error="$hasValidationErrors('user_id')"
-            />
-          </div>
-
-          <div class="col-12">
-            <q-input
-              dense
-              outlined
-              label="Email"
-              type="email"
-              readonly
-              v-model="emailReport.email"
-              autogrow
-              :error-message="$getValidationErrors('email')"
-              :error="$hasValidationErrors('email')"
-            />
-          </div>
-          <div class="col-12">
-            <q-input
-              dense
-              outlined
-              label="Message"
-              v-model="emailReport.message"
-              type="textarea"
-            />
-          </div> -->
         </div>
       </q-card-section>
 

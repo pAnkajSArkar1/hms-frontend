@@ -106,16 +106,16 @@ export default defineComponent({
         link: "/login",
         show: true,
       },
-      {
-        title: "Donate Blood",
-        link: "/donor-signup",
-        show: true,
-      },
-      {
-        title: "Receive Blood",
-        link: "/receiver-signup",
-        show: true,
-      },
+      // {
+      //   title: "Donate Blood",
+      //   link: "/donor-signup",
+      //   show: true,
+      // },
+      // {
+      //   title: "Receive Blood",
+      //   link: "/receiver-signup",
+      //   show: true,
+      // },
       // {
       //   title: "Signup",
       //   link: "/signup",

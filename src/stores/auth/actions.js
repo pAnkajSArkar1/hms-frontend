@@ -136,7 +136,18 @@ export function resetForm(form) {
   form.priority = "";
   form.consultantant_type = "";
   form.message = "";
-  form.slot = "";
+  form.from_time = "";
+  form.to_time = "";
+  form.name = "";
+  form.email = "";
+  form.phone = null;
+  form.address = "";
+  form.purpose_of_visiting = "";
+  form.date_of_visiting = "";
+  form.from_time = "";
+  form.to_time = "";
+  form.aadhar_no = null;
+  form.vaccination_status = "";
 }
 
 export function createAppointment() {
@@ -149,11 +160,36 @@ export function createAppointment() {
         priority: this.makeAppointment.priority,
         consultantant_type: this.makeAppointment.consultantant_type,
         message: this.makeAppointment.message,
-        slot:
-          this.makeAppointment.slot_from + " - " + this.makeAppointment.slot_to,
+        from_time: this.makeAppointment.from_time,
+        to_time: this.makeAppointment.to_time,
       })
       .then((response) => {
         this.resetForm(this.makeAppointment);
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function createVisitor() {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/visitors", {
+        name: this.makeVisitor.name,
+        email: this.makeVisitor.email,
+        // phone: this.makeVisitor.phone,
+        address: this.makeVisitor.address,
+        purpose_of_visiting: this.makeVisitor.purpose_of_visiting,
+        date_of_visiting: this.makeVisitor.date_of_visiting,
+        from_time: this.makeVisitor.from_time,
+        to_time: this.makeVisitor.to_time,
+        aadhar_no: this.makeVisitor.aadhar_no,
+        vaccination_status: this.makeVisitor.vaccination_status,
+      })
+      .then((response) => {
+        this.resetForm(this.makeVisitor);
         resolve(response);
       })
       .catch((err) => {
@@ -233,6 +269,26 @@ export function signupUser() {
   return new Promise((resolve, reject) => {
     axios
       .post("/auth/register", {
+        company_id: this.signup.company_id,
+        name: this.signup.name,
+        email: this.signup.email,
+        primary_contact: this.signup.primary_contact,
+        password: this.signup.password,
+        confirm_password: this.signup.confirm_password,
+      })
+      .then((response) => {
+        this.fetchAuthUser();
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+export function signupVisitor() {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/auth/visitor", {
         company_id: this.signup.company_id,
         name: this.signup.name,
         email: this.signup.email,
