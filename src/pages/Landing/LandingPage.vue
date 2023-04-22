@@ -31,10 +31,10 @@
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
             <q-card flat bordered class="border-radius-20" @click="toDonor()">
-              <q-img src="~assets/svg/injection.svg" />
+              <q-img src="~assets/svg/blooddonation.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
                 <div class="text-weight-bold font-25">Donate Blood</div>
-                <p class="font-16">Variety of Medicines</p>
+                <p class="font-16">Donate Blood in our Blood Bank</p>
               </q-card-section>
             </q-card>
           </div>
@@ -45,19 +45,19 @@
               class="border-radius-20"
               @click="toReceiver()"
             >
-              <q-img src="~assets/svg/test.svg" />
+              <q-img src="~assets/svg/bloodreceive.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
                 <div class="text-weight-bold font-25">Receive Blood</div>
-                <p class="font-16">Fast and accurate tests</p>
+                <p class="font-16">Receive Blood from Us</p>
               </q-card-section>
             </q-card>
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
             <q-card flat bordered class="border-radius-20" @click="toVisitor()">
-              <q-img src="~assets/svg/surgery.svg" />
+              <q-img src="~assets/svg/visit.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
                 <div class="text-weight-bold font-25">Visit Us</div>
-                <p class="font-16">Secure and trusted surgeons</p>
+                <p class="font-16">Visit Us anytime</p>
               </q-card-section>
             </q-card>
           </div>
