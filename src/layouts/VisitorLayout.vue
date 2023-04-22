@@ -86,40 +86,20 @@ export default defineComponent({
     const $q = useQuasar();
     const router = useRouter();
     const authUserStore = useAuthStore();
-
     const essentialLinks = computed(() => [
+      // {
+      //   title: "Dashboard",
+      //   link: "/patient-dashboard",
+      //   show: true,
+      // },
       {
-        title: "Dashboard",
-        link: "/home",
+        title: "Visit a patient",
+        link: "/visit",
         show: true,
       },
       {
-        title: "Users",
-        link: "/users",
-        show: true,
-      },
-      // disable:
-      //   authUserStore.authUser.user_role.role.code === "sadmin"
-      //     ? true
-      //     : false,
-      {
-        title: "Bed Management",
-        link: "/bed-management",
-        show: true,
-      },
-      {
-        title: "Blood Bank",
-        link: "/blood-admin",
-        show: true,
-      },
-      {
-        title: "Appointment Requests",
-        link: "/appointment-requests",
-        show: true,
-      },
-      {
-        title: "Visitor Requests",
-        link: "/visitor-requests",
+        title: "Visit History",
+        link: "/visit-history",
         show: true,
       },
 

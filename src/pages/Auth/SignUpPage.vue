@@ -17,6 +17,17 @@
         </q-card-section>
 
         <q-card-section class="q-pb-sm">
+          <div class="col-12">
+            <QSearch
+              label="Select Hospital"
+              v-model="signup.company_id"
+              :useStore="companyStore"
+              optionValue="id"
+              optionLabel="name"
+              :error-message="$getValidationErrors('company_id')"
+              :error="$hasValidationErrors('company_id')"
+            />
+          </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 q-mb-md">
             <q-input
               dense
@@ -155,6 +166,7 @@
 import { ref, defineComponent, getCurrentInstance } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
+import { useCompanyStore } from "stores/getCompany";
 import { useAuthStore } from "stores/auth/index";
 import { storeToRefs } from "pinia";
 
@@ -162,6 +174,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useAuthStore();
+    const companyStore = useCompanyStore();
     const loader = ref(false);
     const $q = useQuasar();
 
@@ -206,6 +219,7 @@ export default defineComponent({
 
     return {
       store,
+      companyStore,
       loader,
       submitForm,
       isPwd: ref(true),

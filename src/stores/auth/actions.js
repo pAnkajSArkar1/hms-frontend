@@ -150,13 +150,7 @@ export function createAppointment() {
         consultantant_type: this.makeAppointment.consultantant_type,
         message: this.makeAppointment.message,
         slot:
-          "from:" +
-          " " +
-          this.makeAppointment.slot_from +
-          " , " +
-          "to:" +
-          " " +
-          this.makeAppointment.slot_to,
+          this.makeAppointment.slot_from + " - " + this.makeAppointment.slot_to,
       })
       .then((response) => {
         this.resetForm(this.makeAppointment);
@@ -239,6 +233,7 @@ export function signupUser() {
   return new Promise((resolve, reject) => {
     axios
       .post("/auth/register", {
+        company_id: this.signup.company_id,
         name: this.signup.name,
         email: this.signup.email,
         primary_contact: this.signup.primary_contact,

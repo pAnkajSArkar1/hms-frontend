@@ -293,6 +293,7 @@ const routes = [
       },
     ],
   },
+
   // admin appointment request
   {
     path: "/appointment-requests",
@@ -304,6 +305,42 @@ const routes = [
           import(
             "src/pages/Appointment/Admin/AppointmentRequests/IndexPage.vue"
           ),
+      },
+    ],
+  },
+
+  // visit
+  {
+    path: "/visit",
+    component: () => import("layouts/VisitorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/Visitor/Patient/Appointment/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/visit-history",
+    component: () => import("layouts/VisitorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/Visitor/Patient/AppointmentHistory/IndexPage.vue"),
+      },
+    ],
+  },
+  // admin visitor request
+  {
+    path: "/visitor-requests",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/Visitor/Admin/AppointmentRequests/IndexPage.vue"),
       },
     ],
   },

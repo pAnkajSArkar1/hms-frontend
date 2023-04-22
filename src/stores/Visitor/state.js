@@ -11,10 +11,10 @@ export default function () {
       //   sortable: true,
       // },
       {
-        name: "patientname",
+        name: "visitorname",
         align: "left",
-        label: "Patient Name",
-        field: (row) => row?.patient_details?.name,
+        label: "Visitor Name",
+        field: (row) => row?.name,
         sortable: true,
       },
       {

@@ -45,14 +45,17 @@
                 </q-chip>
               </span>
             </q-td>
-            <q-td key="actions" align="right">
+            <q-td
+              key="actions"
+              align="right"
+              v-if="bodyRow.row.status === 'Pending'"
+            >
               <q-btn
                 flat
                 round
                 dense
                 color="accent"
                 icon="edit"
-                v-if="bodyRow.row.status === 'Pending'"
                 class="q-ml-sm"
                 @click="onClickEdit(bodyRow.row)"
               >
@@ -62,32 +65,31 @@
                 flat
                 round
                 dense
-                color="secondary"
-                icon="email"
-                class="q-ml-sm"
-                @click="onClickEmail(bodyRow.row)"
+                color="negative"
+                icon="clear"
+                @click="onClickDelete(bodyRow.row)"
               >
-                <q-tooltip> Email Report </q-tooltip>
+                <q-tooltip> Delete </q-tooltip>
               </q-btn>
             </q-td>
           </q-tr>
         </template>
       </QDataTable>
     </div>
+    <!-- CREATE -->
+    <q-dialog v-model="showCreateRequest">
+      <q-card class="card-width">
+        <div :class="$q.platform.is.desktop ? '' : ''">
+          <create-request :useStore="useStore" v-bind:modal="true" />
+        </div>
+      </q-card>
+    </q-dialog>
+
     <!-- EDIT -->
     <q-dialog v-model="showEditAppointment">
       <q-card class="card-width">
         <div :class="$q.platform.is.desktop ? '' : ''">
           <edit-appointment :useStore="useStore" v-bind:modal="true" />
-        </div>
-      </q-card>
-    </q-dialog>
-
-    <!-- email report -->
-    <q-dialog v-model="showEmailDialog">
-      <q-card class="" style="width: 600px">
-        <div :class="$q.platform.is.desktop ? '' : ''">
-          <email-report :useStore="useStore" v-bind:modal="true" />
         </div>
       </q-card>
     </q-dialog>
@@ -110,38 +112,71 @@ import { useAppointmentStore } from "src/stores/Appointment/makeAppointment";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
+const CreateRequest = defineAsyncComponent(() => import("./CreateRequest.vue"));
 const EditAppointment = defineAsyncComponent(() =>
   import("./EditAppointment.vue")
 );
-const EmailReport = defineAsyncComponent(() => import("./EmailReport.vue"));
 
 export default {
   name: "RequestManagement",
   components: {
+    CreateRequest,
     EditAppointment,
-    EmailReport,
   },
 
   setup(props) {
     const useStore = useAppointmentStore();
+    const showCreateAppointment = computed(
+      () => useStore.showCreateAppointment
+    );
     const showEditAppointment = computed(() => useStore.showEditAppointment);
-    const showEmailDialog = computed(() => useStore.showEmailDialog);
 
     const $q = useQuasar();
+    const { deleteItem } = useStore;
     const { formData, dialogs } = storeToRefs(useStore);
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
+    const loading = ref([]);
 
     const onClickEdit = (params) => {
       formData.value = params;
       dialogs.value.editItem = true;
     };
-
-    const onClickEmail = (row) => {
-      useStore.emailReport.id = row.id;
-      useStore.dialogs.emailReport = true;
+    const onClickDelete = (param) => {
+      $q.dialog({
+        title: "Delete Confirmation",
+        message: "Are you sure you want to Delete",
+        ok: {
+          label: "Delete",
+          unelevated: true,
+          color: "red-5",
+        },
+        cancel: {
+          unelevated: true,
+          color: "",
+          textColor: "black",
+        },
+        persistent: true,
+      }).onOk(() => {
+        loading.value = true;
+        deleteItem(param)
+          .then((response) => {
+            Qnotify({
+              message: response.data.message,
+              type: "positive",
+            });
+          })
+          .catch((error) => {
+            Qnotify({
+              message: error.message,
+              type: "negative",
+            });
+          })
+          .finally(() => {
+            loading.value = false;
+          });
+      });
     };
-
     // const onClickShow = () => {
     //   if (formData.value.status === "No Action") {
     //     showType.value = "show";
@@ -151,10 +186,10 @@ export default {
     return {
       useStore,
       onClickEdit,
+      onClickDelete,
       formData,
+      showCreateAppointment,
       showEditAppointment,
-      onClickEmail,
-      showEmailDialog,
       // onClickDelete,
       // loading,
       // taskDetails,
@@ -166,7 +201,7 @@ export default {
 
 <style scoped>
 .card-width {
-  width: 300px;
+  width: 400px;
 }
 .blood-type {
   font-size: 25px;

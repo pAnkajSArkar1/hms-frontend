@@ -11,9 +11,7 @@
         <template v-slot:customBodySlot="bodyRow">
           <q-tr>
             <!-- <q-td key="appointmentid">{{ bodyRow.row?.id }} </q-td> -->
-            <q-td key="patientname"
-              >{{ bodyRow.row?.patient_details?.name }}
-            </q-td>
+            <q-td key="visitorname">{{ bodyRow.row?.name }} </q-td>
             <q-td key="doctor">{{ bodyRow.row?.doctor_details?.name }} </q-td>
             <q-td key="appointmentdate"
               >{{ bodyRow.row?.appointment_date }}
@@ -106,7 +104,7 @@ import {
   onMounted,
   reactive,
 } from "vue";
-import { useAppointmentStore } from "src/stores/Appointment/makeAppointment";
+import { useVisitorStore } from "src/stores/Visitor";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 
@@ -123,7 +121,7 @@ export default {
   },
 
   setup(props) {
-    const useStore = useAppointmentStore();
+    const useStore = useVisitorStore();
     const showEditAppointment = computed(() => useStore.showEditAppointment);
     const showEmailDialog = computed(() => useStore.showEmailDialog);
 

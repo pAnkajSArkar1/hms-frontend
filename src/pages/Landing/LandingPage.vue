@@ -14,13 +14,15 @@
         </div>
         <div class="row q-col-gutter-md">
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20">
+            <!-- <router-link to="/signup"> -->
+            <q-card flat bordered class="cursor-pointer border-radius-20">
               <q-img src="~assets/svg/doctor.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
                 <div class="text-weight-bold font-25">Appointments</div>
                 <p class="font-16">Fast Appointments</p>
               </q-card-section>
             </q-card>
+            <!-- </router-link> -->
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
             <q-card flat bordered class="border-radius-20">

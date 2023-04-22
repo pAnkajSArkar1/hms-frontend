@@ -84,11 +84,7 @@ export default defineComponent({
         link: "/",
         show: true,
       },
-      {
-        title: "Appointment",
-        link: "/appointment",
-        show: true,
-      },
+
       {
         title: "Security & help",
         show: true,

@@ -1,7 +1,7 @@
 import { api, axios } from "boot/axios";
 
-const endPoint = "appointment";
-const mailEndPoint = "appointment-confirmation";
+const endPoint = "visitors";
+const mailEndPoint = "visit-approved";
 
 export function getItems(props) {
   console.log("getItems", true);
@@ -62,29 +62,6 @@ export function fetchAuthUser() {
         this.authUser = response.data;
         console.log("a", this.authUser);
         resolve(true);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-}
-
-export function createAppointment() {
-  return new Promise((resolve, reject) => {
-    axios
-      .post("/appointment", {
-        patient_id: this.authUser.user_role.user_id,
-        appointment_date: this.makeAppointment.appointment_date,
-        doctor_id: this.makeAppointment.doctor_id,
-        source: this.makeAppointment.source,
-        priority: this.makeAppointment.priority,
-        consultantant_type: this.makeAppointment.consultantant_type,
-        message: this.makeAppointment.message,
-        slot: this.makeAppointment.slot,
-      })
-      .then((response) => {
-        // this.resetForm(this.requestBlood);
-        resolve(response);
       })
       .catch((err) => {
         reject(err);
