@@ -10,7 +10,7 @@
     <!-- mobile nav bar -->
     <q-toolbar>
       <router-link to="/">
-        <q-img src="~assets/svg/logo.svg" width="150px" />
+        <q-img src="~assets/images/logo.png" width="130px" height="50px" />
       </router-link>
 
       <q-space></q-space>
