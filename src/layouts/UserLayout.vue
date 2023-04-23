@@ -14,7 +14,12 @@
         />
 
         <router-link to="/">
-          <q-img src="~assets/images/logo.png" width="130px" height="50px" />
+          <q-img
+            src="~assets/images/logo1.png"
+            width="150px"
+            class="q-mt-xs"
+            height="50px"
+          />
         </router-link>
 
         <EssentialLink

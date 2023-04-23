@@ -22,7 +22,7 @@
             />
             <q-img
               v-if="activeRoute == 'home'"
-              src="~assets/images/logo.png"
+              src="~assets/images/logo1.png"
               width="150px"
             />
             <span v-if="activeMenu.pageTitle" class="q-pl-md tool-bar-title">{{
