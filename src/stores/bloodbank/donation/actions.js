@@ -67,6 +67,19 @@ export function createItem() {
   });
 }
 
+export function generateReportDownloadURL(props) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`/blood-donation/${props.id}?export=pdf`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 export function editItem() {
   return new Promise((resolve, reject) => {
     axios

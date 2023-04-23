@@ -35,11 +35,7 @@
                 </q-chip>
               </span>
             </q-td>
-            <q-td
-              key="actions"
-              align="right"
-              v-if="bodyRow.row.status === 'No action'"
-            >
+            <q-td key="actions" align="right">
               <q-btn
                 flat
                 round
@@ -47,6 +43,7 @@
                 color="accent"
                 icon="edit"
                 class="q-ml-sm"
+                v-if="bodyRow.row.status === 'No action'"
                 @click="onClickEdit(bodyRow.row)"
               >
                 <q-tooltip> Edit </q-tooltip>
@@ -55,11 +52,24 @@
                 flat
                 round
                 dense
+                v-if="bodyRow.row.status === 'No action'"
                 color="negative"
                 icon="clear"
                 @click="onClickDelete(bodyRow.row)"
               >
                 <q-tooltip> Delete </q-tooltip>
+              </q-btn>
+              <q-btn
+                flat
+                round
+                dense
+                color="secondary"
+                v-if="bodyRow.row.status === 'Approved'"
+                icon="file_download"
+                class="q-ml-sm"
+                @click="onClickDownload(bodyRow.row)"
+              >
+                <q-tooltip> Download </q-tooltip>
               </q-btn>
             </q-td>
           </q-tr>
@@ -117,11 +127,11 @@ export default {
 
   setup(props) {
     const useStore = useDonationStore();
-    const { deleteItem } = useStore;
+    const { deleteItem, generateReportDownloadURL } = useStore;
 
     const showCreateDonation = computed(() => useStore.showCreateDonation);
-    const showEditDonation = computed(() => useStore.showEditDonation);
 
+    const showEditDonation = computed(() => useStore.showEditDonation);
     const $q = useQuasar();
     // const { deleteItem } = useStore;
     const { formData, dialogs } = storeToRefs(useStore);
@@ -134,6 +144,13 @@ export default {
       formData.value = params;
       dialogs.value.editItem = true;
     };
+
+    const onClickDownload = (row) => {
+      generateReportDownloadURL({ id: row.id }).then((response) => {
+        window.open(response.tempUrl);
+      });
+    };
+
     const onClickDelete = (param) => {
       $q.dialog({
         title: "Delete Confirmation",
@@ -172,6 +189,7 @@ export default {
 
     return {
       useStore,
+      onClickDownload,
       onClickEdit,
       formData,
       loading,

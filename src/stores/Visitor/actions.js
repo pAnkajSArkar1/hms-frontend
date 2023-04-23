@@ -4,22 +4,25 @@ const endPoint = "visitors";
 const mailEndPoint = "visit-approved";
 
 export function getItems(props) {
-  console.log("getItems", true);
-
-  if (props.pagination.descending == true) {
-    var direction = "DESC";
+  if (props.all) {
+    var params = {
+      all: props.all,
+    };
   } else {
-    var direction = "ASC";
-  }
+    if (props.pagination.descending == true) {
+      var direction = "DESC";
+    } else {
+      var direction = "ASC";
+    }
 
-  var params = {
-    sort: props.pagination.sortBy,
-    direction: direction,
-    page: props.pagination.page,
-    rowsPerPage: props.pagination.rowsPerPage,
-    search: props.search ? props.search : this.filter.search,
-    company_id: this.filter?.company_id,
-  };
+    var params = {
+      sort: props.pagination.sortBy,
+      direction: direction,
+      page: props.pagination.page,
+      rowsPerPage: props.pagination.rowsPerPage,
+      search: props.search ? props.search : this.filter.search,
+    };
+  }
 
   return new Promise((resolve, reject) => {
     axios

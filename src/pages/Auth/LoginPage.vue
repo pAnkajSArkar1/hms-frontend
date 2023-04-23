@@ -121,7 +121,10 @@ export default defineComponent({
             message: "Login successfull",
             type: "positive",
           });
-          if (store.authUser.user_role.role.code === "sadmin") {
+          if (
+            store.authUser.user_role.role.code === "sadmin" ||
+            store.authUser.user_role.role.code === "admin"
+          ) {
             router.push("/home");
           } else if (store.authUser.user_role.role.code === "blood_donor") {
             router.push("/donor-dashboard");
@@ -129,6 +132,8 @@ export default defineComponent({
             router.push("/receiver-dashboard");
           } else if (store.authUser.user_role.role.code === "regd_patient") {
             router.push("/make-appointment");
+          } else if (store.authUser.user_role.role.code === "visitor") {
+            router.push("/visit");
           }
         })
         .catch((error) => {
