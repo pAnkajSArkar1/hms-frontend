@@ -12,6 +12,7 @@ import BedMenu from "components/BedMenu.vue";
 import BloodAdmin from "components/BloodAdmin.vue";
 import BloodDonor from "components/BloodDonor.vue";
 import BloodPatient from "components/BloodPatient.vue";
+import GlobalMessage from "components/GlobalMessage.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -28,4 +29,5 @@ export default ({ app }) => {
   app.component("BloodAdmin", BloodAdmin);
   app.component("BloodDonor", BloodDonor);
   app.component("BloodPatient", BloodPatient);
+  app.component("GlobalMessage", GlobalMessage);
 };

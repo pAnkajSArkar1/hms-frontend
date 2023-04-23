@@ -107,6 +107,11 @@ export default defineComponent({
         link: "/appointment-history",
         show: true,
       },
+      {
+        title: "Brodcasts",
+        link: "/brodcasts",
+        show: true,
+      },
 
       // {
       //   title: "Home",

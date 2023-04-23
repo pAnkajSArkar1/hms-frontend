@@ -369,6 +369,27 @@ const routes = [
       },
     ],
   },
+  // USER
+  {
+    path: "/global-message",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/brodcasts",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
   // {
   //   path: "/company-profile",
   //   component: () => import("layouts/MainLayout.vue"),

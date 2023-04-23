@@ -65,8 +65,8 @@
                   v-model="donateStore.donateBlood.units_in_ml"
                   square
                   placeholder="Example: 10"
-                  :error-message="$getValidationErrors('primary_contact')"
-                  :error="$hasValidationErrors('primary_contact')"
+                  :error-message="$getValidationErrors('units_in_ml')"
+                  :error="$hasValidationErrors('units_in_ml')"
                 />
               </q-card-section>
             </q-card>

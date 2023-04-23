@@ -127,6 +127,16 @@ export default defineComponent({
         link: "/manage-visitor",
         show: true,
       },
+      {
+        title: "Global Message",
+        link: "/global-message",
+        show: true,
+      },
+      {
+        title: "Brodcasts",
+        link: "/brodcasts",
+        show: true,
+      },
 
       // {
       //   title: "Home",

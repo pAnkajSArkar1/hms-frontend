@@ -107,6 +107,11 @@ export default defineComponent({
         link: "/donation-history",
         show: true,
       },
+      {
+        title: "Brodcasts",
+        link: "/brodcasts",
+        show: true,
+      },
       // {
       //   title: "Home",
       //   link: "/overview",
