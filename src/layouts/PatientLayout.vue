@@ -108,7 +108,7 @@ export default defineComponent({
       },
       {
         title: "Brodcasts",
-        link: "/brodcasts",
+        link: "/patient-brodcasts",
         show: true,
       },
       // {

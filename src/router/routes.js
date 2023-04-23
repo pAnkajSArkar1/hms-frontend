@@ -369,7 +369,7 @@ const routes = [
       },
     ],
   },
-  // USER
+  // admin global message
   {
     path: "/global-message",
     component: () => import("layouts/MainLayout.vue"),
@@ -381,8 +381,59 @@ const routes = [
     ],
   },
   {
+    path: "/manage-message",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/GlobalMessage/GlobalMessageManage.vue"),
+      },
+    ],
+  },
+  {
     path: "/brodcasts",
     component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/donor-brodcasts",
+    component: () => import("layouts/DonorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/patient-brodcasts",
+    component: () => import("layouts/PatientLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/user-brodcasts",
+    component: () => import("layouts/UserLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/visitor-brodcasts",
+    component: () => import("layouts/VisitorLayout.vue"),
     children: [
       {
         path: "",
@@ -419,33 +470,6 @@ const routes = [
   //     },
   //   ],
   // },
-
-  // // Branch
-
-  // {
-  //   path: "/department",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () => import("pages/Branch/IndexPage.vue"),
-  //       meta: { name: "Login", requiresAuth: true, acl: "user.index" },
-  //     },
-  //   ],
-  // },
-
-  // // Asset
-  {
-    path: "/asset",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/Asset/IndexPage.vue"),
-        meta: { name: "Login", requiresAuth: true, acl: "assets.index" },
-      },
-    ],
-  },
 
   // // {
   // //     path: "/company",
@@ -496,209 +520,6 @@ const routes = [
   //     {
   //       path: "/terms-conditions",
   //       component: () => import("src/pages/PrivacyPolicy/IndexPage.vue"),
-  //     },
-  //   ],
-  // },
-
-  // //   RISK ASSESSMENT
-  // {
-  //   path: "/riskassessment",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/RiskAssesment/IndexPage.vue"),
-  //       meta: { name: "assessment", requiresAuth: true, acl: "user.index" },
-  //     },
-  //     {
-  //       path: "report",
-  //       component: () =>
-  //         import(
-  //           "src/pages/Customer/RiskAssesment/CreateRiskAssessment/IndexPage.vue"
-  //         ),
-  //       meta: { name: "assessment", requiresAuth: true, acl: "user.index" },
-  //     },
-  //     {
-  //       path: ":id",
-  //       name: "view-risk-assessment",
-  //       component: () =>
-  //         import(
-  //           "src/pages/Customer/RiskAssesment/CreateRiskAssessment/ViewAssessment.vue"
-  //         ),
-  //       meta: { name: "assessment", requiresAuth: true, acl: "user.index" },
-  //     },
-  //     {
-  //       path: "activity",
-  //       component: () =>
-  //         import("src/pages/Customer/RiskAssesment/Activities/IndexPage.vue"),
-  //       meta: {
-  //         name: "activities.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //     {
-  //       path: "hazard",
-  //       component: () =>
-  //         import("src/pages/Customer/RiskAssesment/Hazards/IndexPage.vue"),
-  //       meta: {
-  //         name: "activities.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //     {
-  //       path: "risk",
-  //       component: () =>
-  //         import("src/pages/Customer/RiskAssesment/Risk/IndexPage.vue"),
-  //       meta: {
-  //         name: "activities.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //     {
-  //       path: "risk-rating",
-  //       meta: {
-  //         name: "activities.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //       children: [
-  //         {
-  //           path: "",
-  //           name: "riskRating",
-  //           component: () =>
-  //             import(
-  //               "src/pages/Customer/RiskAssesment/RiskRating/IndexPage.vue"
-  //             ),
-  //         },
-  //         {
-  //           path: "create",
-  //           name: "create-risk-rating",
-  //           component: () =>
-  //             import(
-  //               "src/pages/Customer/RiskAssesment/RiskRating/CreateRiskRating.vue"
-  //             ),
-  //           meta: {
-  //             name: "activities.index",
-  //             requiresAuth: true,
-  //             acl: "user.index",
-  //           },
-  //         },
-  //         {
-  //           path: "edit",
-  //           name: "edit-risk-rating",
-  //           component: () =>
-  //             import(
-  //               "src/pages/Customer/RiskAssesment/RiskRating/EditRiskRating.vue"
-  //             ),
-  //           meta: {
-  //             name: "activities.index",
-  //             requiresAuth: true,
-  //             acl: "user.index",
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-
-  // // TASK MANAGEMENT
-  // {
-  //   path: "/task-management",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/RiskRegister/IndexPage.vue"),
-  //       meta: {
-  //         name: "risk_register.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   path: "/inspection-checklist",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/InspectionChecklist/IndexPage.vue"),
-  //       meta: {
-  //         name: "inspection_checklist.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //     {
-  //       path: "inspection-template",
-  //       component: () =>
-  //         import(
-  //           "src/pages/Customer/InspectionChecklist/Templates/IndexPage.vue"
-  //         ),
-  //       meta: {
-  //         name: "equipment_checklist.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //   ],
-  // },
-
-  // // PPE INSPECTION CHECKLIST
-  // {
-  //   path: "/ppe-inspection",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/PpeInspection/IndexPage.vue"),
-  //     },
-  //     {
-  //       path: "template",
-  //       component: () =>
-  //         import("src/pages/Customer/PpeInspection/PpeTemplate/IndexPage.vue"),
-  //     },
-  //     {
-  //       path: "equipment",
-  //       component: () =>
-  //         import("src/pages/Customer/PpeInspection/PpeEquipment/IndexPage.vue"),
-  //     },
-  //   ],
-  // },
-
-  // //WORKPLACE AUDIT
-  // {
-  //   path: "/workplace-audit",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/WorkplaceAudit/IndexPage.vue"),
-  //       meta: {
-  //         name: "workplace_audit.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //     {
-  //       path: "questions",
-  //       component: () =>
-  //         import("src/pages/Customer/WorkplaceAudit/Questions/IndexPage.vue"),
-  //       meta: {
-  //         name: "questions.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
   //     },
   //   ],
   // },
@@ -806,66 +627,6 @@ const routes = [
   //       //   requiresAuth: true,
   //       //   acl: "user.index",
   //       // },
-  //     },
-  //   ],
-  // },
-  // // {
-  // //     path: "/",
-  // //     component: () =>
-  // //         import ("layouts/MainLayout.vue"),
-  // //     children: [{
-  // //             path: "/",
-  // //             component: () =>
-  // //                 import ("pages/Customer/IndexPage.vue")
-  // //         },
-  // //         {
-  // //             path: "/about-us",
-  // //             component: () =>
-  // //                 import ("src/pages/AboutUs.vue"),
-  // //         },
-  // //         {
-  // //             path: "/terms-conditions",
-  // //             component: () =>
-  // //                 import ("src/pages/PrivacyPolicy/IndexPage.vue"),
-  // //         },
-  // //         {
-  // //             path: "/dashboard",
-  // //             component: () =>
-  // //                 import ("src/pages/Company/DashBoard.vue"),
-  // //             meta: { name: "dashboard.index", requiresAuth: true, acl: "user.index" },
-  // //         },
-  // //     ],
-  // // },
-
-  // {
-  //   path: "/incident-management",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/IncidentManagement/IndexPage.vue"),
-  //       meta: {
-  //         name: "incident_management.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/workplace-audit",
-  //   component: () => import("layouts/MainLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Customer/WorkplaceAudit/IndexPage.vue"),
-  //       meta: {
-  //         name: "workplace_audit.index",
-  //         requiresAuth: true,
-  //         acl: "user.index",
-  //       },
   //     },
   //   ],
   // },

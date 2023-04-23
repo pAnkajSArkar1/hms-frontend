@@ -81,8 +81,6 @@
 <script>
 import { ref, defineAsyncComponent, onMounted, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { useDashboardStore } from "stores/Customer/Inspection/dashboard";
-import { useTemplateStore } from "stores/Customer/Inspection/template";
 import { useMediaStore } from "stores/media";
 import axios from "axios";
 import { LocalStorage as SessionStorage } from "quasar";

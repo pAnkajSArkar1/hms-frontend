@@ -129,13 +129,24 @@ export default defineComponent({
       },
       {
         title: "Global Message",
-        link: "/global-message",
         show: true,
-      },
-      {
-        title: "Brodcasts",
-        link: "/brodcasts",
-        show: true,
+        childs: [
+          {
+            title: "Brodcasts",
+            link: "/brodcasts",
+            show: true,
+          },
+          {
+            title: "Brodcast Message",
+            link: "/global-message",
+            show: true,
+          },
+          {
+            title: "Manage Messages",
+            link: "/manage-message",
+            show: true,
+          },
+        ],
       },
 
       // {
