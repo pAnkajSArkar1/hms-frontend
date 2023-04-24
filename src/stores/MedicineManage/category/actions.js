@@ -1,23 +1,27 @@
 import { api, axios } from "boot/axios";
 
-const endPoint = "medicine";
+const endPoint = "category";
 
 export function getItems(props) {
-  console.log("getItems", true);
-
-  if (props.pagination.descending == true) {
-    var direction = "DESC";
+  if (props.all) {
+    var params = {
+      all: props.all,
+    };
   } else {
-    var direction = "ASC";
-  }
+    if (props.pagination.descending == true) {
+      var direction = "DESC";
+    } else {
+      var direction = "ASC";
+    }
 
-  var params = {
-    sort: props.pagination.sortBy,
-    direction: direction,
-    page: props.pagination.page,
-    rowsPerPage: props.pagination.rowsPerPage,
-    search: props.search ? props.search : this.filter.search,
-  };
+    var params = {
+      sort: props.pagination.sortBy,
+      direction: direction,
+      page: props.pagination.page,
+      rowsPerPage: props.pagination.rowsPerPage,
+      search: props.search ? props.search : this.filter.search,
+    };
+  }
 
   return new Promise((resolve, reject) => {
     axios
@@ -33,13 +37,32 @@ export function getItems(props) {
   });
 }
 
+export function getItem(params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(endPoint + "/" + params.id)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function resetForm(form) {
+  form.name = "";
+  form.description = "";
+}
+
 export function createItem() {
   return new Promise((resolve, reject) => {
     axios
-      .post(endPoint, this.newData)
+      .post(endPoint, this.formData)
       .then((response) => {
         this.lastUpdated = new Date();
         this.dialogs.createItem = false;
+        this.resetForm(this.formData);
         resolve(response);
       })
       .catch((err) => {

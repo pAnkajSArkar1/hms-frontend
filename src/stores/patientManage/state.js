@@ -19,10 +19,10 @@ export default function () {
         sortable: true,
       },
       {
-        name: "role",
+        name: "disease",
         align: "left",
-        label: "Role",
-        field: (row) => row.user_role.role.role,
+        label: "Disease",
+        field: "disease",
         sortable: true,
       },
       { name: "actions", align: "right", label: "Actions" },
@@ -37,7 +37,7 @@ export default function () {
     newData: reactive({
       name: "",
       email: "",
-      role: "",
+      role: "regd_patient",
       password: "",
       confirm_password: "",
       company_id: null,
@@ -62,7 +62,7 @@ export default function () {
     formData: reactive({
       name: "",
       email: "",
-      role: "",
+      role: "regd_patient",
       company_id: null,
       primary_contact: null,
       signed_by: "",

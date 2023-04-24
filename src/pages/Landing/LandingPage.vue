@@ -63,7 +63,7 @@
           </div>
         </div>
       </section>
-      <section
+      <!-- <section
         class="q-pt-xl"
         :class="$q.platform.is.desktop ? 'container' : 'container'"
       >
@@ -191,7 +191,7 @@
             <navigation class="text-grey-1 bg-grey-7" />
           </template>
         </carousel>
-      </section>
+      </section> -->
 
       <section
         class="q-pt-xl"
@@ -305,9 +305,9 @@ const images = [
 export default {
   name: "HomePage",
   components: {
-    Carousel,
-    Slide,
-    Navigation,
+    // Carousel,
+    // Slide,
+    // Navigation,
   },
   setup() {
     const router = useRouter();

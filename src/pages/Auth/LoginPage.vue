@@ -134,6 +134,10 @@ export default defineComponent({
             router.push("/make-appointment");
           } else if (store.authUser.user_role.role.code === "visitor") {
             router.push("/visit");
+          } else if (store.authUser.user_role.role.code === "pharmacist") {
+            router.push("/medicine-status");
+          } else if (store.authUser.user_role.role.code === "receptionist") {
+            router.push("/patients-management");
           }
         })
         .catch((error) => {

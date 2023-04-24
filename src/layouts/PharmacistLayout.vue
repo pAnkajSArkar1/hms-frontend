@@ -12,7 +12,6 @@
           v-if="$q.platform.is.mobile"
           class="q-mr-md"
         />
-
         <router-link to="/">
           <q-img
             src="~assets/images/logo1.png"
@@ -21,6 +20,7 @@
             height="50px"
           />
         </router-link>
+
         <EssentialLink
           :essentialLinks="essentialLinks"
           :isVertical="false"
@@ -28,7 +28,9 @@
         />
 
         <q-space />
-
+        <q-item clickable @click="logout()">
+          <q-item-section>Logout</q-item-section>
+        </q-item>
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -70,8 +72,12 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, onMounted, computed, onBeforeMount } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { acl } from "boot/acl";
+import { useAuthStore } from "stores/auth/index";
+import { useQuasar } from "quasar";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
   name: "MainLayout",
@@ -81,50 +87,30 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
-
+    const $q = useQuasar();
+    const router = useRouter();
+    const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
       {
-        title: "Home",
-        link: "/",
+        title: "Dashboard",
+        link: "/medicine-status",
         show: true,
       },
-
-      // {
-      //   title: "Security & help",
-      //   show: true,
-      //   childs: [
-      //     {
-      //       title: "Data Security",
-      //       link: "/data-security",
-      //       show: true,
-      //     },
-      //     {
-      //       title: "Help",
-      //       link: "/help",
-      //       show: true,
-      //     },
-      //   ],
-      // },
       {
-        title: "Login",
-        link: "/login",
+        title: "Medicines",
+        link: "/medicine-list",
         show: true,
       },
-      // {
-      //   title: "Donate Blood",
-      //   link: "/donor-signup",
-      //   show: true,
-      // },
-      // {
-      //   title: "Receive Blood",
-      //   link: "/receiver-signup",
-      //   show: true,
-      // },
-      // {
-      //   title: "Signup",
-      //   link: "/signup",
-      //   show: true,
-      // },
+      {
+        title: "Sales History",
+        link: "/medicine-sales-list",
+        show: true,
+      },
+      {
+        title: "Brodcasts",
+        link: "/pharmacist-brodcasts",
+        show: true,
+      },
       // {
       //   title: "Home",
       //   link: "/overview",
@@ -240,9 +226,32 @@ export default defineComponent({
       // },
     ]);
 
+    const logout = () => {
+      $q.dialog({
+        title: "Confirm",
+        message: "Are you sure to logout?",
+        ok: {
+          label: "Yes",
+          unelevated: true,
+          color: "primary",
+        },
+        cancel: {
+          unelevated: true,
+          color: "",
+          textColor: "black",
+        },
+        persistent: true,
+      }).onOk(() => {
+        authUserStore.logout().then((r) => {
+          window.location.href = "/";
+        });
+      });
+    };
+
     return {
       essentialLinks,
       leftDrawerOpen,
+      logout,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },

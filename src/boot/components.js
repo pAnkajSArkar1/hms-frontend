@@ -9,10 +9,12 @@ import PolarAreaChart from "components/CHART/PolarAreaChart.vue";
 import UploaderFile from "components/CRUD/UploaderFile.vue";
 import SingleUploaderFile from "components/CRUD/SingleUploaderFile.vue";
 import BedMenu from "components/BedMenu.vue";
+import BedMenuR from "components/BedMenuR.vue";
 import BloodAdmin from "components/BloodAdmin.vue";
 import BloodDonor from "components/BloodDonor.vue";
 import BloodPatient from "components/BloodPatient.vue";
 import GlobalMessage from "components/GlobalMessage.vue";
+import MedicineMenu from "components/MedicineMenu.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -26,8 +28,10 @@ export default ({ app }) => {
   app.component("UploaderFile", UploaderFile);
   app.component("SingleUploaderFile", SingleUploaderFile);
   app.component("BedMenu", BedMenu);
+  app.component("BedMenuR", BedMenuR);
   app.component("BloodAdmin", BloodAdmin);
   app.component("BloodDonor", BloodDonor);
   app.component("BloodPatient", BloodPatient);
   app.component("GlobalMessage", GlobalMessage);
+  app.component("MedicineMenu", MedicineMenu);
 };

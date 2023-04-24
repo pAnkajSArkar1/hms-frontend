@@ -53,7 +53,7 @@ export default function () {
         field: "email",
         sortable: true,
       },
-      // { name: "actions", align: "right", label: "Actions" },
+      // { name: "actions", align: "right", label: "Actions"},
     ],
     filter: {
       search: "",

@@ -1,7 +1,8 @@
 <template>
   <q-page>
+    <MedicineMenu />
     <div class="q-pa-md">
-      <QDataTable :useStore="useStore" title="All Medicines" />
+      <QDataTable :useStore="useStore" title="Medicine" />
 
       <!-- CREATE -->
       <q-dialog v-model="showCreateMedicines">
@@ -26,7 +27,7 @@
 
 <script>
 import { computed, defineAsyncComponent } from "vue";
-import { useMedicineStore } from "stores/medicine";
+import { useMedicineStore } from "stores/MedicineManage/medicine";
 
 const CreateMedicine = defineAsyncComponent(() =>
   import("./CreateMedicine.vue")
@@ -34,7 +35,7 @@ const CreateMedicine = defineAsyncComponent(() =>
 const EditMedicine = defineAsyncComponent(() => import("./EditMedicine.vue"));
 
 export default {
-  name: "ManageMedicine",
+  name: "MedicineManagement",
   components: {
     CreateMedicine,
     EditMedicine,
@@ -53,3 +54,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card-width {
+  width: 500px;
+}
+</style>

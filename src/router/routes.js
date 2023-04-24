@@ -441,6 +441,128 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/pharmacist-brodcasts",
+    component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+
+  // medicine admin
+  {
+    path: "/medicine-management",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/MedicineManagement/Dashboard/IndexPage.vue"),
+      },
+      {
+        path: "category",
+        component: () =>
+          import("src/pages/MedicineManagement/Category/IndexPage.vue"),
+      },
+      {
+        path: "medicine",
+        component: () =>
+          import("src/pages/MedicineManagement/Medicine/IndexPage.vue"),
+      },
+      {
+        path: "medicine-sales",
+        component: () =>
+          import("src/pages/MedicineManagement/MedicineSale/IndexPage.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/medicine-status",
+    component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Pharmacist/Dashboard/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/medicine-list",
+    component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Pharmacist/Medicine/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/medicine-sales-list",
+    component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/Pharmacist/MedicineSale/IndexPage.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/bed-details",
+    component: () => import("layouts/ReceptionistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/BedsReceptioninst/BedStatus/IndexPage.vue"),
+      },
+      {
+        path: "floors",
+        component: () =>
+          import("src/pages/BedsReceptioninst/Floor/IndexPage.vue"),
+      },
+      {
+        path: "bed-groups",
+        component: () =>
+          import("src/pages/BedsReceptioninst/BedGroup/IndexPage.vue"),
+      },
+      {
+        path: "bed-types",
+        component: () =>
+          import("src/pages/BedsReceptioninst/BedType/IndexPage.vue"),
+      },
+      {
+        path: "bed-lists",
+        component: () =>
+          import("src/pages/BedsReceptioninst/BedList/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/patients-management",
+    component: () => import("layouts/ReceptionistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/PatientManagement/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/patients",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/PatientManagement/IndexPage.vue"),
+      },
+    ],
+  },
   // {
   //   path: "/company-profile",
   //   component: () => import("layouts/MainLayout.vue"),

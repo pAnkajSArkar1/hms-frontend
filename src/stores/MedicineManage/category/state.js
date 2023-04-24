@@ -7,22 +7,8 @@ export default function () {
       {
         name: "name",
         align: "left",
-        label: "Name",
+        label: "Category",
         field: "name",
-        sortable: true,
-      },
-      {
-        name: "mfg date",
-        align: "left",
-        label: "Manufacture date",
-        field: "mfg_date",
-        sortable: true,
-      },
-      {
-        name: "exp date",
-        align: "left",
-        label: "Expiry date",
-        field: "exp_date",
         sortable: true,
       },
       {
@@ -32,14 +18,6 @@ export default function () {
         field: "description",
         sortable: true,
       },
-      {
-        name: "price",
-        align: "left",
-        label: "Price",
-        field: "price",
-        sortable: true,
-      },
-
       { name: "actions", align: "right", label: "Actions" },
     ],
     filter: {
@@ -47,25 +25,13 @@ export default function () {
     },
     items: reactive([]),
     item: reactive({}),
-    newData: reactive({
-      name: "",
-      brand: "",
-      price: "",
-      description: "",
-      instruction: "",
-      mfg_date: "",
-      exp_date: "",
-    }),
     formData: reactive({
       name: "",
-      brand: "",
-      price: "",
       description: "",
-      instruction: "",
-      mfg_date: "",
-      exp_date: "",
     }),
-    created_at: "",
+    createdby: {
+      name: "",
+    },
     dialogs: reactive({
       createItem: false,
       editItem: false,

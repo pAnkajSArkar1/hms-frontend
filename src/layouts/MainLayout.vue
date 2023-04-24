@@ -98,11 +98,24 @@ export default defineComponent({
         link: "/home",
         show: true,
       },
+
       {
-        title: "Users",
-        link: "/users",
+        title: "User Management",
         show: true,
+        childs: [
+          {
+            title: "Users",
+            link: "/users",
+            show: true,
+          },
+          {
+            title: "Patients",
+            link: "/patients",
+            show: true,
+          },
+        ],
       },
+
       // disable:
       //   authUserStore.authUser.user_role.role.code === "sadmin"
       //     ? true
@@ -147,6 +160,11 @@ export default defineComponent({
             show: true,
           },
         ],
+      },
+      {
+        title: "Medicine Management",
+        link: "/medicine-management",
+        show: true,
       },
 
       // {
