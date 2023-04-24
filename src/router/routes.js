@@ -460,11 +460,6 @@ const routes = [
       {
         path: "",
         component: () =>
-          import("src/pages/MedicineManagement/Dashboard/IndexPage.vue"),
-      },
-      {
-        path: "category",
-        component: () =>
           import("src/pages/MedicineManagement/Category/IndexPage.vue"),
       },
       {
@@ -480,16 +475,16 @@ const routes = [
     ],
   },
 
-  {
-    path: "/medicine-status",
-    component: () => import("layouts/PharmacistLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/Pharmacist/Dashboard/IndexPage.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "/medicine-status",
+  //   component: () => import("layouts/PharmacistLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("src/pages/Pharmacist/Dashboard/IndexPage.vue"),
+  //     },
+  //   ],
+  // },
   {
     path: "/medicine-list",
     component: () => import("layouts/PharmacistLayout.vue"),

@@ -61,7 +61,7 @@
           </div>
 
           <div class="flex justify-end q-pt-md">
-            <q-btn type="primary" color="primary">Donate</q-btn>
+            <q-btn type="primary" color="primary">Brodcast</q-btn>
           </div>
         </div>
       </q-form>

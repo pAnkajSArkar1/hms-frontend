@@ -6,36 +6,14 @@
       <QDataTable
         :customBodySlot="true"
         :useStore="useStore"
-        :canAdd="false"
         title="Medicine Sales"
       >
         <template v-slot:customBodySlot="bodyRow">
           <q-tr>
             <q-td key="donationid">{{ bodyRow.row?.id }} </q-td>
-            <q-td key="donorname">{{ bodyRow.row?.donor_details?.name }} </q-td>
-            <q-td key="donorno"
-              >{{ bodyRow.row?.donor_details?.primary_contact }}
-            </q-td>
-            <q-td key="bloodgroup">{{ bodyRow.row.blood_group }} </q-td>
-            <q-td key="unitsinml">{{ bodyRow.row.units_in_ml }} </q-td>
-            <q-td key="disease">{{ bodyRow.row.disease }} </q-td>
-            <q-td key="status">
-              <span v-if="bodyRow.row.status === 'Approved'">
-                <q-chip color="green" class="text-white">
-                  {{ bodyRow.row.status }}
-                </q-chip>
-              </span>
-              <span v-if="bodyRow.row.status === 'Rejected'">
-                <q-chip color="red" class="text-white">
-                  {{ bodyRow.row.status }}
-                </q-chip>
-              </span>
-              <span v-if="bodyRow.row.status === 'No action'">
-                <q-chip color="grey" class="text-white">
-                  {{ bodyRow.row.status }}
-                </q-chip>
-              </span>
-            </q-td>
+            <q-td key="invoice_no">{{ bodyRow.row?.invoice_no }} </q-td>
+            <q-td key="total_price">{{ bodyRow.row.total_price }} </q-td>
+            <q-td key="total_profit">{{ bodyRow.row.total_profit }} </q-td>
             <q-td key="actions" align="right">
               <q-btn
                 flat
@@ -44,7 +22,6 @@
                 color="accent"
                 icon="edit"
                 class="q-ml-sm"
-                v-if="bodyRow.row.status === 'No action'"
                 @click="onClickEdit(bodyRow.row)"
               >
                 <q-tooltip> Edit </q-tooltip>
@@ -53,7 +30,6 @@
                 flat
                 round
                 dense
-                v-if="bodyRow.row.status === 'No action'"
                 color="negative"
                 icon="clear"
                 @click="onClickDelete(bodyRow.row)"
@@ -65,7 +41,6 @@
                 round
                 dense
                 color="secondary"
-                v-if="bodyRow.row.status === 'Approved'"
                 icon="file_download"
                 class="q-ml-sm"
                 @click="onClickDownload(bodyRow.row)"

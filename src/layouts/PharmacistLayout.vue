@@ -91,11 +91,11 @@ export default defineComponent({
     const router = useRouter();
     const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
-      {
-        title: "Dashboard",
-        link: "/medicine-status",
-        show: true,
-      },
+      // {
+      //   title: "Dashboard",
+      //   link: "/medicine-status",
+      //   show: true,
+      // },
       {
         title: "Medicines",
         link: "/medicine-list",

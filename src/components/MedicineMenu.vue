@@ -5,16 +5,10 @@
       <q-space />
       <q-tabs v-model="tab">
         <q-route-tab
-          name="status"
-          label="Medicine Status"
-          no-caps
-          to="/medicine-management"
-        />
-        <q-route-tab
           name="category"
           label="Category"
           no-caps
-          to="/medicine-management/category"
+          to="/medicine-management"
         />
         <q-route-tab
           name="medicine"
