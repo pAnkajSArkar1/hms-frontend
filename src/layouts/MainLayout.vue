@@ -29,9 +29,37 @@
         />
 
         <q-space />
-        <q-item clickable @click="logout()">
-          <q-item-section>Logout</q-item-section>
-        </q-item>
+        <q-btn-dropdown flat unelevated no-caps>
+          <template v-slot:label>
+            <span size="10px" class="float-right q-px-sm">
+              {{ authUserStore?.authUser?.name }}
+            </span>
+          </template>
+
+          <q-list style="min-width: 100px">
+            <q-item clickable :to="{ name: 'profile' }">
+              <q-item-section>Profile</q-item-section>
+            </q-item>
+            <q-separator />
+            <!-- <span
+              v-if="
+                authUserStore?.authUser &&
+                authUserStore?.authUser?.user_role?.role?.code === 'cadmin'
+              "
+            >
+              <q-item clickable :to="{ name: 'companyProfile' }">
+                <q-item-section>Company Profile</q-item-section>
+              </q-item>
+            </span> -->
+            <!-- <q-item clickable>
+              <q-item-section>Membership Plan</q-item-section>
+            </q-item> -->
+            <q-separator />
+            <q-item clickable @click="logout()">
+              <q-item-section>Logout</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -91,7 +119,10 @@ export default defineComponent({
     const $q = useQuasar();
     const router = useRouter();
     const authUserStore = useAuthStore();
-
+    const { fetchAuthUser } = authUserStore;
+    onMounted(() => {
+      fetchAuthUser();
+    });
     const essentialLinks = computed(() => [
       {
         title: "Dashboard",

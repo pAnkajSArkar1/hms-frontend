@@ -68,7 +68,7 @@
               dense
               outlined
               label="Primary contact"
-              type="number"
+              v-on:keypress="NumbersOnly"
               v-model="signup.primary_contact"
               :rules="[
                 (val) => (val && val.length) || $t('Invalid Credentials'),
@@ -177,6 +177,19 @@ export default defineComponent({
     const companyStore = useCompanyStore();
     const loader = ref(false);
     const $q = useQuasar();
+    const NumbersOnly = (evt) => {
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    };
 
     const { signup } = storeToRefs(store);
 
@@ -221,6 +234,7 @@ export default defineComponent({
       store,
       companyStore,
       loader,
+      NumbersOnly,
       submitForm,
       isPwd: ref(true),
       isNewPwd: ref(true),

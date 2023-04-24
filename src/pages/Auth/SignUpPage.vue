@@ -68,7 +68,7 @@
               dense
               outlined
               label="Primary contact"
-              type="number"
+              v-on:keypress="NumbersOnly"
               v-model="signup.primary_contact"
               :rules="[
                 (val) => (val && val.length) || $t('Invalid Credentials'),
@@ -187,6 +187,20 @@ export default defineComponent({
     const setValidationErrors =
       app.appContext.config.globalProperties.$setValidationErrors;
 
+    const NumbersOnly = (evt) => {
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    };
+
     function submitForm() {
       loader.value = true;
       store
@@ -219,6 +233,7 @@ export default defineComponent({
 
     return {
       store,
+      NumbersOnly,
       companyStore,
       loader,
       submitForm,
