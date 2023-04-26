@@ -23,7 +23,6 @@
             <q-td key="donorno"
               >{{ bodyRow.row?.patient_details?.primary_contact }}
             </q-td>
-            <q-td key="source">{{ bodyRow.row.source }} </q-td>
             <q-td key="priority">{{ bodyRow.row.priority }} </q-td>
             <q-td key="consultantant_type"
               >{{ bodyRow.row.consultantant_type }}

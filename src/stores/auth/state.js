@@ -10,6 +10,10 @@ export default function () {
       profile_picture: [],
       user_role: [],
     }),
+    filter: {
+      search: "",
+      doctors_speciality_id: null,
+    },
     login: {
       email: "",
       password: "",
@@ -37,6 +41,7 @@ export default function () {
     makeAppointment: {
       appointment_date: "",
       doctor_id: null,
+      doctors_speciality_id: null,
       priority: "",
       consultantant_type: "",
       message: "",

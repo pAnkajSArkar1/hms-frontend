@@ -3,22 +3,28 @@ import { api, axios } from "boot/axios";
 const endPoint = "users";
 
 export function getItems(props) {
-  console.log("getItems", true);
-
-  if (props.pagination.descending == true) {
-    var direction = "DESC";
+  if (props.all) {
+    var params = {
+      all: props.all,
+      doctors_speciality_id: props.doctors_speciality_id,
+    };
   } else {
-    var direction = "ASC";
-  }
+    if (props.pagination.descending == true) {
+      var direction = "DESC";
+    } else {
+      var direction = "ASC";
+    }
 
-  var params = {
-    sort: props.pagination.sortBy,
-    direction: direction,
-    page: props.pagination.page,
-    rowsPerPage: props.pagination.rowsPerPage,
-    search: props.search ? props.search : this.filter.search,
-    company_id: this.filter?.company_id,
-  };
+    var params = {
+      sort: props.pagination.sortBy,
+      direction: direction,
+      page: props.pagination.page,
+      rowsPerPage: props.pagination.rowsPerPage,
+      search: props.search ? props.search : this.filter.search,
+      company_id: this.filter?.company_id,
+      doctors_speciality_id: this.filter?.doctors_speciality_id,
+    };
+  }
 
   return new Promise((resolve, reject) => {
     axios

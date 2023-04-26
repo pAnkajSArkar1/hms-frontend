@@ -72,21 +72,32 @@ export function fetchAuthUser() {
   });
 }
 
+export function resetForm(form) {
+  form.appointment_date = "";
+  form.doctor_id = null;
+  form.priority = "";
+  form.consultantant_type = "";
+  form.message = "";
+  form.from_time = "";
+  form.to_time = "";
+}
+
 export function createAppointment() {
   return new Promise((resolve, reject) => {
     axios
       .post("/appointment", {
-        patient_id: this.authUser.user_role.user_id,
-        appointment_date: this.makeAppointment.appointment_date,
-        doctor_id: this.makeAppointment.doctor_id,
-        source: this.makeAppointment.source,
-        priority: this.makeAppointment.priority,
-        consultantant_type: this.makeAppointment.consultantant_type,
-        message: this.makeAppointment.message,
-        slot: this.makeAppointment.slot,
+        patient_id: this.formData.patient_id,
+        appointment_date: this.formData.appointment_date,
+        doctor_id: this.formData.doctor_id,
+        doctors_speciality_id: this.formData.doctors_speciality_id,
+        priority: this.formData.priority,
+        consultantant_type: this.formData.consultantant_type,
+        message: this.formData.message,
+        from_time: this.formData.from_time,
+        to_time: this.formData.to_time,
       })
       .then((response) => {
-        // this.resetForm(this.requestBlood);
+        this.resetForm(this.formData);
         resolve(response);
       })
       .catch((err) => {

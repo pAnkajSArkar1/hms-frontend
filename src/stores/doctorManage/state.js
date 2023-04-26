@@ -30,6 +30,7 @@ export default function () {
     filter: {
       search: "",
       company_id: "",
+      doctors_speciality_id: null,
       name: "",
     },
     items: reactive([]),
@@ -37,7 +38,8 @@ export default function () {
     newData: reactive({
       name: "",
       email: "",
-      role: "regd_patient",
+      role: "doctor",
+      doctors_speciality_id: null,
       password: "",
       confirm_password: "",
       company_id: null,
@@ -62,10 +64,11 @@ export default function () {
     formData: reactive({
       name: "",
       email: "",
-      role: "regd_patient",
+      role: "doctor",
       company_id: null,
       primary_contact: null,
       signed_by: "",
+      doctors_speciality_id: null,
       identity_proof: [],
       address: "",
       gender: "",

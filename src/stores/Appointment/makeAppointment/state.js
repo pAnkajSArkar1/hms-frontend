@@ -39,13 +39,6 @@ export default function () {
         sortable: true,
       },
       {
-        name: "source",
-        align: "left",
-        label: "Source",
-        field: "source",
-        sortable: true,
-      },
-      {
         name: "priority",
         align: "left",
         label: "Priority",
@@ -92,6 +85,7 @@ export default function () {
       appointment_date: "",
       doctor_id: null,
       source: "",
+      doctors_speciality_id: null,
       priority: "",
       consultantant_type: "",
       message: "",

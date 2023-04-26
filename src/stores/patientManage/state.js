@@ -37,7 +37,7 @@ export default function () {
     newData: reactive({
       name: "",
       email: "",
-      role: "regd_patient",
+      role: "general_user",
       password: "",
       confirm_password: "",
       company_id: null,
@@ -62,7 +62,7 @@ export default function () {
     formData: reactive({
       name: "",
       email: "",
-      role: "regd_patient",
+      role: "general_user",
       company_id: null,
       primary_contact: null,
       signed_by: "",

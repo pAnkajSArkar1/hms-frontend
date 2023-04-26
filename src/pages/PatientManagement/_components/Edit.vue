@@ -299,7 +299,7 @@ export default {
 
     onMounted(() => {
       formData.value.company_id = route?.params?.id;
-      formData.value.role = "regd_patient";
+      formData.value.role = "general_user";
     });
 
     const pageTitle = computed(() => {

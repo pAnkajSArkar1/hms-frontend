@@ -29,16 +29,34 @@
             </div>
             <q-card flat bordered class="my-card">
               <q-card-section class="row q-col-gutter-md">
-                <div class="col-12 col-md-9 col-lg-9">
+                <div class="col-12 col-md-5 col-lg-5">
                   <QSearch
-                    label="Select Doctor"
-                    :useStore="docStore"
+                    label="Select Speciality"
+                    :useStore="specialityStore"
                     optionValue="id"
                     optionLabel="name"
-                    v-model="authStore.makeAppointment.doctor_id"
+                    v-model="appointmentStore.formData.doctors_speciality_id"
                     outlined
                     dense
                     square
+                    @update:modelValue="onSpecialitySelect"
+                    :error-message="
+                      $getValidationErrors('doctors_speciality_id')
+                    "
+                    :error="$hasValidationErrors('doctors_speciality_id')"
+                  />
+                </div>
+                <div class="col-12 col-md-5 col-lg-5">
+                  <q-select
+                    dense
+                    v-model="appointmentStore.formData.doctor_id"
+                    outlined
+                    :options="doctorOptions"
+                    label="Select Doctor"
+                    optionValue="id"
+                    optionLabel="name"
+                    emit-value
+                    map-options
                     :error-message="$getValidationErrors('doctor_id')"
                     :error="$hasValidationErrors('doctor_id')"
                   />
@@ -60,13 +78,8 @@
                     dense
                     readonly
                     label="Date for Appointment"
-                    v-model="authStore.makeAppointment.appointment_date"
+                    v-model="appointmentStore.formData.appointment_date"
                     mask="date"
-                    :rules="[
-                      (val) =>
-                        (val && val.length) ||
-                        'Please enter date for the appointment',
-                    ]"
                     :error-message="$getValidationErrors('appointment_date')"
                     :error="$hasValidationErrors('appointment_date')"
                   >
@@ -78,7 +91,7 @@
                           transition-hide="scale"
                         >
                           <q-date
-                            v-model="authStore.makeAppointment.appointment_date"
+                            v-model="appointmentStore.formData.appointment_date"
                           >
                             <div class="row items-center justify-end">
                               <q-btn
@@ -97,27 +110,6 @@
               </q-card-section>
             </q-card>
           </div>
-
-          <!-- <div class="q-pb-lg">
-            <div class="q-pb-md">
-              <h2 class="form-heading">Provide a Source</h2>
-              <div>Mention your source below.</div>
-            </div>
-            <q-card flat bordered class="my-card">
-              <q-card-section class="row q-col-gutter-md">
-                <div class="col-12 col-md-9 col-lg-9">
-                  <q-input
-                    dense
-                    outlined
-                    v-model="authStore.makeAppointment.source"
-                    square
-                    placeholder="Source"
-                  />
-                </div>
-              </q-card-section>
-            </q-card>
-          </div> -->
-
           <div class="q-pb-lg">
             <div class="q-pb-md">
               <h2 class="form-heading">Nature of appointment priority</h2>
@@ -138,13 +130,9 @@
                     type="priority"
                     outlined
                     clearable
-                    v-model="authStore.makeAppointment.priority"
+                    v-model="appointmentStore.formData.priority"
                     dense
                     label="Priority"
-                    :rules="[
-                      (val) =>
-                        (val && val.length) || 'Please select a priority',
-                    ]"
                     :error-message="$getValidationErrors('priority')"
                     :error="$hasValidationErrors('priority')"
                   />
@@ -167,7 +155,7 @@
                   <!-- <q-input
                     dense
                     outlined
-                    v-model="authStore.makeAppointment.consultantant_type"
+                    v-model="appointmentStore.formData.consultantant_type"
                     square
                     placeholder="Consultantant Type"
                   /> -->
@@ -180,12 +168,9 @@
                     type="mode"
                     outlined
                     clearable
-                    v-model="authStore.makeAppointment.consultantant_type"
+                    v-model="appointmentStore.formData.consultantant_type"
                     dense
                     label="Mode"
-                    :rules="[
-                      (val) => (val && val.length) || 'Please select a Mode',
-                    ]"
                     :error-message="$getValidationErrors('consultantant_type')"
                     :error="$hasValidationErrors('consultantant_type')"
                   />
@@ -209,7 +194,7 @@
                     dense
                     outlined
                     square
-                    v-model="authStore.makeAppointment.message"
+                    v-model="appointmentStore.formData.message"
                     placeholder="Message"
                   />
                 </div>
@@ -235,9 +220,10 @@
                     square
                     label="From"
                     readonly
-                    v-model="authStore.makeAppointment.from_time"
+                    v-model="appointmentStore.formData.from_time"
                     mask="time"
-                    :rules="['time']"
+                    :error-message="$getValidationErrors('from_time')"
+                    :error="$hasValidationErrors('from_time')"
                   >
                     <template v-slot:append>
                       <q-icon name="access_time" class="cursor-pointer">
@@ -246,7 +232,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.from_time">
+                          <q-time v-model="appointmentStore.formData.from_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup
@@ -268,9 +254,10 @@
                     square
                     label="To"
                     readonly
-                    v-model="authStore.makeAppointment.to_time"
+                    v-model="appointmentStore.formData.to_time"
                     mask="time"
-                    :rules="['time']"
+                    :error-message="$getValidationErrors('to_time')"
+                    :error="$hasValidationErrors('to_time')"
                   >
                     <template v-slot:append>
                       <q-icon name="access_time" class="cursor-pointer">
@@ -279,7 +266,7 @@
                           transition-show="scale"
                           transition-hide="scale"
                         >
-                          <q-time v-model="authStore.makeAppointment.to_time">
+                          <q-time v-model="appointmentStore.formData.to_time">
                             <div class="row items-center justify-end">
                               <q-btn
                                 v-close-popup
@@ -308,17 +295,22 @@
 </template>
 
 <script>
-import { getCurrentInstance, ref, onMounted } from "vue";
+import { getCurrentInstance, ref, onMounted, watch } from "vue";
 import { useAppointmentStore } from "stores/Appointment/makeAppointment/index";
 import { useAuthStore } from "stores/auth/index";
-import { useShowDoctorStore } from "stores/showDoctors";
+import { useUserStore } from "stores/doctorManage";
+import { useSpecialityStore } from "stores/doctorSpeciality";
 
 export default {
   name: "DescriptionPage",
   setup() {
     const appointmentStore = useAppointmentStore();
     const authStore = useAuthStore();
-    const docStore = useShowDoctorStore();
+    const specialityStore = useSpecialityStore();
+    const docStore = useUserStore();
+    const { getItems: getDoctor } = docStore;
+    const doctorOptions = ref([]);
+
     const { fetchAuthUser } = authStore;
     const app = getCurrentInstance();
     const clearValidationErrors =
@@ -326,10 +318,9 @@ export default {
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
 
     const onSubmit = () => {
-      authStore
+      appointmentStore
         .createAppointment()
         .then((response) => {
-          console.log("A", authStore.makeAppointment.slot);
           Qnotify({
             message: response.data.message,
             type: "positive",
@@ -351,6 +342,29 @@ export default {
         });
     };
 
+    const onSpecialitySelect = () => {
+      console.log("floor_id", appointmentStore.formData.doctors_speciality_id);
+      // console.log("ds", formData.value.doctors_speciality_id);
+      if (appointmentStore.formData.doctors_speciality_id !== null) {
+        getDoctor({
+          all: true,
+          doctors_speciality_id:
+            appointmentStore.formData.doctors_speciality_id,
+        }).then((response) => {
+          doctorOptions.value = response.data;
+          console.log("option", doctorOptions.value);
+        });
+      }
+    };
+    watch(
+      () => {
+        return appointmentStore.formData.doctors_speciality_id;
+      },
+      (first, second) => {
+        appointmentStore.formData.doctor_id = null;
+      }
+    );
+
     onMounted(() => {
       fetchAuthUser();
     });
@@ -371,6 +385,8 @@ export default {
 
     return {
       onSubmit,
+      doctorOptions,
+      onSpecialitySelect,
       priorityList: [
         { label: "No Urgency", value: "No Urgency" },
         { label: "Urgent", value: "Urgent" },
@@ -383,6 +399,7 @@ export default {
       NumbersOnly,
       authStore,
       docStore,
+      specialityStore,
       appointmentStore,
     };
   },

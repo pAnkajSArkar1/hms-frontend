@@ -3,14 +3,31 @@
     <div class="row q-col-gutter-md q-pb-md">
       <div class="col-12">
         <QSearch
-          label="Select Doctor"
-          :useStore="docStore"
+          label="Select Speciality"
+          :useStore="specialityStore"
           optionValue="id"
+          disable
           optionLabel="name"
-          v-model="formData.doctor_id"
+          v-model="formData.doctors_speciality_id"
           outlined
           dense
           square
+          @update:modelValue="onSpecialitySelect"
+          :error-message="$getValidationErrors('doctors_speciality_id')"
+          :error="$hasValidationErrors('doctors_speciality_id')"
+        />
+      </div>
+      <div class="col-12">
+        <q-select
+          dense
+          v-model="formData.doctor_id"
+          outlined
+          :options="doctorOptions"
+          label="Select Doctor"
+          optionValue="id"
+          optionLabel="name"
+          emit-value
+          map-options
           :error-message="$getValidationErrors('doctor_id')"
           :error="$hasValidationErrors('doctor_id')"
         />
@@ -155,9 +172,11 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useShowDoctorStore } from "stores/showDoctors";
+import { useUserStore } from "stores/doctorManage";
+import { useSpecialityStore } from "stores/doctorSpeciality";
 
 export default {
   name: "EditBedType",
@@ -166,11 +185,40 @@ export default {
   },
   setup(props) {
     const { useStore } = reactive(props);
+    const specialityStore = useSpecialityStore();
+    const doctorOptions = ref([]);
     const docStore = useShowDoctorStore();
+    const showdocStore = useUserStore();
+    const { getItems: getDoctor } = showdocStore;
     const { formData } = storeToRefs(useStore);
 
+    const onSpecialitySelect = () => {
+      console.log("floor_id", formData.value.doctors_speciality_id);
+      // console.log("ds", formData.value.doctors_speciality_id);
+      if (formData.value.doctors_speciality_id !== null) {
+        getDoctor({
+          all: true,
+          doctors_speciality_id: formData.value.doctors_speciality_id,
+        }).then((response) => {
+          doctorOptions.value = response.data;
+          console.log("option", doctorOptions.value);
+        });
+      }
+    };
+    watch(
+      () => {
+        return formData.value.doctors_speciality_id;
+      },
+      (first, second) => {
+        formData.value.doctor_id = null;
+      }
+    );
     return {
       formData,
+      showdocStore,
+      doctorOptions,
+      specialityStore,
+      onSpecialitySelect,
       docStore,
       priorityList: [
         { label: "No Urgency", value: "No Urgency" },

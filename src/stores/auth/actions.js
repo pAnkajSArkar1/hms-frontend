@@ -159,6 +159,7 @@ export function createAppointment() {
         patient_id: this.authUser.user_role.user_id,
         appointment_date: this.makeAppointment.appointment_date,
         doctor_id: this.makeAppointment.doctor_id,
+        doctors_speciality_id: this.makeAppointment.doctors_speciality_id,
         priority: this.makeAppointment.priority,
         consultantant_type: this.makeAppointment.consultantant_type,
         message: this.makeAppointment.message,
