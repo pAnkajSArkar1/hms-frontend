@@ -97,22 +97,6 @@ export default defineComponent({
       //   link: "/patient-dashboard",
       //   show: true,
       // },
-      {
-        title: "Make an appointment",
-        link: "/make-appointment",
-        show: true,
-      },
-      {
-        title: "Appointment History",
-        link: "/appointment-history",
-        show: true,
-      },
-      {
-        title: "Brodcasts",
-        link: "/user-brodcasts",
-        show: true,
-      },
-
       // {
       //   title: "Home",
       //   link: "/overview",

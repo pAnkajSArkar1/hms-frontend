@@ -91,26 +91,6 @@ export default defineComponent({
     const router = useRouter();
     const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
-      {
-        title: "Dashboard",
-        link: "/receiver-dashboard",
-        show: true,
-      },
-      {
-        title: "Request",
-        link: "/request",
-        show: true,
-      },
-      {
-        title: "Requests History",
-        link: "/request-history",
-        show: true,
-      },
-      {
-        title: "Brodcasts",
-        link: "/patient-brodcasts",
-        show: true,
-      },
       // {
       //   title: "Home",
       //   link: "/overview",

@@ -21,7 +21,6 @@
             height="50px"
           />
         </router-link>
-
         <EssentialLink
           :essentialLinks="essentialLinks"
           :isVertical="false"
@@ -41,19 +40,7 @@
               <q-item-section>Profile</q-item-section>
             </q-item>
             <q-separator />
-            <!-- <span
-              v-if="
-                authUserStore?.authUser &&
-                authUserStore?.authUser?.user_role?.role?.code === 'cadmin'
-              "
-            >
-              <q-item clickable :to="{ name: 'companyProfile' }">
-                <q-item-section>Company Profile</q-item-section>
-              </q-item>
-            </span> -->
-            <!-- <q-item clickable>
-              <q-item-section>Membership Plan</q-item-section>
-            </q-item> -->
+
             <q-separator />
             <q-item clickable @click="logout()">
               <q-item-section>Logout</q-item-section>
@@ -73,7 +60,7 @@
     >
       <q-list>
         <q-item-label header
-          ><span class="flex flex-center menu_font">Menu</span>
+          ><span class="flex flex-center menu_font">Menu </span>
         </q-item-label>
       </q-list>
       <EssentialLink :essentialLinks="essentialLinks" />
@@ -337,6 +324,7 @@ export default defineComponent({
 
     return {
       essentialLinks,
+      authUserStore,
       leftDrawerOpen,
       logout,
       toggleLeftDrawer() {

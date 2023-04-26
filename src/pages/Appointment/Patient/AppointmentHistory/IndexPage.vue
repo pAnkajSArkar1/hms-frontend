@@ -1,6 +1,8 @@
 <template>
   <!-- QDATATABLE -->
   <q-page>
+    <AppointmentMenu />
+
     <div class="q-pa-md">
       <QDataTable
         :customBodySlot="true"

@@ -1,7 +1,6 @@
 <template>
   <div>
     <q-toolbar class="">
-      <div class="text-h6">Donate Blood</div>
       <q-space />
       <q-tabs v-model="tab">
         <q-route-tab
@@ -20,7 +19,7 @@
           name="doantehistory"
           label="Donate History"
           no-caps
-          to="/donor/donate-history"
+          to="/donor/donation-history"
         />
       </q-tabs>
     </q-toolbar>

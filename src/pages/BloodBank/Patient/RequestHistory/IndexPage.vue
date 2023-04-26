@@ -1,6 +1,8 @@
 <template>
   <!-- QDATATABLE -->
   <q-page>
+    <BloodPatient />
+
     <div class="q-pa-md">
       <QDataTable
         :customBodySlot="true"

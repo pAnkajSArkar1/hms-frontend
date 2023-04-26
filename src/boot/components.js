@@ -15,6 +15,9 @@ import BloodDonor from "components/BloodDonor.vue";
 import BloodPatient from "components/BloodPatient.vue";
 import GlobalMessage from "components/GlobalMessage.vue";
 import MedicineMenu from "components/MedicineMenu.vue";
+import AvatarUploder from "components/AvatarUploder.vue";
+import AppointmentMenu from "components/AppointmentMenu.vue";
+import VisitMenu from "components/VisitMenu.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -34,4 +37,7 @@ export default ({ app }) => {
   app.component("BloodPatient", BloodPatient);
   app.component("GlobalMessage", GlobalMessage);
   app.component("MedicineMenu", MedicineMenu);
+  app.component("AppointmentMenu", AppointmentMenu);
+  app.component("AvatarUploder", AvatarUploder);
+  app.component("VisitMenu", VisitMenu);
 };

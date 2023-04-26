@@ -28,9 +28,25 @@
         />
 
         <q-space />
-        <q-item clickable @click="logout()">
-          <q-item-section>Logout</q-item-section>
-        </q-item>
+        <q-btn-dropdown flat unelevated no-caps>
+          <template v-slot:label>
+            <span size="10px" class="float-right q-px-sm">
+              {{ authUserStore?.authUser?.name }}
+            </span>
+          </template>
+
+          <q-list style="min-width: 100px">
+            <q-item clickable :to="{ name: 'profile' }">
+              <q-item-section>Profile</q-item-section>
+            </q-item>
+            <q-separator />
+
+            <q-separator />
+            <q-item clickable @click="logout()">
+              <q-item-section>Logout</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -251,6 +267,7 @@ export default defineComponent({
     return {
       essentialLinks,
       leftDrawerOpen,
+      authUserStore,
       logout,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;

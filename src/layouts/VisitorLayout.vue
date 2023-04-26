@@ -97,22 +97,6 @@ export default defineComponent({
       //   link: "/patient-dashboard",
       //   show: true,
       // },
-      {
-        title: "Visit a patient",
-        link: "/visit",
-        show: true,
-      },
-      {
-        title: "Visit History",
-        link: "/visit-history",
-        show: true,
-      },
-      {
-        title: "Brodcasts",
-        link: "/visitor-brodcasts",
-        show: true,
-      },
-
       // {
       //   title: "Home",
       //   link: "/overview",

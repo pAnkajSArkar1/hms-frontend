@@ -106,3 +106,8 @@ export function deleteItem(props) {
 export function setDigitalSignature(props) {
   this.formData.signed_by = props.id;
 }
+
+export function setNewItemLogo(props) {
+  console.log("props", props);
+  this.newData.identity_proof = props.id;
+}

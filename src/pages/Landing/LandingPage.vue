@@ -19,7 +19,7 @@
               flat
               bordered
               class="cursor-pointer border-radius-20"
-              @click="toAppointment()"
+              @click="toSignup()"
             >
               <q-img src="~assets/svg/doctor.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
@@ -30,7 +30,7 @@
             <!-- </router-link> -->
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20" @click="toDonor()">
+            <q-card flat bordered class="border-radius-20" @click="toSignup()">
               <q-img src="~assets/svg/blooddonation.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
                 <div class="text-weight-bold font-25">Donate Blood</div>
@@ -39,12 +39,7 @@
             </q-card>
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card
-              flat
-              bordered
-              class="border-radius-20"
-              @click="toReceiver()"
-            >
+            <q-card flat bordered class="border-radius-20" @click="toSignup()">
               <q-img src="~assets/svg/bloodreceive.svg" />
               <q-card-section class="text-white bg-primary q-pb-xl">
                 <div class="text-weight-bold font-25">Receive Blood</div>
@@ -53,7 +48,7 @@
             </q-card>
           </div>
           <div class="col-12 col-sm-12 col-md-3 cursor-pointer zoom-thumbnail">
-            <q-card flat bordered class="border-radius-20" @click="toVisitor()">
+            <q-card flat bordered class="border-radius-20" @click="toSignup()">
               <q-img src="~assets/svg/visit.svg" />
               <q-card-section class="text-white bg-secondary q-pb-xl">
                 <div class="text-weight-bold font-25">Visit Us</div>
@@ -311,18 +306,10 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const toAppointment = () => {
+    const toSignup = () => {
       router.push("/signup");
     };
-    const toDonor = () => {
-      router.push("/donor-signup");
-    };
-    const toReceiver = () => {
-      router.push("/receiver-signup");
-    };
-    const toVisitor = () => {
-      router.push("/visitor-signup");
-    };
+
     const info = ref(null);
     const $q = useQuasar();
     $q.platform.is.mobile;
@@ -331,10 +318,7 @@ export default {
 
     return {
       dialog: ref(false),
-      toAppointment,
-      toReceiver,
-      toVisitor,
-      toDonor,
+      toSignup,
       slide: ref(1),
       autoplay: ref(true),
       mostbooked: ref(1),

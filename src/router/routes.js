@@ -9,6 +9,16 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/avatar",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/components/HomePage.vue"),
+      },
+    ],
+  },
 
   {
     path: "/home",
@@ -197,10 +207,8 @@ const routes = [
       },
     ],
   },
-
-  // blood donor
   {
-    path: "/donor-dashboard",
+    path: "/donor",
     component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
@@ -208,95 +216,50 @@ const routes = [
         component: () =>
           import("src/pages/BloodBank/Donor/Dashboard/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/donate",
-    component: () => import("layouts/DonorLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "blood-donate",
         component: () =>
           import("src/pages/BloodBank/Donor/Donate/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/donation-history",
-    component: () => import("layouts/DonorLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "donation-history",
         component: () =>
           import("src/pages/BloodBank/Donor/DonateHistory/IndexPage.vue"),
       },
     ],
   },
-
-  // blood receiver
   {
-    path: "/receiver-dashboard",
-    component: () => import("layouts/PatientLayout.vue"),
+    path: "/receiver",
+    component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
         path: "",
         component: () =>
           import("src/pages/BloodBank/Patient/Dashboard/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/request",
-    component: () => import("layouts/PatientLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "request-blood",
         component: () =>
           import("src/pages/BloodBank/Patient/Request/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/request-history",
-    component: () => import("layouts/PatientLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "request-history",
         component: () =>
           import("src/pages/BloodBank/Patient/RequestHistory/IndexPage.vue"),
       },
     ],
   },
-
-  // patient
-  // {
-  //   path: "/patient-dashboard",
-  //   component: () => import("layouts/UserLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () =>
-  //         import("src/pages/Appointment/Dashboard/IndexPage.vue"),
-  //     },
-  //   ],
-  // },
   {
-    path: "/make-appointment",
-    component: () => import("layouts/UserLayout.vue"),
+    path: "/appointment",
+    component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
         path: "",
         component: () =>
           import("src/pages/Appointment/Patient/Appointment/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/appointment-history",
-    component: () => import("layouts/UserLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "appointment-history",
         component: () =>
           import(
             "src/pages/Appointment/Patient/AppointmentHistory/IndexPage.vue"
@@ -304,7 +267,6 @@ const routes = [
       },
     ],
   },
-
   // admin appointment request
   {
     path: "/manage-appointment",
@@ -323,21 +285,15 @@ const routes = [
   // visit
   {
     path: "/visit",
-    component: () => import("layouts/VisitorLayout.vue"),
+    component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
         path: "",
         component: () =>
           import("src/pages/Visitor/Patient/Visit/IndexPage.vue"),
       },
-    ],
-  },
-  {
-    path: "/visit-history",
-    component: () => import("layouts/VisitorLayout.vue"),
-    children: [
       {
-        path: "",
+        path: "visit-history",
         component: () =>
           import("src/pages/Visitor/Patient/VisitHistory/IndexPage.vue"),
       },
@@ -402,38 +358,8 @@ const routes = [
     ],
   },
   {
-    path: "/donor-brodcasts",
-    component: () => import("layouts/DonorLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
-      },
-    ],
-  },
-  {
-    path: "/patient-brodcasts",
-    component: () => import("layouts/PatientLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
-      },
-    ],
-  },
-  {
     path: "/user-brodcasts",
-    component: () => import("layouts/UserLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
-      },
-    ],
-  },
-  {
-    path: "/visitor-brodcasts",
-    component: () => import("layouts/VisitorLayout.vue"),
+    component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
         path: "",
@@ -555,6 +481,16 @@ const routes = [
       {
         path: "",
         component: () => import("src/pages/PatientManagement/IndexPage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/receptionist-brodcasts",
+    component: () => import("layouts/ReceptionistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
       },
     ],
   },

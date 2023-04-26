@@ -1,4 +1,5 @@
 <template>
+  <VisitMenu />
   <q-page class="container">
     <div class="q-py-md">
       <div class="row">

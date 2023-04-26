@@ -86,6 +86,22 @@ p {
 .rounded-corner {
   border-radius: 20px 20px 20px 20px;
 }
+.main-heading {
+  font-size: 21px;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.1;
+  color: inherit;
+  margin: 0.67em 0;
+}
+.form-heading {
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.1;
+  color: inherit;
+  margin: 0.67em 0;
+}
 
 .hotel-list-border {
   border: 1px solid #d7caca;

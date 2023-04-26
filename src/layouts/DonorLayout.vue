@@ -21,7 +21,6 @@
             height="50px"
           />
         </router-link>
-
         <EssentialLink
           :essentialLinks="essentialLinks"
           :isVertical="false"
@@ -29,9 +28,25 @@
         />
 
         <q-space />
-        <q-item clickable @click="logout()">
-          <q-item-section>Logout</q-item-section>
-        </q-item>
+        <q-btn-dropdown flat unelevated no-caps>
+          <template v-slot:label>
+            <span size="10px" class="float-right q-px-sm">
+              {{ authUserStore?.authUser?.name }}
+            </span>
+          </template>
+
+          <q-list style="min-width: 100px">
+            <q-item clickable :to="{ name: 'profile' }">
+              <q-item-section>Profile</q-item-section>
+            </q-item>
+            <q-separator />
+
+            <q-separator />
+            <q-item clickable @click="logout()">
+              <q-item-section>Logout</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
         <!-- <ProfileOption /> -->
       </q-toolbar>
     </q-header>
@@ -45,7 +60,7 @@
     >
       <q-list>
         <q-item-label header
-          ><span class="flex flex-center menu_font">Menu</span>
+          ><span class="flex flex-center menu_font">Menu </span>
         </q-item-label>
       </q-list>
       <EssentialLink :essentialLinks="essentialLinks" />
@@ -93,25 +108,33 @@ export default defineComponent({
     const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
       {
-        title: "Dashboard",
-        link: "/donor-dashboard",
+        title: "Donate Blood",
+        link: "/donor",
         show: true,
       },
       {
-        title: "Donate",
-        link: "/donate",
+        title: "Receive Blood",
+        link: "/receiver",
+        show: true,
+      },
+
+      {
+        title: "Appointment",
+        link: "/appointment",
         show: true,
       },
       {
-        title: "Donation History",
-        link: "/donation-history",
+        title: "Visit",
+        link: "/visit",
         show: true,
       },
+
       {
         title: "Brodcasts",
-        link: "/donor-brodcasts",
+        link: "/user-brodcasts",
         show: true,
       },
+
       // {
       //   title: "Home",
       //   link: "/overview",
@@ -252,6 +275,7 @@ export default defineComponent({
     return {
       essentialLinks,
       leftDrawerOpen,
+      authUserStore,
       logout,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;

@@ -1,6 +1,7 @@
 <template>
   <!-- QDATATABLE -->
   <q-page>
+    <BloodPatient />
     <div class="row q-col-gutter-md q-pa-md">
       <div class="col-12 col-md-3 col-lg-3">
         <q-card class="card">

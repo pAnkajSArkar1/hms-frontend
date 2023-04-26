@@ -42,6 +42,8 @@ export function updateProfile() {
       .put("/user-profile-update", {
         name: this.authUser.name,
         username: this.authUser.username,
+        primary_contact: this.authUser.primary_contact,
+        address: this.authUser.address,
         signature: this.authUser.signature_picture,
       })
       .then((response) => {
@@ -273,6 +275,7 @@ export function signupUser() {
         name: this.signup.name,
         email: this.signup.email,
         primary_contact: this.signup.primary_contact,
+        // profile_picture: this.authUser.profile_picture,
         password: this.signup.password,
         confirm_password: this.signup.confirm_password,
       })

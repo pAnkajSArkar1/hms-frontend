@@ -1,26 +1,25 @@
 <template>
   <div>
     <q-toolbar class="">
-      <div class="text-h6">Receive Blood</div>
       <q-space />
       <q-tabs v-model="tab">
         <q-route-tab
           name="patientdashboard"
           label="Dashboard"
           no-caps
-          to="/patient"
+          to="/receiver"
         />
         <q-route-tab
           name="requestblood"
           label="Request Blood"
           no-caps
-          to="/patient/request-blood"
+          to="/receiver/request-blood"
         />
         <q-route-tab
           name="requesthistory"
           label="Request History"
           no-caps
-          to="/patient/request-history"
+          to="/receiver/request-history"
         />
       </q-tabs>
     </q-toolbar>

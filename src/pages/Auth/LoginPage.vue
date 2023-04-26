@@ -72,7 +72,14 @@
       </q-form>
 
       <q-separator />
-
+      <div class="flex flex-center q-pt-md">
+        <q-card bordered flat class="q-pr-sm q-py-xs cursor-pointer">
+          <div class="text-weight-medium text-grey-8" style="font-size: 15px">
+            <q-img src="~assets/images/google.jpg" width="40px" />Sign in with
+            Google
+          </div>
+        </q-card>
+      </div>
       <q-card-section class="row justify-center text-center">
         <div>Don't have an account yet ?</div>
         <div class="flex justify-end q-pl-sm">
@@ -126,14 +133,8 @@ export default defineComponent({
             store.authUser.user_role.role.code === "admin"
           ) {
             router.push("/home");
-          } else if (store.authUser.user_role.role.code === "blood_donor") {
-            router.push("/donor-dashboard");
-          } else if (store.authUser.user_role.role.code === "blood_reciever") {
-            router.push("/receiver-dashboard");
-          } else if (store.authUser.user_role.role.code === "regd_patient") {
-            router.push("/make-appointment");
-          } else if (store.authUser.user_role.role.code === "visitor") {
-            router.push("/visit");
+          } else if (store.authUser.user_role.role.code === "general_user") {
+            router.push("/donor");
           } else if (store.authUser.user_role.role.code === "pharmacist") {
             router.push("/medicine-list");
           } else if (store.authUser.user_role.role.code === "receptionist") {
