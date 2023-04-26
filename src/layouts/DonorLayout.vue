@@ -36,7 +36,7 @@
           </template>
 
           <q-list style="min-width: 100px">
-            <q-item clickable :to="{ name: 'profile' }">
+            <q-item clickable :to="{ name: 'user-profile' }">
               <q-item-section>Profile</q-item-section>
             </q-item>
             <q-separator />

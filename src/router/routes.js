@@ -325,6 +325,42 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/profile",
+    component: () => import("layouts/DonorLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "user-profile",
+        component: () => import("src/pages/ProfilePage.vue"),
+        meta: { name: "Profile", requiresAuth: true },
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "pharma-profile",
+        component: () => import("src/pages/ProfilePage.vue"),
+        meta: { name: "Profile", requiresAuth: true },
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    component: () => import("layouts/ReceptionistLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "recep-profile",
+        component: () => import("src/pages/ProfilePage.vue"),
+        meta: { name: "Profile", requiresAuth: true },
+      },
+    ],
+  },
   // admin global message
   {
     path: "/global-message",
