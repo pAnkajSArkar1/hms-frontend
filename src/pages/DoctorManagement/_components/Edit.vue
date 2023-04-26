@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.name"
+          v-model="newData.name"
           dense
           label="Name"
           :error-message="$getValidationErrors('name')"
@@ -13,10 +13,21 @@
         </q-input>
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <QSearch
+          label="Speciality"
+          v-model="newData.doctors_speciality_id"
+          :useStore="specialityStore"
+          optionValue="id"
+          optionLabel="name"
+          :error-message="$getValidationErrors('doctors_speciality_id')"
+          :error="$hasValidationErrors('doctors_speciality_id')"
+        />
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           type="email"
           outlined
-          v-model="formData.email"
+          v-model="newData.email"
           dense
           label="Email"
           :error-message="$getValidationErrors('email')"
@@ -27,7 +38,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.username"
+          v-model="newData.username"
           dense
           label="Username"
           :error-message="$getValidationErrors('username')"
@@ -35,27 +46,10 @@
         >
         </q-input>
       </div>
-      <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-        <q-select
-          :options="getRoleOptions"
-          map-options
-          emit-value
-          option-label="label"
-          option-value="value"
-          type="role"
-          outlined
-          v-model="formData.role"
-          dense
-          label="Select Role"
-          :error-message="$getValidationErrors('role')"
-          :error="$hasValidationErrors('role')"
-        >
-        </q-select>
-      </div> -->
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.primary_contact"
+          v-model="newData.primary_contact"
           dense
           type="number"
           label="Primary Contact"
@@ -67,7 +61,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.secondary_contact"
+          v-model="newData.secondary_contact"
           dense
           type="number"
           label="Secondary Contact"
@@ -80,7 +74,7 @@
         <q-input
           type="password"
           outlined
-          v-model="formData.password"
+          v-model="newData.password"
           dense
           label="New Password"
           :error-message="$getValidationErrors('password')"
@@ -91,7 +85,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.confirm_password"
+          v-model="newData.confirm_password"
           dense
           type="password"
           label="Confirm Password"
@@ -102,7 +96,7 @@
       </div>
       <div class="col-12">
         <SingleUploaderFile
-          v-model="formData.identity_proof"
+          v-model="newData.identity_proof"
           label="Upload Identity Proof"
           acceptFileType=".pdf,.txt,.doc,.docx"
           attachmentType="document"
@@ -112,7 +106,7 @@
         <q-input
           type="textarea"
           outlined
-          v-model="formData.address"
+          v-model="newData.address"
           dense
           label="Address"
           :error-message="$getValidationErrors('address')"
@@ -130,7 +124,7 @@
           type="gender"
           outlined
           clearable
-          v-model="formData.gender"
+          v-model="newData.gender"
           dense
           label="Gender"
           :error-message="$getValidationErrors('gender')"
@@ -147,7 +141,7 @@
           type="blood"
           outlined
           clearable
-          v-model="formData.blood_group"
+          v-model="newData.blood_group"
           dense
           label="Blood Group"
           :error-message="$getValidationErrors('blood_group')"
@@ -157,119 +151,12 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="formData.age"
+          v-model="newData.age"
           dense
           type="number"
           label="Age"
           :error-message="$getValidationErrors('age')"
           :error="$hasValidationErrors('age')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.disease"
-          dense
-          label="Disease"
-          :error-message="$getValidationErrors('disease')"
-          :error="$hasValidationErrors('disease')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          dense
-          readonly
-          label="Date of Admission"
-          v-model="formData.date_of_addmission"
-          mask="date"
-          :error-message="$getValidationErrors('date_of_addmission')"
-          :error="$hasValidationErrors('date_of_addmission')"
-        >
-          <template v-slot:append>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy
-                cover
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date v-model="formData.date_of_addmission">
-                  <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="Close" color="primary" flat />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-6">
-        <QSearch
-          label="Assign To Bed"
-          v-model="formData.assigned_to_room"
-          :useStore="bedListStore"
-          optionValue="id"
-          optionLabel="name"
-          :error-message="$getValidationErrors('assigned_to_room')"
-          :error="$hasValidationErrors('assigned_to_room')"
-        />
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.blood_pressure_level"
-          dense
-          label="Blood pressure level"
-          :error-message="$getValidationErrors('blood_pressure_level')"
-          :error="$hasValidationErrors('blood_pressure_level')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.heart_beat"
-          dense
-          label="Heart Rate"
-          :error-message="$getValidationErrors('heart_beat')"
-          :error="$hasValidationErrors('heart_beat')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.sugar_level"
-          dense
-          label="Blood Sugar Level"
-          :error-message="$getValidationErrors('sugar_level')"
-          :error="$hasValidationErrors('sugar_level')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.height"
-          dense
-          label="Height"
-          :error-message="$getValidationErrors('height')"
-          :error="$hasValidationErrors('height')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="formData.weight"
-          dense
-          label="Weight"
-          :error-message="$getValidationErrors('weight')"
-          :error="$hasValidationErrors('weight')"
         >
         </q-input>
       </div>
@@ -283,6 +170,7 @@ import { storeToRefs } from "pinia";
 import { useRouter, useRoute } from "vue-router";
 import { useBedListStore } from "stores/Beds/bedList";
 import { useAuthStore } from "stores/auth/index";
+import { useSpecialityStore } from "stores/doctorSpeciality";
 
 export default {
   name: "EditUserPage",
@@ -293,17 +181,18 @@ export default {
   setup(props) {
     const authUserStore = useAuthStore();
     const bedListStore = useBedListStore();
+    const specialityStore = useSpecialityStore();
     const { useStore, company } = reactive(props);
-    const { formData, filter } = storeToRefs(useStore);
+    const { newData, filter } = storeToRefs(useStore);
     const route = useRoute();
 
     onMounted(() => {
-      formData.value.company_id = route?.params?.id;
-      formData.value.role = "regd_patient";
+      newData.value.company_id = route?.params?.id;
+      newData.value.role = "doctor";
     });
 
     const pageTitle = computed(() => {
-      return `Edit patient ${company?.name ? "( " + company?.name + " )" : ""}`;
+      return `Edit doctor ${company?.name ? "( " + company?.name + " )" : ""}`;
     });
 
     const getRoleOptions = computed(() => {
@@ -396,9 +285,10 @@ export default {
         { label: "AB+", value: "AB+" },
         { label: "AB-", value: "AB-" },
       ],
-      formData,
+      newData,
       pageTitle,
       bedListStore,
+      specialityStore,
     };
   },
 };

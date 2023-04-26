@@ -372,32 +372,12 @@ export default {
         if (company?.name) {
           return [
             {
-              label: "Company Admin",
-              value: "cadmin",
-            },
-            {
-              label: "Company Employee",
-              value: "cemployee",
-            },
-            {
               label: "Doctor",
               value: "doctor",
             },
             {
-              label: "Nurse",
-              value: "nurse",
-            },
-            {
-              label: "Blood Doner",
-              value: "blood_donor",
-            },
-            {
-              label: "Blood Reciever",
-              value: "blood_reciever",
-            },
-            {
-              label: "Visitor",
-              value: "visitor",
+              label: "General user",
+              value: "general_user",
             },
             {
               label: "Pharmacist",
@@ -411,32 +391,12 @@ export default {
         } else {
           return [
             {
-              label: "Company Admin",
-              value: "cadmin",
-            },
-            {
-              label: "Company Employee",
-              value: "cemployee",
-            },
-            {
               label: "Doctor",
               value: "doctor",
             },
             {
-              label: "Nurse",
-              value: "nurse",
-            },
-            {
-              label: "Blood Doner",
-              value: "blood_donor",
-            },
-            {
-              label: "Blood Reciever",
-              value: "blood_reciever",
-            },
-            {
-              label: "Visitor",
-              value: "visitor",
+              label: "General user",
+              value: "general_user",
             },
             {
               label: "Pharmacist",
@@ -453,32 +413,12 @@ export default {
       ) {
         return [
           {
-            label: "Company Admin",
-            value: "cadmin",
-          },
-          {
-            label: "Company Employee",
-            value: "cemployee",
-          },
-          {
             label: "Doctor",
             value: "doctor",
           },
           {
-            label: "Nurse",
-            value: "nurse",
-          },
-          {
-            label: "Blood Doner",
-            value: "blood_donor",
-          },
-          {
-            label: "Blood Reciever",
-            value: "blood_reciever",
-          },
-          {
-            label: "Visitor",
-            value: "visitor",
+            label: "General user",
+            value: "general_user",
           },
           {
             label: "Pharmacist",
@@ -492,32 +432,12 @@ export default {
       } else if (authUserStore?.authUser?.user_role?.role?.code === "sadmin") {
         return [
           {
-            label: "Company Admin",
-            value: "cadmin",
-          },
-          {
-            label: "Company Employee",
-            value: "cemployee",
-          },
-          {
             label: "Doctor",
             value: "doctor",
           },
           {
-            label: "Nurse",
-            value: "nurse",
-          },
-          {
-            label: "Blood Doner",
-            value: "blood_donor",
-          },
-          {
-            label: "Blood Reciever",
-            value: "blood_reciever",
-          },
-          {
-            label: "Visitor",
-            value: "visitor",
+            label: "General user",
+            value: "general_user",
           },
           {
             label: "Pharmacist",

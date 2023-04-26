@@ -18,6 +18,7 @@ import MedicineMenu from "components/MedicineMenu.vue";
 import AvatarUploder from "components/AvatarUploder.vue";
 import AppointmentMenu from "components/AppointmentMenu.vue";
 import VisitMenu from "components/VisitMenu.vue";
+import DoctorAdmin from "components/DoctorAdmin.vue";
 
 export default ({ app }) => {
   app.component("QDataTable", QDataTable);
@@ -40,4 +41,5 @@ export default ({ app }) => {
   app.component("AppointmentMenu", AppointmentMenu);
   app.component("AvatarUploder", AvatarUploder);
   app.component("VisitMenu", VisitMenu);
+  app.component("DoctorAdmin", DoctorAdmin);
 };

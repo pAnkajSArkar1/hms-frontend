@@ -343,31 +343,46 @@ export default {
     });
 
     const getRoleOptions = computed(() => {
-      if (authUserStore?.authUser?.user_role?.role?.code === "sadmin") {
+      if (
+        authUserStore?.authUser?.user_role?.role?.code === "sadmin" &&
+        authUserStore?.authUser?.user_role?.role?.code === "admin"
+      ) {
         if (company?.name) {
           return [
             {
-              label: "Company Admin",
-              value: "cadmin",
+              label: "Doctor",
+              value: "doctor",
             },
             {
-              label: "Company Employee",
-              value: "cemployee",
+              label: "General user",
+              value: "general_user",
+            },
+            {
+              label: "Pharmacist",
+              value: "pharmacist",
+            },
+            {
+              label: "Receptionist",
+              value: "receptionist",
             },
           ];
         } else {
           return [
             {
-              label: "Site Employee",
-              value: "semployee",
+              label: "Doctor",
+              value: "doctor",
             },
             {
-              label: "Company Admin",
-              value: "cadmin",
+              label: "General user",
+              value: "general_user",
             },
             {
-              label: "Company Employee",
-              value: "cemployee",
+              label: "Pharmacist",
+              value: "pharmacist",
+            },
+            {
+              label: "Receptionist",
+              value: "receptionist",
             },
           ];
         }
@@ -376,23 +391,39 @@ export default {
       ) {
         return [
           {
-            label: "Company Admin",
-            value: "cadmin",
+            label: "Doctor",
+            value: "doctor",
           },
           {
-            label: "Company Employee",
-            value: "cemployee",
+            label: "General user",
+            value: "general_user",
+          },
+          {
+            label: "Pharmacist",
+            value: "pharmacist",
+          },
+          {
+            label: "Receptionist",
+            value: "receptionist",
           },
         ];
       } else if (authUserStore?.authUser?.user_role?.role?.code === "sadmin") {
         return [
           {
-            label: "Company Admin",
-            value: "cadmin",
+            label: "Doctor",
+            value: "doctor",
           },
           {
-            label: "Company Employee",
-            value: "cemployee",
+            label: "General user",
+            value: "general_user",
+          },
+          {
+            label: "Pharmacist",
+            value: "pharmacist",
+          },
+          {
+            label: "Receptionist",
+            value: "receptionist",
           },
         ];
       } else {

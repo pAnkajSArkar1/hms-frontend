@@ -1,43 +1,47 @@
 <template>
-  <q-page class="q-pa-md">
-    <QDataTable
-      :customBodySlot="true"
-      class="no-shadow"
-      :useStore="userStore"
-      title="Users"
-    >
-      <template v-slot:customBodySlot="bodyRow">
-        <q-tr v-if="bodyRow.row.user_role.role.code === 'regd_patient'">
-          <q-td key="name">{{ bodyRow.row?.name }} </q-td>
-          <q-td key="email">{{ bodyRow.row?.email }} </q-td>
-          <q-td key="disease">{{ bodyRow.row.disease }} </q-td>
+  <q-page class="">
+    <DoctorAdmin />
+    <div class="q-pa-md">
+      <QDataTable
+        :customBodySlot="true"
+        class="no-shadow"
+        :useStore="userStore"
+        title="Doctors"
+      >
+        <template v-slot:customBodySlot="bodyRow">
+          <q-tr v-if="bodyRow.row.user_role.role.code === 'doctor'">
+            <q-td key="name">{{ bodyRow.row?.name }} </q-td>
+            <q-td key="email">{{ bodyRow.row?.email }} </q-td>
+            <q-td key="speciality"
+              >{{ bodyRow.row?.doctors_speciality_details?.name }}
+            </q-td>
 
-          <q-td key="actions" align="right">
-            <q-btn
-              flat
-              round
-              dense
-              color="accent"
-              icon="edit"
-              class="q-ml-sm"
-              @click="onClickEdit(bodyRow.row)"
-            >
-              <q-tooltip> Edit </q-tooltip>
-            </q-btn>
-            <q-btn
-              flat
-              round
-              dense
-              color="negative"
-              icon="clear"
-              @click="onClickDelete(bodyRow.row)"
-            >
-              <q-tooltip> Delete </q-tooltip>
-            </q-btn>
-          </q-td>
-        </q-tr>
-      </template>
-      <!-- <template v-slot:customTop>
+            <q-td key="actions" align="right">
+              <q-btn
+                flat
+                round
+                dense
+                color="accent"
+                icon="edit"
+                class="q-ml-sm"
+                @click="onClickEdit(bodyRow.row)"
+              >
+                <q-tooltip> Edit </q-tooltip>
+              </q-btn>
+              <q-btn
+                flat
+                round
+                dense
+                color="negative"
+                icon="clear"
+                @click="onClickDelete(bodyRow.row)"
+              >
+                <q-tooltip> Delete </q-tooltip>
+              </q-btn>
+            </q-td>
+          </q-tr>
+        </template>
+        <!-- <template v-slot:customTop>
         <div>
           <QSearch
             label="Department"
@@ -49,7 +53,7 @@
           />
         </div>
       </template> -->
-      <!-- <template v-slot:aditionalActions="props">
+        <!-- <template v-slot:aditionalActions="props">
         <q-btn
           flat
           round
@@ -62,7 +66,9 @@
           <q-tooltip> Edit </q-tooltip>
         </q-btn>
       </template> -->
-    </QDataTable>
+      </QDataTable>
+    </div>
+
     <!-- Create User Dialog -->
     <q-dialog v-model="showCreateModal">
       <q-card class="card">
@@ -93,7 +99,7 @@ import {
   onBeforeUnmount,
   watch,
 } from "vue";
-import { useUserStore } from "stores/patientManage/index";
+import { useUserStore } from "stores/doctorManage/index";
 import { useCompanyStore } from "stores/company/index";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";

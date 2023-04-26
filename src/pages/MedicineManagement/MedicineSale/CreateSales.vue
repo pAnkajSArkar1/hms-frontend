@@ -2,23 +2,12 @@
   <QCreateForm :useStore="useStore" :getItems="getItems" title="Add Sales">
     <div class="row q-col-gutter-md">
       <div class="col-12 col-md-6 col-lg-6">
-        <!-- <QSearch
+        <QSearch
           label="Select Patient"
           v-model="formData.patient_id"
-          :useStore="useCatStore"
+          :useStore="usePatientStore"
           optionValue="id"
           optionLabel="name"
-          :error-message="$getValidationErrors('patient_id')"
-          :error="$hasValidationErrors('patient_id')"
-        /> -->
-        <q-input
-          dense
-          outlined
-          v-model="formData.patient_id"
-          label="Select Patient"
-          v-on:keypress="NumbersOnly"
-          lazy-rules
-          hint
           :error-message="$getValidationErrors('patient_id')"
           :error="$hasValidationErrors('patient_id')"
         />
@@ -126,6 +115,7 @@ import { storeToRefs } from "pinia";
 import { useCategoryStore } from "stores/MedicineManage/category";
 import { useMedicineStore } from "stores/MedicineManage/medicine";
 import { useMedicineSalesStore } from "stores/MedicineManage/medicineSales";
+import { useShowPatientStore } from "stores/showPatient/index";
 
 export default {
   name: "CreateBedList",
@@ -134,6 +124,7 @@ export default {
     const useCatStore = useCategoryStore();
     const useMedStore = useMedicineStore();
     const useStore = useMedicineSalesStore();
+    const usePatientStore = useShowPatientStore();
     const { formData, getItems } = storeToRefs(useStore);
     const { getItems: getMeds } = useMedStore;
 
@@ -191,6 +182,7 @@ export default {
       onCategorySelect,
       formData,
       useStore,
+      usePatientStore,
       medsOptions,
       getItems,
       NumbersOnly,

@@ -357,16 +357,16 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/user-brodcasts",
-    component: () => import("layouts/DonorLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "/user-brodcasts",
+  //   component: () => import("layouts/DonorLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+  //     },
+  //   ],
+  // },
   {
     path: "/pharmacist-brodcasts",
     component: () => import("layouts/PharmacistLayout.vue"),
@@ -464,6 +464,7 @@ const routes = [
       },
     ],
   },
+  // receptioninst patient
   {
     path: "/patients-management",
     component: () => import("layouts/ReceptionistLayout.vue"),
@@ -474,6 +475,7 @@ const routes = [
       },
     ],
   },
+  // admin patient
   {
     path: "/patients",
     component: () => import("layouts/MainLayout.vue"),
@@ -484,6 +486,33 @@ const routes = [
       },
     ],
   },
+  // {
+  //   path: "/doctors",
+  //   component: () => import("layouts/MainLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("src/pages/DoctorManagement/IndexPage.vue"),
+  //     },
+  //   ],
+  // },
+
+  {
+    path: "/doctor",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/DoctorManagement/IndexPage.vue"),
+      },
+      {
+        path: "speciality",
+        component: () =>
+          import("src/pages/DoctorManagement/Speciality/IndexPage.vue"),
+      },
+    ],
+  },
+
   {
     path: "/receptionist-brodcasts",
     component: () => import("layouts/ReceptionistLayout.vue"),

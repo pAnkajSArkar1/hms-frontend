@@ -4,10 +4,10 @@
       :customBodySlot="true"
       class="no-shadow"
       :useStore="userStore"
-      title="Users"
+      title="Patients"
     >
       <template v-slot:customBodySlot="bodyRow">
-        <q-tr v-if="bodyRow.row.user_role.role.code === 'regd_patient'">
+        <q-tr v-if="bodyRow.row.user_role.role.code === 'general_user'">
           <q-td key="name">{{ bodyRow.row?.name }} </q-td>
           <q-td key="email">{{ bodyRow.row?.email }} </q-td>
           <q-td key="disease">{{ bodyRow.row.disease }} </q-td>

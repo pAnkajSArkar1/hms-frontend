@@ -19,7 +19,6 @@
           spinner-color="white"
           :class="$q.platform.is.mobile ? '' : 'page-image'"
         />
-        {{ authUserStore?.authUser?.name }}
       </div>
     </div>
     <section class="q-pb-lg">

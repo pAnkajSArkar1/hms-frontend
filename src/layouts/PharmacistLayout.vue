@@ -70,7 +70,7 @@
       <router-view />
     </q-page-container>
 
-    <q-separator />
+    <!-- <q-separator />
     <footer v-if="$q.platform.is.desktop">
       <div class="container flex justify-between items-center q-py-lg">
         <div>Copyright © 2023, DoctoLib. All rights reserved.</div>
@@ -83,7 +83,7 @@
           </router-link>
         </div>
       </div>
-    </footer>
+    </footer> -->
   </q-layout>
 </template>
 
