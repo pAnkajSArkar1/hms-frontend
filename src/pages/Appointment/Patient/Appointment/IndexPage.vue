@@ -321,6 +321,8 @@ export default {
     const docStore = useShowDoctorStore();
     const { fetchAuthUser } = authStore;
     const app = getCurrentInstance();
+    const clearValidationErrors =
+      app.appContext.config.globalProperties.$clearValidationErrors;
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
 
     const onSubmit = () => {
@@ -332,6 +334,7 @@ export default {
             message: response.data.message,
             type: "positive",
           });
+          clearValidationErrors();
         })
         .catch((error) => {
           let formatted_message = "";

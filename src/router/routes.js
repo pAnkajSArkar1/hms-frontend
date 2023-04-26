@@ -326,7 +326,7 @@ const routes = [
     ],
   },
   {
-    path: "/profile",
+    path: "/user-profile",
     component: () => import("layouts/DonorLayout.vue"),
     children: [
       {
@@ -338,7 +338,7 @@ const routes = [
     ],
   },
   {
-    path: "/profile",
+    path: "/pharma-profile",
     component: () => import("layouts/PharmacistLayout.vue"),
     children: [
       {
@@ -350,7 +350,7 @@ const routes = [
     ],
   },
   {
-    path: "/profile",
+    path: "/recep-profile",
     component: () => import("layouts/ReceptionistLayout.vue"),
     children: [
       {
