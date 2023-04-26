@@ -108,8 +108,13 @@ export default defineComponent({
     const authUserStore = useAuthStore();
     const essentialLinks = computed(() => [
       {
-        title: "Patients-management",
+        title: "Patients management",
         link: "/patients-management",
+        show: true,
+      },
+      {
+        title: "Appointment management",
+        link: "/manage-appointments",
         show: true,
       },
       {

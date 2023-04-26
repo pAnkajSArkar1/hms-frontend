@@ -21,7 +21,6 @@
             <q-td key="donorno"
               >{{ bodyRow.row?.patient_details?.primary_contact }}
             </q-td>
-            <q-td key="source">{{ bodyRow.row.source }} </q-td>
             <q-td key="priority">{{ bodyRow.row.priority }} </q-td>
             <q-td key="consultantant_type"
               >{{ bodyRow.row.consultantant_type }}
@@ -70,6 +69,16 @@
                 @click="onClickEmail(bodyRow.row)"
               >
                 <q-tooltip> Email Report </q-tooltip>
+              </q-btn>
+              <q-btn
+                flat
+                round
+                dense
+                color="negative"
+                icon="clear"
+                @click="onClickDelete(bodyRow.row)"
+              >
+                <q-tooltip> Delete </q-tooltip>
               </q-btn>
             </q-td>
           </q-tr>
@@ -130,6 +139,9 @@ export default {
     const showEmailDialog = computed(() => useStore.showEmailDialog);
 
     const $q = useQuasar();
+    const { deleteItem } = useStore;
+    const loading = ref([]);
+
     const { formData, dialogs } = storeToRefs(useStore);
     const app = getCurrentInstance();
     const Qnotify = app.appContext.config.globalProperties.$Qnotify;
@@ -142,6 +154,42 @@ export default {
     const onClickEmail = (row) => {
       useStore.emailReport.id = row.id;
       useStore.dialogs.emailReport = true;
+    };
+
+    const onClickDelete = (param) => {
+      $q.dialog({
+        title: "Delete Confirmation",
+        message: "Are you sure you want to Delete",
+        ok: {
+          label: "Delete",
+          unelevated: true,
+          color: "red-5",
+        },
+        cancel: {
+          unelevated: true,
+          color: "",
+          textColor: "black",
+        },
+        persistent: true,
+      }).onOk(() => {
+        loading.value = true;
+        deleteItem(param)
+          .then((response) => {
+            Qnotify({
+              message: response.data.message,
+              type: "positive",
+            });
+          })
+          .catch((error) => {
+            Qnotify({
+              message: error.message,
+              type: "negative",
+            });
+          })
+          .finally(() => {
+            loading.value = false;
+          });
+      });
     };
 
     // const onClickShow = () => {
@@ -157,7 +205,7 @@ export default {
       showEditAppointment,
       onClickEmail,
       showEmailDialog,
-      // onClickDelete,
+      onClickDelete,
       // loading,
       // taskDetails,
       // onClickView,

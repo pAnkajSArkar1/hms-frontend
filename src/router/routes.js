@@ -511,6 +511,19 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/manage-appointments",
+    component: () => import("layouts/ReceptionistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import(
+            "src/pages/Appointment/Admin/AppointmentRequests/IndexPage.vue"
+          ),
+      },
+    ],
+  },
   // admin patient
   {
     path: "/patients",
