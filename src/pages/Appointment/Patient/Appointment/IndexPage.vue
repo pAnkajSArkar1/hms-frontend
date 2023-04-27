@@ -325,7 +325,6 @@ export default {
             message: response.data.message,
             type: "positive",
           });
-          clearValidationErrors();
         })
         .catch((error) => {
           let formatted_message = "";

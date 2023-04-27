@@ -73,7 +73,6 @@ export default function () {
         field: "status",
         sortable: true,
       },
-      { name: "actions", align: "right", label: "Actions" },
     ],
     filter: {
       search: "",

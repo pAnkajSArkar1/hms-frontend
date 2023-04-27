@@ -271,7 +271,7 @@ export function resetPassword() {
 export function signupUser() {
   return new Promise((resolve, reject) => {
     axios
-      .post("/auth/register", {
+      .post("/auth/general-user", {
         company_id: this.signup.company_id,
         name: this.signup.name,
         email: this.signup.email,

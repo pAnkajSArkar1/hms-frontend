@@ -1,5 +1,5 @@
 <template>
-  <QEditForm :useStore="useStore" title="Edit Bed Type">
+  <QEditForm :useStore="useStore" title="Edit Speciality">
     <q-input
       dense
       outlined

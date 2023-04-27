@@ -12,7 +12,6 @@
           v-if="$q.platform.is.mobile"
           class="q-mr-md"
         />
-
         <router-link to="/">
           <q-img
             src="~assets/images/logo1.png"
@@ -21,6 +20,7 @@
             height="50px"
           />
         </router-link>
+
         <EssentialLink
           :essentialLinks="essentialLinks"
           :isVertical="false"
@@ -36,7 +36,7 @@
           </template>
 
           <q-list style="min-width: 100px">
-            <q-item clickable :to="{ name: 'user-profile' }">
+            <q-item clickable :to="{ name: 'pharma-profile' }">
               <q-item-section>Profile</q-item-section>
             </q-item>
             <q-separator />
@@ -60,7 +60,7 @@
     >
       <q-list>
         <q-item-label header
-          ><span class="flex flex-center menu_font">Menu </span>
+          ><span class="flex flex-center menu_font">Menu</span>
         </q-item-label>
       </q-list>
       <EssentialLink :essentialLinks="essentialLinks" />
@@ -111,34 +111,21 @@ export default defineComponent({
       fetchAuthUser();
     });
     const essentialLinks = computed(() => [
-      {
-        title: "Donate Blood",
-        link: "/donor",
-        show: true,
-      },
-      {
-        title: "Receive Blood",
-        link: "/receiver",
-        show: true,
-      },
-
-      {
-        title: "Appointment",
-        link: "/appointment",
-        show: true,
-      },
-      {
-        title: "Visit",
-        link: "/visit",
-        show: true,
-      },
-
       // {
-      //   title: "Brodcasts",
-      //   link: "/user-brodcasts",
+      //   title: "Dashboard",
+      //   link: "/medicine-status",
       //   show: true,
       // },
-
+      {
+        title: "Appointments",
+        link: "/doctor-appointments",
+        show: true,
+      },
+      {
+        title: "Brodcasts",
+        link: "/doctor-brodcasts",
+        show: true,
+      },
       // {
       //   title: "Home",
       //   link: "/overview",

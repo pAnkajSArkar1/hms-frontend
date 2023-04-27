@@ -267,6 +267,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/doctor-appointments",
+    component: () => import("layouts/DoctorLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("src/pages/DoctorManagement/AppointmentHistory/IndexPage.vue"),
+      },
+    ],
+  },
   // admin appointment request
   {
     path: "/manage-appointment",
@@ -406,6 +417,16 @@ const routes = [
   {
     path: "/pharmacist-brodcasts",
     component: () => import("layouts/PharmacistLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/GlobalMessage/MessagePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/doctor-brodcasts",
+    component: () => import("layouts/DoctorLayout.vue"),
     children: [
       {
         path: "",

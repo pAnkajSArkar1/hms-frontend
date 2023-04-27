@@ -13,7 +13,6 @@
             <q-td key="donationid">{{ bodyRow.row?.id }} </q-td>
             <q-td key="invoice_no">{{ bodyRow.row?.invoice_no }} </q-td>
             <q-td key="total_price">{{ bodyRow.row.total_price }} </q-td>
-            <q-td key="total_profit">{{ bodyRow.row.total_profit }} </q-td>
             <q-td key="actions" align="right">
               <q-btn
                 flat

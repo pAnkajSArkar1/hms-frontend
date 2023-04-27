@@ -94,14 +94,14 @@
         >
         </q-input>
       </div>
-      <div class="col-12">
+      <!-- <div class="col-12">
         <SingleUploaderFile
           v-model="newData.identity_proof"
           label="Upload Identity Proof"
           acceptFileType=".pdf,.txt,.doc,.docx"
           attachmentType="document"
         />
-      </div>
+      </div> -->
       <div class="col-12">
         <q-input
           type="textarea"
@@ -157,6 +157,18 @@
           label="Age"
           :error-message="$getValidationErrors('age')"
           :error="$hasValidationErrors('age')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="newData.fees"
+          dense
+          type="number"
+          label="Fees"
+          :error-message="$getValidationErrors('fees')"
+          :error="$hasValidationErrors('fees')"
         >
         </q-input>
       </div>

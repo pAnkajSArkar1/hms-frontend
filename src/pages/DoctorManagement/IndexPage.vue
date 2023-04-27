@@ -149,29 +149,34 @@ export default {
       });
     });
 
+    // const onClickEdit = (params) => {
+    //   formData.value.id = params.id;
+    //   formData.value.name = params.name;
+    //   formData.value.doctors_speciality_id = params.doctors_speciality_id;
+    //   formData.value.email = params.email;
+    //   formData.value.username = params.username;
+    //   formData.value.role = params.user_role.role.code;
+    //   formData.value.primary_contact = params.primary_contact;
+    //   formData.value.secondary_contact = params.secondary_contact;
+    //   formData.value.identity_proof = params.identity_proof;
+    //   formData.value.address = params.address;
+    //   formData.value.gender = params.gender;
+    //   formData.value.disease = params.disease;
+    //   formData.value.assigned_to_room = params.assigned_to_room;
+    //   formData.value.blood_group = params.blood_group;
+    //   formData.value.date_of_addmission = params.date_of_addmission;
+    //   formData.value.age = params.age;
+    //   formData.value.blood_pressure_level = params.blood_pressure_level;
+    //   formData.value.heart_beat = params.heart_beat;
+    //   formData.value.sugar_level = params.sugar_level;
+    //   formData.value.height = params.height;
+    //   formData.value.weight = params.weight;
+    //   formData.value.salary = params.salary;
+    //   formData.value.experience = params.experience;
+    //   dialogs.value.editItem = true;
+    // };
     const onClickEdit = (params) => {
-      formData.value.id = params.id;
-      formData.value.name = params.name;
-      formData.value.email = params.email;
-      formData.value.username = params.username;
-      formData.value.role = params.user_role.role.code;
-      formData.value.primary_contact = params.primary_contact;
-      formData.value.secondary_contact = params.secondary_contact;
-      formData.value.identity_proof = params.identity_proof;
-      formData.value.address = params.address;
-      formData.value.gender = params.gender;
-      formData.value.disease = params.disease;
-      formData.value.assigned_to_room = params.assigned_to_room;
-      formData.value.blood_group = params.blood_group;
-      formData.value.date_of_addmission = params.date_of_addmission;
-      formData.value.age = params.age;
-      formData.value.blood_pressure_level = params.blood_pressure_level;
-      formData.value.heart_beat = params.heart_beat;
-      formData.value.sugar_level = params.sugar_level;
-      formData.value.height = params.height;
-      formData.value.weight = params.weight;
-      formData.value.salary = params.salary;
-      formData.value.experience = params.experience;
+      formData.value = params;
       dialogs.value.editItem = true;
     };
     const onClickDelete = (param) => {

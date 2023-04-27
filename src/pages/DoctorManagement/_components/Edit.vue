@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="newData.name"
+          v-model="formData.name"
           dense
           label="Name"
           :error-message="$getValidationErrors('name')"
@@ -15,7 +15,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <QSearch
           label="Speciality"
-          v-model="newData.doctors_speciality_id"
+          v-model="formData.doctors_speciality_id"
           :useStore="specialityStore"
           optionValue="id"
           optionLabel="name"
@@ -27,7 +27,7 @@
         <q-input
           type="email"
           outlined
-          v-model="newData.email"
+          v-model="formData.email"
           dense
           label="Email"
           :error-message="$getValidationErrors('email')"
@@ -38,7 +38,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="newData.username"
+          v-model="formData.username"
           dense
           label="Username"
           :error-message="$getValidationErrors('username')"
@@ -49,7 +49,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="newData.primary_contact"
+          v-model="formData.primary_contact"
           dense
           type="number"
           label="Primary Contact"
@@ -61,7 +61,7 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="newData.secondary_contact"
+          v-model="formData.secondary_contact"
           dense
           type="number"
           label="Secondary Contact"
@@ -70,43 +70,19 @@
         >
         </q-input>
       </div>
-      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-        <q-input
-          type="password"
-          outlined
-          v-model="newData.password"
-          dense
-          label="New Password"
-          :error-message="$getValidationErrors('password')"
-          :error="$hasValidationErrors('password')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-        <q-input
-          outlined
-          v-model="newData.confirm_password"
-          dense
-          type="password"
-          label="Confirm Password"
-          :error-message="$getValidationErrors('confirm_password')"
-          :error="$hasValidationErrors('confirm_password')"
-        >
-        </q-input>
-      </div>
-      <div class="col-12">
+      <!-- <div class="col-12">
         <SingleUploaderFile
-          v-model="newData.identity_proof"
+          v-model="formData.identity_proof"
           label="Upload Identity Proof"
           acceptFileType=".pdf,.txt,.doc,.docx"
           attachmentType="document"
         />
-      </div>
+      </div> -->
       <div class="col-12">
         <q-input
           type="textarea"
           outlined
-          v-model="newData.address"
+          v-model="formData.address"
           dense
           label="Address"
           :error-message="$getValidationErrors('address')"
@@ -124,7 +100,7 @@
           type="gender"
           outlined
           clearable
-          v-model="newData.gender"
+          v-model="formData.gender"
           dense
           label="Gender"
           :error-message="$getValidationErrors('gender')"
@@ -141,7 +117,7 @@
           type="blood"
           outlined
           clearable
-          v-model="newData.blood_group"
+          v-model="formData.blood_group"
           dense
           label="Blood Group"
           :error-message="$getValidationErrors('blood_group')"
@@ -151,12 +127,24 @@
       <div class="col-12 col-md-6 col-lg-6">
         <q-input
           outlined
-          v-model="newData.age"
+          v-model="formData.age"
           dense
           type="number"
           label="Age"
           :error-message="$getValidationErrors('age')"
           :error="$hasValidationErrors('age')"
+        >
+        </q-input>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <q-input
+          outlined
+          v-model="formData.fees"
+          dense
+          type="number"
+          label="Fees"
+          :error-message="$getValidationErrors('fees')"
+          :error="$hasValidationErrors('fees')"
         >
         </q-input>
       </div>
@@ -183,12 +171,12 @@ export default {
     const bedListStore = useBedListStore();
     const specialityStore = useSpecialityStore();
     const { useStore, company } = reactive(props);
-    const { newData, filter } = storeToRefs(useStore);
+    const { formData, filter } = storeToRefs(useStore);
     const route = useRoute();
 
     onMounted(() => {
-      newData.value.company_id = route?.params?.id;
-      newData.value.role = "doctor";
+      formData.value.company_id = route?.params?.id;
+      formData.value.role = "doctor";
     });
 
     const pageTitle = computed(() => {
@@ -285,7 +273,7 @@ export default {
         { label: "AB+", value: "AB+" },
         { label: "AB-", value: "AB-" },
       ],
-      newData,
+      formData,
       pageTitle,
       bedListStore,
       specialityStore,

@@ -25,13 +25,6 @@ export default function () {
         field: "total_price",
         sortable: true,
       },
-      {
-        name: "total_profit",
-        align: "left",
-        label: "Total profit",
-        field: "total_profit",
-        sortable: true,
-      },
       { name: "actions", align: "right", label: "Actions" },
     ],
     filter: {

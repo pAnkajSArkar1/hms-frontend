@@ -1,5 +1,5 @@
 <template>
-  <QCreateForm :useStore="useStore" title="Add Bed Type">
+  <QCreateForm :useStore="useStore" title="Add Speciality">
     <q-input
       dense
       outlined
